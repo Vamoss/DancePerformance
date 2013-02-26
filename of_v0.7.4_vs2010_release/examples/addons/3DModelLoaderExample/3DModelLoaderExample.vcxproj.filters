@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<ItemGroup>
+		<ClCompile Include="src\testApp.cpp">
+			<Filter>src</Filter>
+		</ClCompile>
+		<ClCompile Include="src\main.cpp">
+			<Filter>src</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofx3DModelLoader\src\ofx3dModelLoader.cpp">
+			<Filter>addons\ofx3DModelLoader\src</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofx3DModelLoader\src\3DS\texture3DS.cpp">
+			<Filter>addons\ofx3DModelLoader\src\3DS</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofx3DModelLoader\src\3DS\model3DS.cpp">
+			<Filter>addons\ofx3DModelLoader\src\3DS</Filter>
+		</ClCompile>
+	</ItemGroup>
+	<ItemGroup>
+		<Filter Include="src">
+			<UniqueIdentifier>{d8376475-7454-4a24-b08a-aac121d3ad6f}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons">
+			<UniqueIdentifier>{71834f65-f3a9-211e-73b8-dc8563776aec}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofx3DModelLoader">
+			<UniqueIdentifier>{90fa273a-87c3-2e0d-b66c-c2adf9841dee}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofx3DModelLoader\src">
+			<UniqueIdentifier>{77e86cda-1acf-7498-153c-973692a0298a}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofx3DModelLoader\src\3DS">
+			<UniqueIdentifier>{34b3e336-f3fa-9140-9697-59c057a654cf}</UniqueIdentifier>
+		</Filter>
+	</ItemGroup>
+	<ItemGroup>
+		<ClInclude Include="src\testApp.h">
+			<Filter>src</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofx3DModelLoader\src\ofx3DBaseLoader.h">
+			<Filter>addons\ofx3DModelLoader\src</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofx3DModelLoader\src\3DS\model3DS.h">
+			<Filter>addons\ofx3DModelLoader\src\3DS</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofx3DModelLoader\src\3DS\texture3DS.h">
+			<Filter>addons\ofx3DModelLoader\src\3DS</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofx3DModelLoader\src\3DS\Vector3DS.h">
+			<Filter>addons\ofx3DModelLoader\src\3DS</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofx3DModelLoader\src\ofx3DModelLoader.h">
+			<Filter>addons\ofx3DModelLoader\src</Filter>
+		</ClInclude>
+	</ItemGroup>
+</Project>
