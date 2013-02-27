@@ -66,7 +66,7 @@ void testApp::setup() {
 	kinect.setLabelDrawer(labelDraw_);
 	kinect.setSkeletonDrawer(skeletonDraw_);
 
-	skelLength = kinect.getSkeletonPoints(skel);
+	//skelLength = kinect.getSkeletonPoints(skel);
 }
 
 //--------------------------------------------------------------
@@ -169,7 +169,7 @@ void testApp::draw() {
 				 << "press 's' to show skeleton only: " << bDrawSkeleton << ",   press 'q' to show point cloud sample: " << bDrawCalibratedTexture;
 	ofDrawBitmapString(reportStream.str(), 20, 648);
 	
-	cout << skelLength << endl;
+	/*cout << skelLength << endl;
 
 	ofSetColor(255, 0, 0);
 	for(int i = 0; i < skelLength; i++){
@@ -178,7 +178,7 @@ void testApp::draw() {
 			ofDrawBitmapString(ofToString(i), skel[i][j]->x, skel[i][j]->y);
 		}
 	}
-	ofSetColor(255);
+	ofSetColor(255);*/
 }
 
 //--------------------------------------------------------------

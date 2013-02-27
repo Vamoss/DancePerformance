@@ -90,7 +90,7 @@ class testApp : public ofBaseApp {
 
 
 		//custom
-		ofPoint* skel[kinect::nui::SkeletonFrame::SKELETON_COUNT];
-		int skelLength;
+		//ofPoint* skel[kinect::nui::SkeletonFrame::SKELETON_COUNT];
+		//int skelLength;
 
 };
