@@ -204,6 +204,9 @@ public:
 	}
 
 public:
+	ofPoint skeletonPoints[SKELETON_COUNT][SKELETON_POSITION_COUNT];	///< joint points of all skeletons
+	ofPoint rawSkeletonPoints[SKELETON_COUNT][SKELETON_POSITION_COUNT];	///< joint points of all skeletons
+
 	const static int KINECT_PLAYERS_INDEX_NUM = 8;
 
 	static int getActiveCount(){
@@ -231,9 +234,6 @@ protected:
 	ofPixels labelPixelsCv[KINECT_PLAYERS_INDEX_NUM];		///<	separated label pixels for cv use, labelPixelsCv[0] contains whole players silhouette. labelPixelsCv[playerId] contains each players silhouette.
 	std::vector<BYTE> soundBuffer;	///<	audio buffer
 	float audioBeamAngle, audioAngle, audioAngleConfidence;	///< for audio
-
-	ofPoint skeletonPoints[SKELETON_COUNT][SKELETON_POSITION_COUNT];	///< joint points of all skeletons
-	ofPoint rawSkeletonPoints[SKELETON_COUNT][SKELETON_POSITION_COUNT];	///< joint points of all skeletons
 
 	int targetAngle;	///< target angle of kinect tilt
 	
