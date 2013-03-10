@@ -45,6 +45,9 @@ public:
         gui1->addWidgetDown(new ofxUILabelButton( length-xInit, false, "SHAKE", OFX_UI_FONT_MEDIUM)); 	
         
         gui1->addWidgetDown(new ofxUISpacer(length-xInit, 2));
+        gui1->addWidgetDown(new ofxUISlider(length-xInit,dim, 0.0, 255.0, 125, "FADE"));	
+        
+        gui1->addWidgetDown(new ofxUISpacer(length-xInit, 2));
         gui1->addWidgetDown(new ofxUILabelButton( length-xInit, false, "SAVE", OFX_UI_FONT_MEDIUM)); 	
         
         
@@ -154,12 +157,12 @@ public:
 						app->bone[(i*kinect::nui::SkeletonData::POSITION_COUNT) + j]->enableCollision();
 					}
 				}
-			}
 #else
 				app->mouseNode.enableCollision();
 #endif
+			}
 			break;
-	}
+		}
     }
     
     
@@ -187,6 +190,11 @@ public:
         {
 			app->addRandomForce(FORCE_AMOUNT);
         }
+		else if(name == "FADE")
+		{
+			ofxUISlider *slider = (ofxUISlider *) e.widget; 
+			app->canvasFade = slider->getScaledValue();
+		}
         else if(name == "SAVE")
         {
             save();

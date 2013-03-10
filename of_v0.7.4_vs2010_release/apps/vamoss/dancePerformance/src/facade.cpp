@@ -67,6 +67,8 @@ facade::facade(void)
 		ofSetColor(255);
 		ofRect(0,0,width, height);
 	canvasTrace.end();
+
+	canvasFade = 125;
 }
 
 void facade::update()
@@ -171,7 +173,7 @@ void facade::draw()
 		glRotatef(rot, 0, -1, 0);
 		canvas.begin();
 
-		ofSetColor(255, 125);
+		ofSetColor(255, canvasFade);
 		canvasTrace.draw(0,0);
 
 		glTranslatef(width/2, 0, -width / 3);

@@ -4,7 +4,7 @@
 #include "ofxKinectNui.h"
 #include "MSAPhysics3D.h"
 
-#define USE_KINECT
+//#define USE_KINECT
 
 
 
@@ -111,5 +111,6 @@ public:
 		
 	ofFbo canvas;
 	ofFbo canvasTrace;
+	int canvasFade;
 };
 
