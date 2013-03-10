@@ -9,6 +9,9 @@ public:
     
 	//TODO
 	//substitute key press
+	//canvas alpha
+	//spring tension
+	//
     
 	ofxUICanvas		*gui1;
     
@@ -94,7 +97,7 @@ public:
 		case 'u': 
 			app->unlockRandomParticles(); 
 			break;
-		case ' ': 
+		case '1': 
 			app->initScene(); 
 			break;
 		case 'x': 
@@ -110,38 +113,51 @@ public:
 			app->rotSpeed -= 0.01f; 
 			break;
 		case '+': 
-			app->mouseNode.setMass(app->mouseNode.getMass() +0.1); 
+#ifdef USE_KINECT
 			for(int i = 0; i < kinect::nui::SkeletonFrame::SKELETON_COUNT; ++i){
 				for(int j = 0; j < kinect::nui::SkeletonData::POSITION_COUNT; ++j){
 					app->bone[(i*kinect::nui::SkeletonData::POSITION_COUNT) + j]->setMass(app->bone[(i*kinect::nui::SkeletonData::POSITION_COUNT) + j]->getMass() +0.1);
 				}
 			}
+#else
+			app->mouseNode.setMass(app->mouseNode.getMass() +0.1);
+#endif
 			break;
 		case '-': 
-			app->mouseNode.setMass(app->mouseNode.getMass() -0.1); 
+#ifdef USE_KINECT
 			for(int i = 0; i < kinect::nui::SkeletonFrame::SKELETON_COUNT; ++i){
 				for(int j = 0; j < kinect::nui::SkeletonData::POSITION_COUNT; ++j){
 					app->bone[(i*kinect::nui::SkeletonData::POSITION_COUNT) + j]->setMass(app->bone[(i*kinect::nui::SkeletonData::POSITION_COUNT) + j]->getMass() -0.1);
 				}
 			}
+#else
+			app->mouseNode.setMass(app->mouseNode.getMass() -0.1); 
+#endif
 			break;
 		case 'm': 
 			bool collision = app->mouseNode.hasCollision();
 			if(collision){
-				app->mouseNode.disableCollision();
+#ifdef USE_KINECT
 				for(int i = 0; i < kinect::nui::SkeletonFrame::SKELETON_COUNT; ++i){
 					for(int j = 0; j < kinect::nui::SkeletonData::POSITION_COUNT; ++j){
 						app->bone[(i*kinect::nui::SkeletonData::POSITION_COUNT) + j]->disableCollision();
 					}
 				}
+#else
+				app->mouseNode.disableCollision();
+#endif
+
 			}else{
-				app->mouseNode.enableCollision();
+#ifdef USE_KINECT
 				for(int i = 0; i < kinect::nui::SkeletonFrame::SKELETON_COUNT; ++i){
 					for(int j = 0; j < kinect::nui::SkeletonData::POSITION_COUNT; ++j){
 						app->bone[(i*kinect::nui::SkeletonData::POSITION_COUNT) + j]->enableCollision();
 					}
 				}
 			}
+#else
+				app->mouseNode.enableCollision();
+#endif
 			break;
 	}
     }

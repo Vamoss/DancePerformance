@@ -4,7 +4,7 @@
 #include "ofxKinectNui.h"
 #include "MSAPhysics3D.h"
 
-#define HEAD
+#define USE_KINECT
 
 
 

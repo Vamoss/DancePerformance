@@ -3,6 +3,7 @@
 
 facade::facade(void)
 {
+#ifdef USE_KINECT
 	//Kinect
 	ofxKinectNui::InitSetting initSetting;
 	initSetting.grabVideo = false;
@@ -23,8 +24,8 @@ facade::facade(void)
 	bPlugged = kinect.isConnected();
 	nearClipping = kinect.getNearClippingDistance();
 	farClipping = kinect.getFarClippingDistance();
-
-	
+	currentSkeletonIndex = -1;
+#endif	
 	//Particles
 	mouseAttract	= false;
 	mouseSpring		= false;
@@ -70,14 +71,13 @@ facade::facade(void)
 
 void facade::update()
 {
-	//kinect
-	kinectSource->update();
-
 	//PARTICLE
 	width = ofGetWidth();
 	height = ofGetHeight();
-	
-	
+
+#ifdef USE_KINECT
+	//kinect
+	kinectSource->update();
 
 	// Update kinect coords
 	float scale = 3;
@@ -97,6 +97,7 @@ void facade::update()
 			}
 		}
 	}
+#endif
 	
 	physics.update();
 }
@@ -386,6 +387,7 @@ void facade::initScene() {
 	mouseNode.setRadius(NODE_MAX_RADIUS);
 
 
+#ifdef USE_KINECT
 	for(int i = 0; i < kinect::nui::SkeletonFrame::SKELETON_COUNT; ++i){
 		for(int j = 0; j < kinect::nui::SkeletonData::POSITION_COUNT; ++j){
 			msa::physics::Particle3D * joint = new msa::physics::Particle3D();
@@ -398,6 +400,7 @@ void facade::initScene() {
 			bone.push_back(joint);
 		}
 	}
+#endif
 }
 
 
@@ -439,18 +442,21 @@ void facade::killRandomConstraint() {
 void facade::toggleMouseSpring() {
 	mouseSpring = !mouseSpring;
 	if(mouseSpring){
+#ifdef USE_KINECT
 		int k = 0;
-		/*for(int i=0; i<physics.numberOfParticles(); i++) {
+		for(int i=0; i<physics.numberOfParticles() && currentSkeletonIndex>-1; i++) {
 			msa::physics::Particle3D *a = physics.getParticle(i);
 			msa::physics::Particle3D *b = bone[(i%kinect::nui::SkeletonData::POSITION_COUNT) + (kinect::nui::SkeletonData::POSITION_COUNT*currentSkeletonIndex)];
 			physics.makeSpring(a, b, ofRandom(SPRING_MIN_STRENGTH, SPRING_MAX_STRENGTH), ofRandom(10, 30));
 			k++;
-		}*/
+		}
+#else
 		for(int i=0; i<physics.numberOfParticles(); i++) {
 			msa::physics::Particle3D *a = physics.getParticle(i);
 			msa::physics::Particle3D *b = &mouseNode;
 			physics.makeSpring(a, b, ofRandom(SPRING_MIN_STRENGTH, SPRING_MAX_STRENGTH), ofRandom(SPRING_MIN_WIDTH, SPRING_MAX_WIDTH));
 		}
+#endif
 	}else{
 		for(int i=physics.numberOfSprings(); i>0; i--) {
 			msa::physics::Spring3D *s = physics.getSpring(i);
@@ -485,13 +491,13 @@ void facade::toggleMouseAttract() {
 		}*/
 
 		int k = 0;
-		for(int i=0; i<physics.numberOfParticles(); i++) {
-			//physics.makeAttraction(bone[(i%kinect::nui::SkeletonData::POSITION_COUNT) + (kinect::nui::SkeletonData::POSITION_COUNT*currentSkeletonIndex)], physics.getParticle(i), ofRandom(MIN_ATTRACTION, MAX_ATTRACTION));
-			
-			//test
-			physics.makeAttraction(&mouseNode, physics.getParticle(i), ofRandom(MIN_ATTRACTION, MAX_ATTRACTION));
-			
+		for(int i=0; i<physics.numberOfParticles() && currentSkeletonIndex>-1; i++) {
+#ifdef USE_KINECT
+			physics.makeAttraction(bone[(i%kinect::nui::SkeletonData::POSITION_COUNT) + (kinect::nui::SkeletonData::POSITION_COUNT*currentSkeletonIndex)], physics.getParticle(i), ofRandom(MIN_ATTRACTION, MAX_ATTRACTION));
 			k++;
+#else
+			physics.makeAttraction(&mouseNode, physics.getParticle(i), ofRandom(MIN_ATTRACTION, MAX_ATTRACTION));
+#endif		
 		}
 	} else {
 		// loop through all existing attractsions and delete them
