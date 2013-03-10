@@ -3,39 +3,6 @@
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\testApp.cpp" />
-    <ClCompile Include="..\..\ofxOpenCv\src\ofxCvColorImage.cpp">
-      <Filter>addons\ofxOpenCv\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ofxOpenCv\src\ofxCvContourFinder.cpp">
-      <Filter>addons\ofxOpenCv\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ofxOpenCv\src\ofxCvFloatImage.cpp">
-      <Filter>addons\ofxOpenCv\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ofxOpenCv\src\ofxCvGrayscaleImage.cpp">
-      <Filter>addons\ofxOpenCv\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ofxOpenCv\src\ofxCvHaarFinder.cpp">
-      <Filter>addons\ofxOpenCv\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ofxOpenCv\src\ofxCvImage.cpp">
-      <Filter>addons\ofxOpenCv\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ofxOpenCv\src\ofxCvShortImage.cpp">
-      <Filter>addons\ofxOpenCv\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ofxXmlSettings\libs\tinyxml.cpp">
-      <Filter>addons\ofxXmlSettings\libs</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ofxXmlSettings\libs\tinyxmlerror.cpp">
-      <Filter>addons\ofxXmlSettings\libs</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ofxXmlSettings\libs\tinyxmlparser.cpp">
-      <Filter>addons\ofxXmlSettings\libs</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ofxXmlSettings\src\ofxXmlSettings.cpp">
-      <Filter>addons\ofxXmlSettings\src</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\addons\ofxKinectNui\src\kinect\nui\AudioStream.cpp">
       <Filter>addons\ofxKinectNui</Filter>
     </ClCompile>
@@ -75,48 +42,42 @@
     <ClCompile Include="..\..\..\addons\ofxKinectNui\src\win32\Event.cpp">
       <Filter>addons\ofxKinectNui</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxOpenCv\src\ofxCvColorImage.cpp">
+      <Filter>addons\ofxOpenCv</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxOpenCv\src\ofxCvContourFinder.cpp">
+      <Filter>addons\ofxOpenCv</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxOpenCv\src\ofxCvFloatImage.cpp">
+      <Filter>addons\ofxOpenCv</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxOpenCv\src\ofxCvGrayscaleImage.cpp">
+      <Filter>addons\ofxOpenCv</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxOpenCv\src\ofxCvHaarFinder.cpp">
+      <Filter>addons\ofxOpenCv</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxOpenCv\src\ofxCvImage.cpp">
+      <Filter>addons\ofxOpenCv</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxOpenCv\src\ofxCvShortImage.cpp">
+      <Filter>addons\ofxOpenCv</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxXmlSettings\src\ofxXmlSettings.cpp">
+      <Filter>addons\ofxXmlSettings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxXmlSettings\libs\tinyxml.cpp">
+      <Filter>addons\ofxXmlSettings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxXmlSettings\libs\tinyxmlerror.cpp">
+      <Filter>addons\ofxXmlSettings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxXmlSettings\libs\tinyxmlparser.cpp">
+      <Filter>addons\ofxXmlSettings</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\testApp.h" />
-    <ClInclude Include="..\..\ofxOpenCv\src\ofxCvBlob.h">
-      <Filter>addons\ofxOpenCv\src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ofxOpenCv\src\ofxCvColorImage.h">
-      <Filter>addons\ofxOpenCv\src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ofxOpenCv\src\ofxCvConstants.h">
-      <Filter>addons\ofxOpenCv\src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ofxOpenCv\src\ofxCvContourFinder.h">
-      <Filter>addons\ofxOpenCv\src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ofxOpenCv\src\ofxCvFloatImage.h">
-      <Filter>addons\ofxOpenCv\src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ofxOpenCv\src\ofxCvGrayscaleImage.h">
-      <Filter>addons\ofxOpenCv\src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ofxOpenCv\src\ofxCvHaarFinder.h">
-      <Filter>addons\ofxOpenCv\src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ofxOpenCv\src\ofxCvImage.h">
-      <Filter>addons\ofxOpenCv\src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ofxOpenCv\src\ofxCvMain.h">
-      <Filter>addons\ofxOpenCv\src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ofxOpenCv\src\ofxCvShortImage.h">
-      <Filter>addons\ofxOpenCv\src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ofxOpenCv\src\ofxOpenCv.h">
-      <Filter>addons\ofxOpenCv\src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ofxXmlSettings\libs\tinyxml.h">
-      <Filter>addons\ofxXmlSettings\libs</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ofxXmlSettings\src\ofxXmlSettings.h">
-      <Filter>addons\ofxXmlSettings\src</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\addons\ofxKinectNui\src\kinect\nui\AudioStream.h">
       <Filter>addons\ofxKinectNui</Filter>
     </ClInclude>
@@ -177,6 +138,45 @@
     <ClInclude Include="..\..\..\addons\ofxKinectNui\src\win32\SpinLock.h">
       <Filter>addons\ofxKinectNui</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\src\ofxCvBlob.h">
+      <Filter>addons\ofxOpenCv</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\src\ofxCvColorImage.h">
+      <Filter>addons\ofxOpenCv</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\src\ofxCvConstants.h">
+      <Filter>addons\ofxOpenCv</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\src\ofxCvContourFinder.h">
+      <Filter>addons\ofxOpenCv</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\src\ofxCvFloatImage.h">
+      <Filter>addons\ofxOpenCv</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\src\ofxCvGrayscaleImage.h">
+      <Filter>addons\ofxOpenCv</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\src\ofxCvHaarFinder.h">
+      <Filter>addons\ofxOpenCv</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\src\ofxCvImage.h">
+      <Filter>addons\ofxOpenCv</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\src\ofxCvMain.h">
+      <Filter>addons\ofxOpenCv</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\src\ofxCvShortImage.h">
+      <Filter>addons\ofxOpenCv</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\src\ofxOpenCv.h">
+      <Filter>addons\ofxOpenCv</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxXmlSettings\src\ofxXmlSettings.h">
+      <Filter>addons\ofxXmlSettings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxXmlSettings\libs\tinyxml.h">
+      <Filter>addons\ofxXmlSettings</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="addons">
@@ -186,19 +186,10 @@
       <UniqueIdentifier>{41a2b0ca-3ef8-475b-97c2-628cf256ce13}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxOpenCv">
-      <UniqueIdentifier>{af263bee-67b3-442a-885b-0a345f018b18}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="addons\ofxOpenCv\src">
-      <UniqueIdentifier>{df5480f0-884c-4159-a44d-c26fde8fabdf}</UniqueIdentifier>
+      <UniqueIdentifier>{48d0fcd4-5ee6-4547-8637-36abae36b0c1}</UniqueIdentifier>
     </Filter>
     <Filter Include="addons\ofxXmlSettings">
-      <UniqueIdentifier>{545d1e0c-99bc-43a9-bdb6-5009a9a028ff}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="addons\ofxXmlSettings\src">
-      <UniqueIdentifier>{05a6d16c-a082-43b9-bb74-07331ca1eb45}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="addons\ofxXmlSettings\libs">
-      <UniqueIdentifier>{d7ecfd3e-d689-4244-961d-29679905674e}</UniqueIdentifier>
+      <UniqueIdentifier>{eec6a382-f6b8-4560-a268-985cee5e5d04}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -26,7 +26,7 @@ void testApp::setup() {
 	initSetting.grabLabelCv = true;
 	kinect.init(initSetting);
 //	kinect.init(false, true, false, true, false, false, true, false);	/// only use depth capturing and separated label capturing
-	kinect.open();
+	kinect.open(true);
 
 	ofSetVerticalSync(true);
 

@@ -212,23 +212,24 @@ void testApp::draw() {
 			if(p->isFixed()) glColor4f(1, 0, 0, 1);
 			else glColor4f(1, 1, 1, 1);
 
-			glEnable(GL_ALPHA_TEST);
+			//glEnable(GL_ALPHA_TEST);
 			
 			// draw ball
 			glPushMatrix();
 			glTranslatef(p->getPosition().x, p->getPosition().y, p->getPosition().z);
 			glRotatef(180-rot, 0, 1, 0);
 
-			ofSphere(p->getRadius());
+			ofCircle(0,0,p->getRadius());
+			//ofSphere(p->getRadius());
 			/*glBegin(GL_QUADS);
 			glTexCoord2f(0, 0); glVertex2f(-p->getRadius(), -p->getRadius());
 			glTexCoord2f(1, 0); glVertex2f(p->getRadius(), -p->getRadius());
 			glTexCoord2f(1, 1); glVertex2f(p->getRadius(), p->getRadius());
 			glTexCoord2f(0, 1); glVertex2f(-p->getRadius(), p->getRadius());
-			glEnd();
-			glPopMatrix();*/
+			glEnd();*/
+			glPopMatrix();
 			
-			glDisable(GL_ALPHA_TEST);
+			//glDisable(GL_ALPHA_TEST);
 			
 			float alpha = ofMap(p->getPosition().y, -height * 1.5, height, 0, 1);
 			if(alpha>0) {
@@ -236,8 +237,8 @@ void testApp::draw() {
 				glTranslatef(p->getPosition().x, height, p->getPosition().z);
 				glRotatef(-90, 1, 0, 0);
 				glColor4f(255, 255, 255, alpha * alpha * alpha * alpha);
-				float r = p->getRadius() * alpha;
 				ofCircle(0, 0, 0, p->getRadius());
+				//float r = p->getRadius() * alpha;
 				/*glBegin(GL_QUADS);
 				glTexCoord2f(0, 0); glVertex2f(-r, -r);
 				glTexCoord2f(1, 0); glVertex2f(r, -r);
@@ -603,9 +604,19 @@ void testApp::addRandomParticle() {
 }
 
 void testApp::addRandomSpring() {
-	msa::physics::Particle3D *a = physics.getParticle((int)ofRandom(0, physics.numberOfParticles()));
-	msa::physics::Particle3D *b = physics.getParticle((int)ofRandom(0, physics.numberOfParticles()));
-	physics.makeSpring(a, b, ofRandom(SPRING_MIN_STRENGTH, SPRING_MAX_STRENGTH), ofRandom(10, width/2));
+	int k = 0;
+	/*for(int i=0; i<physics.numberOfParticles(); i++) {
+		msa::physics::Particle3D *a = physics.getParticle(i);
+		msa::physics::Particle3D *b = bone[(i%20) + (20*currentSkeletonIndex)];
+		physics.makeSpring(a, b, ofRandom(SPRING_MIN_STRENGTH, SPRING_MAX_STRENGTH), ofRandom(10, 30));
+		k++;
+	}*/
+	for(int i=0; i<physics.numberOfParticles(); i++) {
+		msa::physics::Particle3D *a = physics.getParticle(i);
+		msa::physics::Particle3D *b = &mouseNode;
+		physics.makeSpring(a, b, ofRandom(SPRING_MIN_STRENGTH, SPRING_MAX_STRENGTH), ofRandom(SPRING_MIN_WIDTH, SPRING_MAX_WIDTH));
+	}
+
 }
 
 
@@ -615,8 +626,10 @@ void testApp::killRandomParticle() {
 }
 
 void testApp::killRandomSpring() {
-	msa::physics::Spring3D *s = physics.getSpring( floor(ofRandom(0, physics.numberOfSprings())));
-	if(s) s->kill();
+	for(int i=physics.numberOfSprings(); i>0; i--) {
+		msa::physics::Spring3D *s = physics.getSpring(i);
+		if(s) s->kill();
+	}
 }
 
 void testApp::killRandomConstraint() {
@@ -651,7 +664,11 @@ void testApp::toggleMouseAttract() {
 
 		int k = 0;
 		for(int i=0; i<physics.numberOfParticles(); i++) {
-			physics.makeAttraction(bone[(i%20) + (20*currentSkeletonIndex)], physics.getParticle(i), ofRandom(MIN_ATTRACTION, MAX_ATTRACTION));
+			//physics.makeAttraction(bone[(i%20) + (20*currentSkeletonIndex)], physics.getParticle(i), ofRandom(MIN_ATTRACTION, MAX_ATTRACTION));
+			
+			//test
+			physics.makeAttraction(&mouseNode, physics.getParticle(i), ofRandom(MIN_ATTRACTION, MAX_ATTRACTION));
+			
 			k++;
 		}
 	} else {

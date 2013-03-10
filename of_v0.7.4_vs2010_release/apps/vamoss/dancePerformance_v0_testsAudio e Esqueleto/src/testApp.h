@@ -32,11 +32,11 @@ class ofxKinectNuiDrawSkeleton;
 //Particles
 #include "MSAPhysics3D.h"
 
-#define	SPRING_MIN_STRENGTH		0.005
-#define SPRING_MAX_STRENGTH		0.1
+#define	SPRING_MIN_STRENGTH		0.07
+#define SPRING_MAX_STRENGTH		0.5
 
-#define	SPRING_MIN_WIDTH		1
-#define SPRING_MAX_WIDTH		3
+#define	SPRING_MIN_WIDTH		10
+#define SPRING_MAX_WIDTH		30
 
 #define NODE_MIN_RADIUS			3
 #define NODE_MAX_RADIUS			6
