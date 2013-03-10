@@ -69,6 +69,9 @@ class testApp : public ofBaseApp {
 		unsigned short nearClipping;
 		unsigned short farClipping;
 		int angle;
+
+
+
 		
 		//PARTICLES
 		void initScene();
@@ -83,14 +86,11 @@ class testApp : public ofBaseApp {
 		void unlockRandomParticles();
 		void drawParticle(float r);
 
-
-
 		bool				mouseAttract;
 		bool				doMouseXY;		// pressing left mmouse button moves mouse in XY plane
 		bool				doMouseYZ;		// pressing right mouse button moves mouse in YZ plane
 		bool				doRender;
 		int					forceTimer;
-
 
 		float				rotSpeed;
 		float				mouseMass;
@@ -98,17 +98,19 @@ class testApp : public ofBaseApp {
 		int			width;
 		int			height;
 
-		float minZ;
-		float maxZ;
-
-
 		msa::physics::World3D		physics;
 		msa::physics::Particle3D	mouseNode;
 
+		ofImage					ballImage;
 
-		
+
+		//integration kinect + physics
 		vector<msa::physics::Particle3D *> bone;
 		int currentSkeletonIndex;
 
-		ofImage					ballImage;
+		float minZ;
+		float maxZ;
+		
+		ofFbo canvas;
+		ofFbo canvasTrace;
 };

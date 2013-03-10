@@ -59,6 +59,9 @@ void testApp::setup() {
 	initScene();
 	
 	
+	//integration kinect + physics
+	canvas.allocate(width, height);
+	canvasTrace.allocate(width, height);
 	minZ = 0;
 	maxZ = 0;
 }
@@ -100,6 +103,8 @@ void testApp::update() {
 
 //--------------------------------------------------------------
 void testApp::draw() {
+
+
 	ofBackground(100, 100, 100);
 	ofSetColor(255);
 
@@ -127,8 +132,6 @@ void testApp::draw() {
 			forceTimer--;
 		}
 		
-		
-		glDisable(GL_LIGHTING);
 		glBegin(GL_QUADS);
 		// draw right wall
 		glColor3f(.1, 0.1, 0.1);		glVertex3f(width/2, height+1, width/2);
@@ -161,10 +164,23 @@ void testApp::draw() {
 		glVertex3f(-width/2, height+1, -width/2);
 		glVertex3f(-width/2, height+1, width/2);
 		glEnd();
+		glDisable(GL_DEPTH_TEST);
+		glDisable(GL_CULL_FACE);
 		
+
+		//canvas
+		glRotatef(rot, 0, -1, 0);
+		canvas.begin();
+
+		ofSetColor(255, 125);
+		canvasTrace.draw(0,0);
+
+		glTranslatef(width/2, 0, -width / 3);
+		glRotatef(rot, 0, 1, 0);
+
 		//particles
 		glAlphaFunc(GL_GREATER, 0.5);
-		
+
 		//ofEnableNormalizedTexCoords();
 		//ballImage.getTextureReference().bind();
 		for(int i=0; i<physics.numberOfParticles(); i++) {
@@ -194,14 +210,29 @@ void testApp::draw() {
 		//ballImage.getTextureReference().unbind();
 		//ofDisableNormalizedTexCoords();
 
-
-
+		
+		canvas.end();
 
 		glPopMatrix();
 
 		
-		glDisable(GL_CULL_FACE);
+		
+		
+		canvasTrace.begin();
+			ofSetColor(255);
+			canvas.draw(0,0);
+		canvasTrace.end();
+		
+		canvasTrace.draw(0,0);
+		
+		canvas.begin();
+			ofClear(0);
+		canvas.end();
+		
 	}
+
+	
+
 
 	/*
 	// HEAD
@@ -247,11 +278,12 @@ void testApp::draw() {
 	pLine.addVertex(src[NUI_SKELETON_POSITION_ANKLE_RIGHT].x, src[NUI_SKELETON_POSITION_ANKLE_RIGHT].y);
 	pLine.addVertex(src[NUI_SKELETON_POSITION_FOOT_RIGHT].x, src[NUI_SKELETON_POSITION_FOOT_RIGHT].y);
 	pLine.draw();*/
+
 	
 
 	glDisable(GL_BLEND);
-	glDisable(GL_DEPTH_TEST);
 	glColor4f(1, 1, 1, 1);
+
 	ofDrawBitmapString(" FPS: " + ofToString(ofGetFrameRate(), 2)
                 + " | Number of particles: " + ofToString(physics.numberOfParticles(), 2)
                 + " | Number of springs: " + ofToString(physics.numberOfSprings(), 2)
