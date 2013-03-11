@@ -132,6 +132,8 @@ void facade::draw()
 			glTranslatef(ofRandom(-translateMax, translateMax), ofRandom(-translateMax, translateMax), ofRandom(-translateMax, translateMax));
 			forceTimer--;
 		}
+
+		ofFill();
 		
 		glBegin(GL_QUADS);
 		// draw right wall

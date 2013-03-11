@@ -7,6 +7,20 @@ void dancePerformance::setup() {
 	ofSetFrameRate(60);
 	
 	m_panel.setup(&m_facade);
+
+	ofxFenster* win=ofxFensterManager::get()->createFenster(1024, 0, 400, 300, OF_WINDOW);
+	win->addListener(&m_panelWindow);
+	win->setBackgroundColor(ofRandom(255), ofRandom(255), ofRandom(255));
+	win->setWindowTitle("Control Panel");
+	m_panelWindow.setup();
+
+	//IF the following code is uncommented, all the following windows should be created on the second display, if there is one available
+	/*ofxDisplayList displays = ofxDisplayManager::get()->getDisplays();
+	ofxDisplay* disp = displays[0];
+	if(displays.size() > 1)
+		disp = displays[1];
+	ofxFensterManager::get()->setActiveDisplay(disp);*/
+
 }
 
 //--------------------------------------------------------------

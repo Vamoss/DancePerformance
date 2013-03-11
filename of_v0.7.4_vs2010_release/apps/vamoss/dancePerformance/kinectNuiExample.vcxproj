@@ -83,7 +83,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\..\libs\openFrameworks;..\..\..\libs\openFrameworks\graphics;..\..\..\libs\openFrameworks\app;..\..\..\libs\openFrameworks\sound;..\..\..\libs\openFrameworks\utils;..\..\..\libs\openFrameworks\communication;..\..\..\libs\openFrameworks\video;..\..\..\libs\openFrameworks\math;..\..\..\libs\openFrameworks\types;..\..\..\libs\openFrameworks\events;..\..\..\libs\glut\include;..\..\..\libs\rtAudio\include;..\..\..\libs\quicktime\include;..\..\..\libs\freetype\include;..\..\..\libs\freetype\include\freetype2;..\..\..\libs\freeImage\include;..\..\..\libs\fmodex\include;..\..\..\libs\videoInput\include;..\..\..\libs\glew\include\;..\..\..\libs\glu\include;..\..\..\libs\poco\include;..\..\..\addons;..\..\..\libs\openFrameworks\gl;..\..\..\libs\openFrameworks\3d;..\..\..\libs\tess2\include;..\..\..\libs\cairo\include\cairo;$(KINECTSDK10_DIR)\inc;..\..\..\addons\ofxKinectNui\src;..\..\..\addons\ofxMSACore\src;..\..\..\addons\ofxMSAObjCPointer\src;..\..\..\addons\ofxMSAPhysics\src;..\..\..\addons\ofxUI\src;..\..\..\addons\ofxXmlSettings\src;..\..\..\addons\ofxXmlSettings\libs</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\addons\ofxFenster\libs\string\include;..\..\..\addons\ofxFenster\libs\ghost\include;..\..\..\addons\ofxFenster\src;..\..\..\libs\openFrameworks;..\..\..\libs\openFrameworks\graphics;..\..\..\libs\openFrameworks\app;..\..\..\libs\openFrameworks\sound;..\..\..\libs\openFrameworks\utils;..\..\..\libs\openFrameworks\communication;..\..\..\libs\openFrameworks\video;..\..\..\libs\openFrameworks\math;..\..\..\libs\openFrameworks\types;..\..\..\libs\openFrameworks\events;..\..\..\libs\glut\include;..\..\..\libs\rtAudio\include;..\..\..\libs\quicktime\include;..\..\..\libs\freetype\include;..\..\..\libs\freetype\include\freetype2;..\..\..\libs\freeImage\include;..\..\..\libs\fmodex\include;..\..\..\libs\videoInput\include;..\..\..\libs\glew\include\;..\..\..\libs\glu\include;..\..\..\libs\poco\include;..\..\..\addons;..\..\..\libs\openFrameworks\gl;..\..\..\libs\openFrameworks\3d;..\..\..\libs\tess2\include;..\..\..\libs\cairo\include\cairo;$(KINECTSDK10_DIR)\inc;..\..\..\addons\ofxKinectNui\src;..\..\..\addons\ofxMSACore\src;..\..\..\addons\ofxMSAObjCPointer\src;..\..\..\addons\ofxMSAPhysics\src;..\..\..\addons\ofxUI\src;..\..\..\addons\ofxXmlSettings\src;..\..\..\addons\ofxXmlSettings\libs</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;POCO_STATIC;CAIRO_WIN32_STATIC_BUILD;DISABLE_SOME_FLOATING_POINT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -94,7 +94,7 @@
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>openframeworksLibDebug.lib;cairo-static.lib;pixman-1.lib;msimg32.lib;OpenGL32.lib;GLu32.lib;kernel32.lib;setupapi.lib;Vfw32.lib;comctl32.lib;glut32.lib;rtAudioD.lib;videoInput.lib;libfreetype.lib;FreeImage.lib;qtmlClient.lib;dsound.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;glew32s.lib;fmodex_vc.lib;glu32.lib;PocoFoundationmdd.lib;PocoNetmdd.lib;PocoUtilmdd.lib;PocoXMLmdd.lib;Ws2_32.lib;tess2.lib;Kinect10.lib;msdmo.lib;dmoguids.lib;amstrmid.lib;WinMM.Lib</AdditionalDependencies>
+      <AdditionalDependencies>openframeworksLibDebug.lib;cairo-static.lib;pixman-1.lib;msimg32.lib;OpenGL32.lib;GLu32.lib;kernel32.lib;setupapi.lib;Vfw32.lib;comctl32.lib;glut32.lib;rtAudioD.lib;videoInput.lib;libfreetype.lib;FreeImage.lib;qtmlClient.lib;dsound.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;glew32s.lib;fmodex_vc.lib;glu32.lib;PocoFoundationmdd.lib;PocoNetmdd.lib;PocoUtilmdd.lib;PocoXMLmdd.lib;Ws2_32.lib;tess2.lib;Kinect10.lib;msdmo.lib;dmoguids.lib;amstrmid.lib;WinMM.Lib;\..\..\addons\ofxFenster\libs\ghost\lib\win_vs\libghost_debug.lib</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <AdditionalLibraryDirectories>..\..\..\libs\glut\lib\vs2010;..\..\..\libs\rtAudio\lib\vs2010;..\..\..\libs\FreeImage\lib\vs2010;..\..\..\libs\freetype\lib\vs2010;..\..\..\libs\quicktime\lib\vs2010;..\..\..\libs\fmodex\lib\vs2010;..\..\..\libs\videoInput\lib\vs2010;..\..\..\libs\cairo\lib\vs2010;..\..\..\libs\glew\lib\vs2010;..\..\..\libs\glu\lib\vs2010;..\..\..\libs\Poco\lib\vs2010;..\..\..\libs\tess2\lib\vs2010;..\..\..\libs\openFrameworksCompiled\lib\vs2010;$(KINECTSDK10_DIR)\lib\x86</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>atlthunk.lib;LIBC.lib;LIBCMT;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
@@ -149,7 +149,7 @@ if not exist "$(ProjectDir)bin\data" mkdir  "$(ProjectDir)bin\data"
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WholeProgramOptimization>false</WholeProgramOptimization>
-      <AdditionalIncludeDirectories>..\..\..\libs\openFrameworks;..\..\..\libs\openFrameworks\graphics;..\..\..\libs\openFrameworks\app;..\..\..\libs\openFrameworks\sound;..\..\..\libs\openFrameworks\utils;..\..\..\libs\openFrameworks\communication;..\..\..\libs\openFrameworks\video;..\..\..\libs\openFrameworks\math;..\..\..\libs\openFrameworks\types;..\..\..\libs\openFrameworks\events;..\..\..\libs\glut\include;..\..\..\libs\rtAudio\include;..\..\..\libs\quicktime\include;..\..\..\libs\freetype\include;..\..\..\libs\freetype\include\freetype2;..\..\..\libs\freeImage\include;..\..\..\libs\fmodex\include;..\..\..\libs\videoInput\include;..\..\..\libs\glew\include\;..\..\..\libs\glu\include;..\..\..\libs\poco\include;..\..\..\addons;..\..\..\libs\openFrameworks\gl;..\..\..\libs\openFrameworks\3d;..\..\..\libs\tess2\include;..\..\..\libs\cairo\include\cairo;$(KINECTSDK10_DIR)\inc;..\..\..\addons\ofxKinectNui\src;..\..\..\addons\ofxMSACore\src;..\..\..\addons\ofxMSAObjCPointer\src;..\..\..\addons\ofxMSAPhysics\src;..\..\..\addons\ofxUI\src;..\..\..\addons\ofxXmlSettings\src;..\..\..\addons\ofxXmlSettings\libs</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\addons\ofxFenster\libs\string\include;..\..\..\addons\ofxFenster\libs\ghost\include;..\..\..\addons\ofxFenster\src;..\..\..\libs\openFrameworks;..\..\..\libs\openFrameworks\graphics;..\..\..\libs\openFrameworks\app;..\..\..\libs\openFrameworks\sound;..\..\..\libs\openFrameworks\utils;..\..\..\libs\openFrameworks\communication;..\..\..\libs\openFrameworks\video;..\..\..\libs\openFrameworks\math;..\..\..\libs\openFrameworks\types;..\..\..\libs\openFrameworks\events;..\..\..\libs\glut\include;..\..\..\libs\rtAudio\include;..\..\..\libs\quicktime\include;..\..\..\libs\freetype\include;..\..\..\libs\freetype\include\freetype2;..\..\..\libs\freeImage\include;..\..\..\libs\fmodex\include;..\..\..\libs\videoInput\include;..\..\..\libs\glew\include\;..\..\..\libs\glu\include;..\..\..\libs\poco\include;..\..\..\addons;..\..\..\libs\openFrameworks\gl;..\..\..\libs\openFrameworks\3d;..\..\..\libs\tess2\include;..\..\..\libs\cairo\include\cairo;$(KINECTSDK10_DIR)\inc;..\..\..\addons\ofxKinectNui\src;..\..\..\addons\ofxMSACore\src;..\..\..\addons\ofxMSAObjCPointer\src;..\..\..\addons\ofxMSAPhysics\src;..\..\..\addons\ofxUI\src;..\..\..\addons\ofxXmlSettings\src;..\..\..\addons\ofxXmlSettings\libs</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;POCO_STATIC;CAIRO_WIN32_STATIC_BUILD;DISABLE_SOME_FLOATING_POINT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <PrecompiledHeader>
@@ -159,7 +159,7 @@ if not exist "$(ProjectDir)bin\data" mkdir  "$(ProjectDir)bin\data"
       </DebugInformationFormat>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>openframeworksLib.lib;cairo-static.lib;pixman-1.lib;msimg32.lib;OpenGL32.lib;GLu32.lib;kernel32.lib;setupapi.lib;glut32.lib;rtAudio.lib;videoInput.lib;libfreetype.lib;FreeImage.lib;qtmlClient.lib;dsound.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;glew32s.lib;fmodex_vc.lib;glu32.lib;Vfw32.lib;comctl32.lib;PocoFoundationmd.lib;PocoNetmd.lib;PocoUtilmd.lib;PocoXMLmd.lib;Ws2_32.lib;tess2.lib;Kinect10.lib;msdmo.lib;dmoguids.lib;amstrmid.lib;WinMM.Lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>openframeworksLib.lib;cairo-static.lib;pixman-1.lib;msimg32.lib;OpenGL32.lib;GLu32.lib;kernel32.lib;setupapi.lib;glut32.lib;rtAudio.lib;videoInput.lib;libfreetype.lib;FreeImage.lib;qtmlClient.lib;dsound.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;glew32s.lib;fmodex_vc.lib;glu32.lib;Vfw32.lib;comctl32.lib;PocoFoundationmd.lib;PocoNetmd.lib;PocoUtilmd.lib;PocoXMLmd.lib;Ws2_32.lib;tess2.lib;Kinect10.lib;msdmo.lib;dmoguids.lib;amstrmid.lib;WinMM.Lib;..\..\..\addons\ofxFenster\libs\ghost\lib\win_vs\libghost.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>..\..\..\libs\glut\lib\vs2010;..\..\..\libs\rtAudio\lib\vs2010;..\..\..\libs\FreeImage\lib\vs2010;..\..\..\libs\freetype\lib\vs2010;..\..\..\libs\quicktime\lib\vs2010;..\..\..\libs\fmodex\lib\vs2010;..\..\..\libs\videoInput\lib\vs2010;..\..\..\libs\cairo\lib\vs2010;..\..\..\libs\glew\lib\vs2010;..\..\..\libs\glu\lib\vs2010;..\..\..\libs\Poco\lib\vs2010;..\..\..\libs\tess2\lib\vs2010;..\..\..\libs\openFrameworksCompiled\lib\vs2010;$(KINECTSDK10_DIR)\lib\x86</AdditionalLibraryDirectories>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <IgnoreSpecificDefaultLibraries>atlthunk.lib; LIBC.lib; LIBCMT;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
@@ -222,6 +222,10 @@ if not exist "$(ProjectDir)\bin\data" mkdir  "$(ProjectDir)\bin\data"
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\addons\ofxFenster\src\ofxDisplay.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxFenster\src\ofxDisplayManager.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxFenster\src\ofxFenster.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxFenster\src\ofxFensterManager.cpp" />
     <ClCompile Include="..\..\..\addons\ofxKinectNui\src\kinect\nui\AudioStream.cpp" />
     <ClCompile Include="..\..\..\addons\ofxKinectNui\src\kinect\nui\ImageFrame.cpp" />
     <ClCompile Include="..\..\..\addons\ofxKinectNui\src\kinect\nui\ImageStream.cpp" />
@@ -246,6 +250,54 @@ if not exist "$(ProjectDir)\bin\data" mkdir  "$(ProjectDir)\bin\data"
     <ClCompile Include="src\dancePerformance.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\addons\ofxFenster\libs\ghost\include\GHOST_Buttons.h" />
+    <ClInclude Include="..\..\..\addons\ofxFenster\libs\ghost\include\GHOST_C-api.h" />
+    <ClInclude Include="..\..\..\addons\ofxFenster\libs\ghost\include\GHOST_CallbackEventConsumer.h" />
+    <ClInclude Include="..\..\..\addons\ofxFenster\libs\ghost\include\GHOST_Debug.h" />
+    <ClInclude Include="..\..\..\addons\ofxFenster\libs\ghost\include\GHOST_DisplayManager.h" />
+    <ClInclude Include="..\..\..\addons\ofxFenster\libs\ghost\include\GHOST_DisplayManagerNULL.h" />
+    <ClInclude Include="..\..\..\addons\ofxFenster\libs\ghost\include\GHOST_Event.h" />
+    <ClInclude Include="..\..\..\addons\ofxFenster\libs\ghost\include\GHOST_EventButton.h" />
+    <ClInclude Include="..\..\..\addons\ofxFenster\libs\ghost\include\GHOST_EventCursor.h" />
+    <ClInclude Include="..\..\..\addons\ofxFenster\libs\ghost\include\GHOST_EventDragnDrop.h" />
+    <ClInclude Include="..\..\..\addons\ofxFenster\libs\ghost\include\GHOST_EventKey.h" />
+    <ClInclude Include="..\..\..\addons\ofxFenster\libs\ghost\include\GHOST_EventManager.h" />
+    <ClInclude Include="..\..\..\addons\ofxFenster\libs\ghost\include\GHOST_EventNDOF.h" />
+    <ClInclude Include="..\..\..\addons\ofxFenster\libs\ghost\include\GHOST_EventPrinter.h" />
+    <ClInclude Include="..\..\..\addons\ofxFenster\libs\ghost\include\GHOST_EventString.h" />
+    <ClInclude Include="..\..\..\addons\ofxFenster\libs\ghost\include\GHOST_EventTrackpad.h" />
+    <ClInclude Include="..\..\..\addons\ofxFenster\libs\ghost\include\GHOST_EventWheel.h" />
+    <ClInclude Include="..\..\..\addons\ofxFenster\libs\ghost\include\GHOST_IEvent.h" />
+    <ClInclude Include="..\..\..\addons\ofxFenster\libs\ghost\include\GHOST_IEventConsumer.h" />
+    <ClInclude Include="..\..\..\addons\ofxFenster\libs\ghost\include\GHOST_ISystem.h" />
+    <ClInclude Include="..\..\..\addons\ofxFenster\libs\ghost\include\GHOST_ISystemPaths.h" />
+    <ClInclude Include="..\..\..\addons\ofxFenster\libs\ghost\include\GHOST_ITimerTask.h" />
+    <ClInclude Include="..\..\..\addons\ofxFenster\libs\ghost\include\GHOST_IWindow.h" />
+    <ClInclude Include="..\..\..\addons\ofxFenster\libs\ghost\include\GHOST_ModifierKeys.h" />
+    <ClInclude Include="..\..\..\addons\ofxFenster\libs\ghost\include\GHOST_Path-api.h" />
+    <ClInclude Include="..\..\..\addons\ofxFenster\libs\ghost\include\GHOST_Rect.h" />
+    <ClInclude Include="..\..\..\addons\ofxFenster\libs\ghost\include\GHOST_System.h" />
+    <ClInclude Include="..\..\..\addons\ofxFenster\libs\ghost\include\GHOST_SystemNULL.h" />
+    <ClInclude Include="..\..\..\addons\ofxFenster\libs\ghost\include\GHOST_SystemPaths.h" />
+    <ClInclude Include="..\..\..\addons\ofxFenster\libs\ghost\include\GHOST_TimerManager.h" />
+    <ClInclude Include="..\..\..\addons\ofxFenster\libs\ghost\include\GHOST_TimerTask.h" />
+    <ClInclude Include="..\..\..\addons\ofxFenster\libs\ghost\include\GHOST_Types.h" />
+    <ClInclude Include="..\..\..\addons\ofxFenster\libs\ghost\include\GHOST_Window.h" />
+    <ClInclude Include="..\..\..\addons\ofxFenster\libs\ghost\include\GHOST_WindowManager.h" />
+    <ClInclude Include="..\..\..\addons\ofxFenster\libs\ghost\include\GHOST_WindowNULL.h" />
+    <ClInclude Include="..\..\..\addons\ofxFenster\libs\ghost\include\WIN32\GHOST_DisplayManagerWin32.h" />
+    <ClInclude Include="..\..\..\addons\ofxFenster\libs\ghost\include\WIN32\GHOST_DropTargetWin32.h" />
+    <ClInclude Include="..\..\..\addons\ofxFenster\libs\ghost\include\WIN32\GHOST_SystemPathsWin32.h" />
+    <ClInclude Include="..\..\..\addons\ofxFenster\libs\ghost\include\WIN32\GHOST_SystemWin32.h" />
+    <ClInclude Include="..\..\..\addons\ofxFenster\libs\ghost\include\WIN32\GHOST_TaskbarWin32.h" />
+    <ClInclude Include="..\..\..\addons\ofxFenster\libs\ghost\include\WIN32\GHOST_WindowWin32.h" />
+    <ClInclude Include="..\..\..\addons\ofxFenster\libs\ghost\include\WIN32\pktdef.h" />
+    <ClInclude Include="..\..\..\addons\ofxFenster\libs\ghost\include\WIN32\wintab.h" />
+    <ClInclude Include="..\..\..\addons\ofxFenster\libs\string\include\STR_String.h" />
+    <ClInclude Include="..\..\..\addons\ofxFenster\src\ofxDisplay.h" />
+    <ClInclude Include="..\..\..\addons\ofxFenster\src\ofxDisplayManager.h" />
+    <ClInclude Include="..\..\..\addons\ofxFenster\src\ofxFenster.h" />
+    <ClInclude Include="..\..\..\addons\ofxFenster\src\ofxFensterManager.h" />
     <ClInclude Include="..\..\..\addons\ofxKinectNui\src\kinect\nui\AudioStream.h" />
     <ClInclude Include="..\..\..\addons\ofxKinectNui\src\kinect\nui\ImageFrame.h" />
     <ClInclude Include="..\..\..\addons\ofxKinectNui\src\kinect\nui\ImageStream.h" />
@@ -333,6 +385,7 @@ if not exist "$(ProjectDir)\bin\data" mkdir  "$(ProjectDir)\bin\data"
     <ClInclude Include="src\dancePerformance.h" />
     <ClInclude Include="src\facade.h" />
     <ClInclude Include="src\panelUI.h" />
+    <ClInclude Include="src\panelWindow.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\libs\openFrameworksCompiled\project\vs2010\openframeworksLib.vcxproj">
