@@ -3,30 +3,20 @@
 
 #include "ofMain.h"
 #include "ofxFensterManager.h"
+#include "panelUI.h"
 
 class panelWindow: public ofxFensterListener {
 public:
 	panelWindow() {
-		rotX = ofRandom(-20, 20);
-		rotY = ofRandom(-10, 10);
+
 	}
 
 	void draw() {
-		ofPushMatrix();
-		ofPushStyle();
-			ofSetColor(255);
-			ofNoFill();
-			ofTranslate(ofGetWidth()*.5, ofGetHeight()*.5, 0);
-			ofRotateX(rotX);
-			ofRotateY(rotY);
-			ofBox(0, 0, 0, 100);
-		ofPopStyle();
-		ofPopMatrix();
+		m_panel.draw();
 	}
 
 	void mouseMoved(int x, int y) {
-		rotY = ofMap(x, 0, ofGetWidth(), -20, 20);
-		rotX = ofMap(y, 0, ofGetHeight(), 60, -60);
+
 	}
 
 	void dragEvent(ofDragInfo dragInfo) {
@@ -38,7 +28,6 @@ public:
 		}
 	}
 
-
-	float rotX;
-	float rotY;
+	
+	panelUI m_panel;
 };

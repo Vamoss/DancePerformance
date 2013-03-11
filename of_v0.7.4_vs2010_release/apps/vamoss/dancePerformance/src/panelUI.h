@@ -3,13 +3,15 @@
 #include "facade.h"
 #include "ofxUI.h"
 
+#undef OFX_UI_GLOBAL_WIDGET_SPACING
+#define OFX_UI_GLOBAL_WIDGET_SPACING 40
+
 class panelUI {
     
 public:
     
 	//TODO
 	//substitute key press
-	//canvas alpha
 	//spring tension
 	//
     
@@ -33,11 +35,13 @@ public:
         float xInit = OFX_UI_GLOBAL_WIDGET_SPACING; 
         float length = 455-xInit; 
         
-        gui1 = new ofxUICanvas(0, 0, length+xInit, ofGetHeight()); 
+        gui1 = new ofxUICanvas(0, 0, length+xInit, ofGetHeight());
+		gui1->setWidgetSpacing(20);
         gui1->addWidgetDown(new ofxUILabel("DANCE PERFORMANCE", OFX_UI_FONT_LARGE)); 
         gui1->addWidgetDown(new ofxUIFPS(OFX_UI_FONT_MEDIUM)); 
         
-        gui1->addWidgetDown(new ofxUISpacer(length-xInit, 2)); 
+		gui1->addSpacer(2);
+        
         gui1->addWidgetDown(new ofxUILabel("PHYSICS", OFX_UI_FONT_MEDIUM));
         gui1->addWidgetDown(new ofxUISlider(length-xInit,dim, 0.0, 2000.0, 50, "PARTICLES"));
         gui1->addWidgetDown(new ofxUIToggle( dim, dim, false, "SPRING"));
@@ -53,6 +57,11 @@ public:
         
         ofAddListener(gui1->newGUIEvent,this,&panelUI::guiEvent);
     }
+
+	void draw()
+	{
+		gui1->draw();
+	}
     
     void keyPressed(int key)
     {   
