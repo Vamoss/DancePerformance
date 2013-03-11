@@ -11,8 +11,7 @@ class panelUI {
 public:
     
 	//TODO
-	//substitute key press
-	//spring tension
+	//substitute define vars
 	//
     
 	ofxUICanvas		*gui1;
@@ -41,19 +40,25 @@ public:
         gui1->addWidgetDown(new ofxUIFPS(OFX_UI_FONT_MEDIUM)); 
         
 		gui1->addSpacer(2);
-        
         gui1->addWidgetDown(new ofxUILabel("PHYSICS", OFX_UI_FONT_MEDIUM));
-        gui1->addWidgetDown(new ofxUISlider(length-xInit,dim, 0.0, 2000.0, 50, "PARTICLES"));
+        gui1->addWidgetDown(new ofxUIToggle( dim, dim, false, "RENDER")); 
         gui1->addWidgetDown(new ofxUIToggle( dim, dim, false, "SPRING"));
         gui1->addWidgetDown(new ofxUIToggle( dim, dim, false, "ATTRACT")); 
-        gui1->addWidgetDown(new ofxUILabelButton( length-xInit, false, "SHAKE", OFX_UI_FONT_MEDIUM)); 	
+        gui1->addWidgetDown(new ofxUIToggle( dim, dim, false, "COLLISION")); 	
+        gui1->addWidgetDown(new ofxUIRangeSlider(length-xInit, dim,	0.0,1.0, 0.07, 0.5, "STRENGHT"));
+        gui1->addWidgetDown(new ofxUISlider(length-xInit, dim, 0.0,2000.0, 50, "PARTICLES"));	
+        gui1->addWidgetDown(new ofxUISlider(length-xInit, dim, -0.9, 5.0, 1.5, "MASS"));
+		ofxUISlider * sliderRot = new ofxUISlider(length-xInit, dim, -3.0, 3.0, 0.0, "ROTATION SPEED");
+		sliderRot->setIncrement(0.1);
+		gui1->addWidgetDown(sliderRot);
+        gui1->addWidgetDown(new ofxUILabelButton( length-xInit, false, "SHAKE", OFX_UI_FONT_MEDIUM));
+        gui1->addWidgetDown(new ofxUILabelButton( length-xInit, false, "RESTART", OFX_UI_FONT_MEDIUM));
+
+        gui1->addSpacer(2);
+		gui1->addWidgetDown(new ofxUISlider(length-xInit,dim, 0.0, 255.0, 125, "FADE"));	
         
-        gui1->addWidgetDown(new ofxUISpacer(length-xInit, 2));
-        gui1->addWidgetDown(new ofxUISlider(length-xInit,dim, 0.0, 255.0, 125, "FADE"));	
-        
-        gui1->addWidgetDown(new ofxUISpacer(length-xInit, 2));
-        gui1->addWidgetDown(new ofxUILabelButton( length-xInit, false, "SAVE", OFX_UI_FONT_MEDIUM)); 	
-        
+		gui1->addSpacer(2);
+		gui1->addWidgetDown(new ofxUILabelButton( length-xInit, false, "SAVE", OFX_UI_FONT_MEDIUM)); 	
         
         ofAddListener(gui1->newGUIEvent,this,&panelUI::guiEvent);
     }
@@ -76,101 +81,13 @@ public:
         }
 
 		//particles
-	switch(key) {
-		case 'a': 
-			app->toggleMouseAttract();
-			break;
-		case 'p': 
-			for(int i=0; i<100; i++) app->addRandomParticle(); 
-			break;
-		case 'P': 
-			for(int i=0; i<100; i++) 
-				app->killRandomParticle(); break;
-		case 's': 
-			app->toggleMouseSpring(); 
-			break;
-		case 'c': 
-			app->physics.isCollisionEnabled() ? app->physics.disableCollision() : app->physics.enableCollision(); 
-			break;
-		case 'C': 
-			app->killRandomConstraint(); 
-			break;
-		case 'r': 
-			app->doRender ^= true; 
-			break;
-		case 'f': 
-			app->addRandomForce(FORCE_AMOUNT); break;
-		case 'F': 
-			app->addRandomForce(FORCE_AMOUNT * 3); 
-			break;
-		case 'l': 
-			app->lockRandomParticles(); 
-			break;
-		case 'u': 
-			app->unlockRandomParticles(); 
-			break;
-		case '1': 
-			app->initScene(); 
-			break;
-		case 'x': 
-			app->doMouseXY = true; 
-			break;
-		case 'z': 
-			app->doMouseYZ = true; 
-			break;
-		case ']': 
-			app->rotSpeed += 0.01f; 
-			break;
-		case '[': 
-			app->rotSpeed -= 0.01f; 
-			break;
-		case '+': 
-#ifdef USE_KINECT
-			for(int i = 0; i < kinect::nui::SkeletonFrame::SKELETON_COUNT; ++i){
-				for(int j = 0; j < kinect::nui::SkeletonData::POSITION_COUNT; ++j){
-					app->bone[(i*kinect::nui::SkeletonData::POSITION_COUNT) + j]->setMass(app->bone[(i*kinect::nui::SkeletonData::POSITION_COUNT) + j]->getMass() +0.1);
-				}
-			}
-#else
-			app->mouseNode.setMass(app->mouseNode.getMass() +0.1);
-#endif
-			break;
-		case '-': 
-#ifdef USE_KINECT
-			for(int i = 0; i < kinect::nui::SkeletonFrame::SKELETON_COUNT; ++i){
-				for(int j = 0; j < kinect::nui::SkeletonData::POSITION_COUNT; ++j){
-					app->bone[(i*kinect::nui::SkeletonData::POSITION_COUNT) + j]->setMass(app->bone[(i*kinect::nui::SkeletonData::POSITION_COUNT) + j]->getMass() -0.1);
-				}
-			}
-#else
-			app->mouseNode.setMass(app->mouseNode.getMass() -0.1); 
-#endif
-			break;
-		case 'm': 
-			bool collision = app->mouseNode.hasCollision();
-			if(collision){
-#ifdef USE_KINECT
-				for(int i = 0; i < kinect::nui::SkeletonFrame::SKELETON_COUNT; ++i){
-					for(int j = 0; j < kinect::nui::SkeletonData::POSITION_COUNT; ++j){
-						app->bone[(i*kinect::nui::SkeletonData::POSITION_COUNT) + j]->disableCollision();
-					}
-				}
-#else
-				app->mouseNode.disableCollision();
-#endif
-
-			}else{
-#ifdef USE_KINECT
-				for(int i = 0; i < kinect::nui::SkeletonFrame::SKELETON_COUNT; ++i){
-					for(int j = 0; j < kinect::nui::SkeletonData::POSITION_COUNT; ++j){
-						app->bone[(i*kinect::nui::SkeletonData::POSITION_COUNT) + j]->enableCollision();
-					}
-				}
-#else
-				app->mouseNode.enableCollision();
-#endif
-			}
-			break;
+		switch(key) {
+			case 'x': 
+				app->doMouseXY = true; 
+				break;
+			case 'z': 
+				app->doMouseYZ = true; 
+				break;
 		}
     }
     
@@ -181,7 +98,12 @@ public:
         int kind = e.widget->getKind(); 
         cout << "got event from: " << name << endl; 	
         
-        if(name == "PARTICLES")
+        if(name == "RENDER")
+		{
+			ofxUIToggle *toggle = (ofxUIToggle *) e.widget; 
+			app->doRender = toggle->getValue(); 
+		}
+		else if(name == "PARTICLES")
         {
             ofxUISlider *slider = (ofxUISlider *) e.widget; 
 			for(int i=app->physics.numberOfParticles(); i < slider->getScaledValue(); i++) app->addRandomParticle();
@@ -189,20 +111,46 @@ public:
         }
         else if(name == "SPRING")
         {
-			app->toggleMouseSpring();
+			ofxUIToggle *toggle = (ofxUIToggle *) e.widget; 
+			app->setMouseSpring(toggle->getValue());
         }
         else if(name == "ATTRACT")
         {
-			app->toggleMouseAttract();
+			ofxUIToggle *toggle = (ofxUIToggle *) e.widget; 
+			app->setMouseAttract(toggle->getValue());
         }
+		else if(name == "STRENGHT")
+		{
+			ofxUIRangeSlider *slider = (ofxUIRangeSlider *) e.widget; 
+			app->setStrength(slider->getScaledValueLow(), slider->getScaledValueHigh());
+		}
         else if(name == "SHAKE")
         {
 			app->addRandomForce(FORCE_AMOUNT);
+        }
+        else if(name == "RESTART")
+        {
+			app->initScene(); 
         }
 		else if(name == "FADE")
 		{
 			ofxUISlider *slider = (ofxUISlider *) e.widget; 
 			app->canvasFade = slider->getScaledValue();
+		}
+		else if(name == "COLLISION")
+		{
+			ofxUIToggle *toggle = (ofxUIToggle *) e.widget; 
+			app->setCollision(toggle->getValue());
+		}
+		else if(name == "ROTATION SPEED")
+		{
+			ofxUISlider *slider = (ofxUISlider *) e.widget; 
+			app->rotSpeed = slider->getScaledValue(); 
+		}
+		else if(name == "MASS")
+		{
+			ofxUISlider *slider = (ofxUISlider *) e.widget; 
+			app->setMass(slider->getScaledValue()); 
 		}
         else if(name == "SAVE")
         {

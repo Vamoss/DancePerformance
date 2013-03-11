@@ -38,6 +38,11 @@ facade::facade(void)
 	rotSpeed		= 0;
 	mouseMass		= 1;
 
+	
+	
+	min_strength = 0.07;
+	max_strength = 0.5;
+
 
 	ballImage.loadImage("ball.png");
 	
@@ -426,7 +431,7 @@ void facade::addRandomParticle() {
 	
 	// add an attraction to the mouseNode
 	if(mouseAttract) physics.makeAttraction(&mouseNode, p, ofRandom(MIN_ATTRACTION, MAX_ATTRACTION));
-	if(mouseSpring) physics.makeSpring(&mouseNode, p, ofRandom(SPRING_MIN_STRENGTH, SPRING_MAX_STRENGTH), ofRandom(SPRING_MIN_WIDTH, SPRING_MAX_WIDTH));
+	if(mouseSpring) physics.makeSpring(&mouseNode, p, ofRandom(min_strength, max_strength), ofRandom(SPRING_MIN_WIDTH, SPRING_MAX_WIDTH));
 }
 
 
@@ -435,30 +440,25 @@ void facade::killRandomParticle() {
 	if(p && p != &mouseNode) p->kill();
 }
 
-void facade::killRandomConstraint() {
-	msa::physics::Constraint3D *c = physics.getConstraint(floor(ofRandom(0, physics.numberOfConstraints())));
-	if(c) c->kill();
-}
 
 
 
-
-void facade::toggleMouseSpring() {
-	mouseSpring = !mouseSpring;
+void facade::setMouseSpring(bool s) {
+	mouseSpring = s;
 	if(mouseSpring){
 #ifdef USE_KINECT
 		int k = 0;
 		for(int i=0; i<physics.numberOfParticles() && currentSkeletonIndex>-1; i++) {
 			msa::physics::Particle3D *a = physics.getParticle(i);
 			msa::physics::Particle3D *b = bone[(i%kinect::nui::SkeletonData::POSITION_COUNT) + (kinect::nui::SkeletonData::POSITION_COUNT*currentSkeletonIndex)];
-			physics.makeSpring(a, b, ofRandom(SPRING_MIN_STRENGTH, SPRING_MAX_STRENGTH), ofRandom(10, 30));
+			physics.makeSpring(a, b, ofMap(i, 0, physics.numberOfParticles(), min_strength, max_strength), ofRandom(10, 30));
 			k++;
 		}
 #else
 		for(int i=0; i<physics.numberOfParticles(); i++) {
 			msa::physics::Particle3D *a = physics.getParticle(i);
 			msa::physics::Particle3D *b = &mouseNode;
-			physics.makeSpring(a, b, ofRandom(SPRING_MIN_STRENGTH, SPRING_MAX_STRENGTH), ofRandom(SPRING_MIN_WIDTH, SPRING_MAX_WIDTH));
+			physics.makeSpring(a, b, ofMap(i, 0, physics.numberOfParticles(), min_strength, max_strength), ofRandom(SPRING_MIN_WIDTH, SPRING_MAX_WIDTH));
 		}
 #endif
 	}else{
@@ -470,8 +470,23 @@ void facade::toggleMouseSpring() {
 }
 
 
-void facade::toggleMouseAttract() {
-	mouseAttract = !mouseAttract;
+
+
+void facade::setMass(float m) {
+#ifdef USE_KINECT
+	for(int i = 0; i < kinect::nui::SkeletonFrame::SKELETON_COUNT; ++i){
+		for(int j = 0; j < kinect::nui::SkeletonData::POSITION_COUNT; ++j){
+			bone[(i*kinect::nui::SkeletonData::POSITION_COUNT) + j]->setMass(m);
+		}
+	}
+#else
+	mouseNode.setMass(m);
+#endif
+}
+
+
+void facade::setMouseAttract(bool a) {
+	mouseAttract = a;
 	if(mouseAttract) {
 		// loop through all particles and add attraction to the closest bone
 		/*msa::physics::Particle3D * closestBone;
@@ -506,6 +521,46 @@ void facade::toggleMouseAttract() {
 	} else {
 		// loop through all existing attractsions and delete them
 		for(int i=0; i<physics.numberOfAttractions(); i++) physics.getAttraction(i)->kill();
+	}
+}
+
+
+
+void facade::setCollision(bool c) {
+	if(c){
+		physics.enableCollision();
+#ifdef USE_KINECT
+		for(int i = 0; i < kinect::nui::SkeletonFrame::SKELETON_COUNT; ++i){
+			for(int j = 0; j < kinect::nui::SkeletonData::POSITION_COUNT; ++j){
+				bone[(i*kinect::nui::SkeletonData::POSITION_COUNT) + j]->enableCollision();
+			}
+		}
+#else
+		mouseNode.enableCollision();
+#endif
+	}else{
+		physics.disableCollision();
+#ifdef USE_KINECT
+		for(int i = 0; i < kinect::nui::SkeletonFrame::SKELETON_COUNT; ++i){
+			for(int j = 0; j < kinect::nui::SkeletonData::POSITION_COUNT; ++j){
+				bone[(i*kinect::nui::SkeletonData::POSITION_COUNT) + j]->disableCollision();
+			}
+		}
+#else
+		mouseNode.disableCollision();
+#endif
+	}
+}
+
+void facade::setStrength(float min, float max) {
+	min_strength = min;
+	max_strength = max;
+
+	for(int i=physics.numberOfSprings(); i>0; i--) {
+		msa::physics::Spring3D *s = physics.getSpring(i);
+		if(s) {
+			s->setStrength(ofMap(i, 0, physics.numberOfSprings(), min, max));
+		}
 	}
 }
 

@@ -10,14 +10,11 @@
 
 //Particles
 
-#define	SPRING_MIN_STRENGTH		0.07
-#define SPRING_MAX_STRENGTH		0.5
-
 #define	SPRING_MIN_WIDTH		10
 #define SPRING_MAX_WIDTH		30
 
-#define NODE_MIN_RADIUS			3
-#define NODE_MAX_RADIUS			6
+#define NODE_MIN_RADIUS			2
+#define NODE_MAX_RADIUS			4
 
 #define MIN_MASS				1
 #define MAX_MASS				3
@@ -75,10 +72,12 @@ public:
 	void initScene();
 	void addRandomParticle();
 	void killRandomParticle();
-	void killRandomConstraint();
-	void toggleMouseAttract();
-	void toggleMouseSpring();
+	void setMouseAttract(bool a);
+	void setMouseSpring(bool b);
+	void setStrength(float min, float max);
 	void addRandomForce(float f);
+	void setMass(float m);
+	void setCollision(bool c);
 	void lockRandomParticles();
 	void unlockRandomParticles();
 	void drawParticle(float r);
@@ -89,6 +88,9 @@ public:
 	bool				doMouseYZ;		// pressing right mouse button moves mouse in YZ plane
 	bool				doRender;
 	int					forceTimer;
+	
+	float				min_strength;
+	float				max_strength;
 
 	float				rotSpeed;
 	float				mouseMass;
