@@ -250,7 +250,7 @@ void facade::draw()
 			msa::physics::Particle3D *p = physics.getParticle(i);
 			if(!p->isFixed()){
 				if(p->isFixed()) glColor4f(1, 0, 0, 1);
-				else glColor4f(1, 1, 1, 1);
+				else ofSetColor(particleColor);
 
 				// draw ball
 				glPushMatrix();
@@ -265,7 +265,7 @@ void facade::draw()
 					glPushMatrix();
 					glTranslatef(p->getPosition().x, height, p->getPosition().z);
 					glRotatef(-90, 1, 0, 0);
-					glColor4f(255, 255, 255, alpha * alpha * alpha * alpha);
+					ofSetColor(particleColor.r, particleColor.g, particleColor.b, alpha * alpha * alpha * alpha * 255);
 					drawParticle(p->getRadius() * alpha);
 					glPopMatrix();
 				}

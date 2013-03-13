@@ -111,6 +111,9 @@ public:
 
 	float minZ;
 	float maxZ;
+
+	//colors
+	ofColor particleColor;
 		
 	//canvas
 	void initCanvas();

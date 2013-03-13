@@ -382,6 +382,8 @@ if not exist "$(ProjectDir)\bin\data" mkdir  "$(ProjectDir)\bin\data"
     <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIWidgetWithLabel.h" />
     <ClInclude Include="..\..\..\addons\ofxXmlSettings\libs\tinyxml.h" />
     <ClInclude Include="..\..\..\addons\ofxXmlSettings\src\ofxXmlSettings.h" />
+    <ClInclude Include="src\colorUI.h" />
+    <ClInclude Include="src\colorWindow.h" />
     <ClInclude Include="src\dancePerformance.h" />
     <ClInclude Include="src\facade.h" />
     <ClInclude Include="src\panelUI.h" />
