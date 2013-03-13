@@ -65,6 +65,8 @@ void dancePerformance::mouseReleased(int x, int y, int button){
 }
 
 void dancePerformance::windowResized(int w, int h){
+	//TODO
+	//ofxFenster nao esta chamando este evento
 	m_facade.windowResized(w, h);
 }
 

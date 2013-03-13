@@ -46,6 +46,7 @@ public:
         gui1->addWidgetDown(new ofxUIToggle( dim, dim, false, "ATTRACT")); 
         gui1->addWidgetDown(new ofxUIToggle( dim, dim, false, "COLLISION")); 	
         gui1->addWidgetDown(new ofxUIRangeSlider(length-xInit, dim,	0.0,1.0, 0.07, 0.5, "STRENGHT"));
+        gui1->addWidgetDown(new ofxUIRangeSlider(length-xInit, dim,	0.0,100.0, 10.0, 30.0, "ORBIT"));
         gui1->addWidgetDown(new ofxUISlider(length-xInit, dim, 0.0,2000.0, 50, "PARTICLES"));	
         gui1->addWidgetDown(new ofxUISlider(length-xInit, dim, -0.9, 5.0, 1.5, "MASS"));
 		ofxUISlider * sliderRot = new ofxUISlider(length-xInit, dim, -3.0, 3.0, 0.0, "ROTATION SPEED");
@@ -123,6 +124,11 @@ public:
 		{
 			ofxUIRangeSlider *slider = (ofxUIRangeSlider *) e.widget; 
 			app->setStrength(slider->getScaledValueLow(), slider->getScaledValueHigh());
+		}
+		else if(name == "ORBIT")
+		{
+			ofxUIRangeSlider *slider = (ofxUIRangeSlider *) e.widget; 
+			app->setOrbit(slider->getScaledValueLow(), slider->getScaledValueHigh());
 		}
         else if(name == "SHAKE")
         {

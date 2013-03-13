@@ -43,6 +43,9 @@ facade::facade(void)
 	min_strength = 0.07;
 	max_strength = 0.5;
 
+	min_width = 10;
+	max_width = 30;
+
 
 	ballImage.loadImage("ball.png");
 	
@@ -63,16 +66,10 @@ facade::facade(void)
 	
 	
 	//integration kinect + physics
-	canvas.allocate(width, height);
-	canvasTrace.allocate(width, height);
 	minZ = 0;
 	maxZ = 0;
-
-	canvasTrace.begin();
-		ofSetColor(255);
-		ofRect(0,0,width, height);
-	canvasTrace.end();
-
+	
+	initCanvas();
 	canvasFade = 125;
 }
 
@@ -91,6 +88,10 @@ void facade::update()
 	for(int i = 0; i < kinect::nui::SkeletonFrame::SKELETON_COUNT; ++i){
 		for(int j = 0; j < kinect::nui::SkeletonData::POSITION_COUNT; ++j){
 			if(kinect.skeletonPoints[i][0].z > 0){
+				if(currentSkeletonIndex>-1 && i!=currentSkeletonIndex){
+					bone[currentSkeletonIndex]->moveTo(ofVec3f(9999999, 9999999, 9999999));
+				}
+
 				currentSkeletonIndex = i;
 				//if(kinect.skeletonPoints[i][0].x<minZ) minZ = kinect.skeletonPoints[i][0].x;
 				//if(kinect.skeletonPoints[i][0].x>maxZ) maxZ = kinect.skeletonPoints[i][0].x;
@@ -99,7 +100,7 @@ void facade::update()
 				float y = (kinect.skeletonPoints[i][j].y-ofGetMouseY()) * scale;
 				float z = ofMap(kinect.skeletonPoints[i][j].z, 0, 40000, width/2, -width/2);
 				bone[(i*kinect::nui::SkeletonData::POSITION_COUNT) + j]->moveTo(ofVec3f(x, y, z));
-			}else{
+			}else if(i!=currentSkeletonIndex){
 				bone[(i*kinect::nui::SkeletonData::POSITION_COUNT) + j]->moveTo(ofVec3f(9999999, 9999999, 9999999));
 			}
 		}
@@ -189,29 +190,85 @@ void facade::draw()
 		//particles
 		glAlphaFunc(GL_GREATER, 0.5);
 
+
+		if(currentSkeletonIndex>=0 && false){
+			ofPolyline pLine;
+			ofPushStyle();
+			ofSetColor(255, 0, 0);
+			ofNoFill();
+			ofSetLineWidth(4);
+			int k = kinect::nui::SkeletonData::POSITION_COUNT * currentSkeletonIndex;
+			// HEAD
+			pLine.clear();
+			pLine.addVertex(bone[NUI_SKELETON_POSITION_HIP_CENTER+k]->getPosition().x, bone[NUI_SKELETON_POSITION_HIP_CENTER+k]->getPosition().y, bone[NUI_SKELETON_POSITION_HIP_CENTER+k]->getPosition().z);
+			pLine.addVertex(bone[NUI_SKELETON_POSITION_SPINE+k]->getPosition().x, bone[NUI_SKELETON_POSITION_SPINE+k]->getPosition().y, bone[NUI_SKELETON_POSITION_SPINE+k]->getPosition().z);
+			pLine.addVertex(bone[NUI_SKELETON_POSITION_SHOULDER_CENTER+k]->getPosition().x, bone[NUI_SKELETON_POSITION_SHOULDER_CENTER+k]->getPosition().y, bone[NUI_SKELETON_POSITION_SHOULDER_CENTER+k]->getPosition().z);
+			pLine.addVertex(bone[NUI_SKELETON_POSITION_HEAD+k]->getPosition().x, bone[NUI_SKELETON_POSITION_HEAD+k]->getPosition().y, bone[NUI_SKELETON_POSITION_HEAD+k]->getPosition().z);
+			pLine.draw();
+	
+			// BODY_LEFT
+			pLine.clear();
+			pLine.addVertex(bone[NUI_SKELETON_POSITION_SHOULDER_CENTER+k]->getPosition().x, bone[NUI_SKELETON_POSITION_SHOULDER_CENTER+k]->getPosition().y, bone[NUI_SKELETON_POSITION_SHOULDER_CENTER+k]->getPosition().z);
+			pLine.addVertex(bone[NUI_SKELETON_POSITION_SHOULDER_LEFT+k]->getPosition().x, bone[NUI_SKELETON_POSITION_SHOULDER_LEFT+k]->getPosition().y, bone[NUI_SKELETON_POSITION_SHOULDER_LEFT+k]->getPosition().z);
+			pLine.addVertex(bone[NUI_SKELETON_POSITION_ELBOW_LEFT+k]->getPosition().x, bone[NUI_SKELETON_POSITION_ELBOW_LEFT+k]->getPosition().y, bone[NUI_SKELETON_POSITION_ELBOW_LEFT+k]->getPosition().z);
+			pLine.addVertex(bone[NUI_SKELETON_POSITION_WRIST_LEFT+k]->getPosition().x, bone[NUI_SKELETON_POSITION_WRIST_LEFT+k]->getPosition().y, bone[NUI_SKELETON_POSITION_WRIST_LEFT+k]->getPosition().z);
+			pLine.addVertex(bone[NUI_SKELETON_POSITION_HAND_LEFT+k]->getPosition().x, bone[NUI_SKELETON_POSITION_HAND_LEFT+k]->getPosition().y, bone[NUI_SKELETON_POSITION_HAND_LEFT+k]->getPosition().z);
+			pLine.draw();
+
+			// BODY_RIGHT
+			pLine.clear();
+			pLine.addVertex(bone[NUI_SKELETON_POSITION_SHOULDER_CENTER+k]->getPosition().x, bone[NUI_SKELETON_POSITION_SHOULDER_CENTER+k]->getPosition().y, bone[NUI_SKELETON_POSITION_SHOULDER_CENTER+k]->getPosition().z);
+			pLine.addVertex(bone[NUI_SKELETON_POSITION_SHOULDER_RIGHT+k]->getPosition().x, bone[NUI_SKELETON_POSITION_SHOULDER_RIGHT+k]->getPosition().y, bone[NUI_SKELETON_POSITION_SHOULDER_RIGHT+k]->getPosition().z);
+			pLine.addVertex(bone[NUI_SKELETON_POSITION_ELBOW_RIGHT+k]->getPosition().x, bone[NUI_SKELETON_POSITION_ELBOW_RIGHT+k]->getPosition().y, bone[NUI_SKELETON_POSITION_ELBOW_RIGHT+k]->getPosition().z);
+			pLine.addVertex(bone[NUI_SKELETON_POSITION_WRIST_RIGHT+k]->getPosition().x, bone[NUI_SKELETON_POSITION_WRIST_RIGHT+k]->getPosition().y, bone[NUI_SKELETON_POSITION_WRIST_RIGHT+k]->getPosition().z);
+			pLine.addVertex(bone[NUI_SKELETON_POSITION_HAND_RIGHT+k]->getPosition().x, bone[NUI_SKELETON_POSITION_HAND_RIGHT+k]->getPosition().y, bone[NUI_SKELETON_POSITION_HAND_RIGHT+k]->getPosition().z);
+			pLine.draw();
+
+			// LEG_LEFT
+			pLine.clear();
+			pLine.addVertex(bone[NUI_SKELETON_POSITION_HIP_CENTER+k]->getPosition().x, bone[NUI_SKELETON_POSITION_HIP_CENTER+k]->getPosition().y, bone[NUI_SKELETON_POSITION_HIP_CENTER+k]->getPosition().z);
+			pLine.addVertex(bone[NUI_SKELETON_POSITION_HIP_LEFT+k]->getPosition().x, bone[NUI_SKELETON_POSITION_HIP_LEFT+k]->getPosition().y, bone[NUI_SKELETON_POSITION_HIP_LEFT+k]->getPosition().z);
+			pLine.addVertex(bone[NUI_SKELETON_POSITION_KNEE_LEFT+k]->getPosition().x, bone[NUI_SKELETON_POSITION_KNEE_LEFT+k]->getPosition().y, bone[NUI_SKELETON_POSITION_KNEE_LEFT+k]->getPosition().z);
+			pLine.addVertex(bone[NUI_SKELETON_POSITION_ANKLE_LEFT+k]->getPosition().x, bone[NUI_SKELETON_POSITION_ANKLE_LEFT+k]->getPosition().y, bone[NUI_SKELETON_POSITION_ANKLE_LEFT+k]->getPosition().z);
+			pLine.addVertex(bone[NUI_SKELETON_POSITION_FOOT_LEFT+k]->getPosition().x, bone[NUI_SKELETON_POSITION_FOOT_LEFT+k]->getPosition().y, bone[NUI_SKELETON_POSITION_FOOT_LEFT+k]->getPosition().z);
+			pLine.draw();
+
+			// LEG_RIGHT
+			pLine.clear();
+			pLine.addVertex(bone[NUI_SKELETON_POSITION_HIP_CENTER+k]->getPosition().x, bone[NUI_SKELETON_POSITION_HIP_CENTER+k]->getPosition().y, bone[NUI_SKELETON_POSITION_HIP_CENTER+k]->getPosition().z);
+			pLine.addVertex(bone[NUI_SKELETON_POSITION_HIP_RIGHT+k]->getPosition().x, bone[NUI_SKELETON_POSITION_HIP_RIGHT+k]->getPosition().y, bone[NUI_SKELETON_POSITION_HIP_RIGHT+k]->getPosition().z);
+			pLine.addVertex(bone[NUI_SKELETON_POSITION_KNEE_RIGHT+k]->getPosition().x, bone[NUI_SKELETON_POSITION_KNEE_RIGHT+k]->getPosition().y, bone[NUI_SKELETON_POSITION_KNEE_RIGHT+k]->getPosition().z);
+			pLine.addVertex(bone[NUI_SKELETON_POSITION_ANKLE_RIGHT+k]->getPosition().x, bone[NUI_SKELETON_POSITION_ANKLE_RIGHT+k]->getPosition().y, bone[NUI_SKELETON_POSITION_ANKLE_RIGHT+k]->getPosition().z);
+			pLine.addVertex(bone[NUI_SKELETON_POSITION_FOOT_RIGHT+k]->getPosition().x, bone[NUI_SKELETON_POSITION_FOOT_RIGHT+k]->getPosition().y, bone[NUI_SKELETON_POSITION_FOOT_RIGHT+k]->getPosition().z);
+			pLine.draw();
+			ofPopStyle();
+		}
+		
 		//ofEnableNormalizedTexCoords();
 		//ballImage.getTextureReference().bind();
 		for(int i=0; i<physics.numberOfParticles(); i++) {
 			msa::physics::Particle3D *p = physics.getParticle(i);
-			if(p->isFixed()) glColor4f(1, 0, 0, 1);
-			else glColor4f(1, 1, 1, 1);
+			if(!p->isFixed()){
+				if(p->isFixed()) glColor4f(1, 0, 0, 1);
+				else glColor4f(1, 1, 1, 1);
 
-			// draw ball
-			glPushMatrix();
-			glTranslatef(p->getPosition().x, p->getPosition().y, p->getPosition().z);
-			glRotatef(180-rot, 0, 1, 0);
-			drawParticle(p->getRadius());
-			glPopMatrix();
-			
-			//draw shadow
-			float alpha = ofMap(p->getPosition().y, -height * 1.5, height, 0, 1);
-			if(alpha>0) {
+				// draw ball
 				glPushMatrix();
-				glTranslatef(p->getPosition().x, height, p->getPosition().z);
-				glRotatef(-90, 1, 0, 0);
-				glColor4f(255, 255, 255, alpha * alpha * alpha * alpha);
-				drawParticle(p->getRadius() * alpha);
+				glTranslatef(p->getPosition().x, p->getPosition().y, p->getPosition().z);
+				glRotatef(180-rot, 0, 1, 0);
+				drawParticle(p->getRadius());
 				glPopMatrix();
+			
+				//draw shadow
+				float alpha = ofMap(p->getPosition().y, -height * 1.5, height, 0, 1);
+				if(alpha>0) {
+					glPushMatrix();
+					glTranslatef(p->getPosition().x, height, p->getPosition().z);
+					glRotatef(-90, 1, 0, 0);
+					glColor4f(255, 255, 255, alpha * alpha * alpha * alpha);
+					drawParticle(p->getRadius() * alpha);
+					glPopMatrix();
+				}
 			}
 			
 		}
@@ -371,6 +428,9 @@ void facade::mouseReleased(int x, int y, int button){
 
 //--------------------------------------------------------------
 void facade::windowResized(int w, int h){
+	width = w;
+	height = h;
+	initCanvas();
 }
 
 //--------------------------------------------------------------
@@ -393,7 +453,7 @@ void facade::initScene() {
 	mouseNode.makeFixed();
 	mouseNode.setMass(MIN_MASS);
 	mouseNode.moveTo(ofVec3f(0, 0, 0));
-	mouseNode.setRadius(NODE_MAX_RADIUS);
+	mouseNode.setRadius(NODE_MAX_RADIUS*3);
 
 
 #ifdef USE_KINECT
@@ -404,7 +464,7 @@ void facade::initScene() {
 			joint->makeFixed();
 			joint->setMass(MIN_MASS);
 			joint->moveTo(ofVec3f(0, 0, 0));
-			joint->setRadius(NODE_MAX_RADIUS);
+			joint->setRadius(j==3 ? NODE_MAX_RADIUS*6 : NODE_MAX_RADIUS*3);
 
 			bone.push_back(joint);
 		}
@@ -430,14 +490,20 @@ void facade::addRandomParticle() {
 	p->setMass(mass)->setBounce(bounce)->setRadius(radius)->enableCollision()->makeFree();
 	
 	// add an attraction to the mouseNode
+#ifdef USE_KINECT
+	if(mouseAttract) physics.makeAttraction(bone[(physics.numberOfParticles()%kinect::nui::SkeletonData::POSITION_COUNT) + (kinect::nui::SkeletonData::POSITION_COUNT*currentSkeletonIndex)], p, ofRandom(MIN_ATTRACTION, MAX_ATTRACTION));
+	if(mouseSpring) physics.makeSpring(bone[(physics.numberOfParticles()%kinect::nui::SkeletonData::POSITION_COUNT) + (kinect::nui::SkeletonData::POSITION_COUNT*currentSkeletonIndex)], p, ofRandom(min_strength, max_strength), ofRandom(min_width, max_width));
+	if(mouseSpring) physics.makeSpring(bone[((physics.numberOfParticles()+1)%kinect::nui::SkeletonData::POSITION_COUNT) + (kinect::nui::SkeletonData::POSITION_COUNT*currentSkeletonIndex)], p, ofRandom(min_strength, max_strength), ofRandom(min_width, max_width));
+#else
 	if(mouseAttract) physics.makeAttraction(&mouseNode, p, ofRandom(MIN_ATTRACTION, MAX_ATTRACTION));
-	if(mouseSpring) physics.makeSpring(&mouseNode, p, ofRandom(min_strength, max_strength), ofRandom(SPRING_MIN_WIDTH, SPRING_MAX_WIDTH));
+	if(mouseSpring) physics.makeSpring(&mouseNode, p, ofRandom(min_strength, max_strength), ofRandom(min_width, max_width));
+#endif
 }
 
 
 void facade::killRandomParticle() {
 	msa::physics::Particle3D *p = physics.getParticle(floor(ofRandom(0, physics.numberOfParticles())));
-	if(p && p != &mouseNode) p->kill();
+	if(p && !p->isFixed()) p->kill();
 }
 
 
@@ -451,14 +517,14 @@ void facade::setMouseSpring(bool s) {
 		for(int i=0; i<physics.numberOfParticles() && currentSkeletonIndex>-1; i++) {
 			msa::physics::Particle3D *a = physics.getParticle(i);
 			msa::physics::Particle3D *b = bone[(i%kinect::nui::SkeletonData::POSITION_COUNT) + (kinect::nui::SkeletonData::POSITION_COUNT*currentSkeletonIndex)];
-			physics.makeSpring(a, b, ofMap(i, 0, physics.numberOfParticles(), min_strength, max_strength), ofRandom(10, 30));
+			physics.makeSpring(a, b, ofMap(i, 0, physics.numberOfParticles(), min_strength, max_strength), ofRandom(min_width, max_width));
 			k++;
 		}
 #else
 		for(int i=0; i<physics.numberOfParticles(); i++) {
 			msa::physics::Particle3D *a = physics.getParticle(i);
 			msa::physics::Particle3D *b = &mouseNode;
-			physics.makeSpring(a, b, ofMap(i, 0, physics.numberOfParticles(), min_strength, max_strength), ofRandom(SPRING_MIN_WIDTH, SPRING_MAX_WIDTH));
+			physics.makeSpring(a, b, ofMap(i, 0, physics.numberOfParticles(), min_strength, max_strength), ofRandom(min_width, max_width));
 		}
 #endif
 	}else{
@@ -564,6 +630,18 @@ void facade::setStrength(float min, float max) {
 	}
 }
 
+void facade::setOrbit(float min, float max) {
+	min_width = min;
+	max_width = max;
+
+	for(int i=physics.numberOfSprings(); i>0; i--) {
+		msa::physics::Spring3D *s = physics.getSpring(i);
+		if(s) {
+			s->setRestLength(ofMap(i, 0, physics.numberOfSprings(), min, max));
+		}
+	}
+}
+
 void facade::addRandomForce(float f) {
 	forceTimer = f;
 	for(int i=0; i<physics.numberOfParticles(); i++) {
@@ -587,4 +665,14 @@ void facade::unlockRandomParticles() {
 		p->makeFree();
 	}
 	mouseNode.makeFixed();
+}
+
+void facade::initCanvas() {
+	cout << "initCanvas" << endl;
+	canvas.allocate(width, height);
+	canvasTrace.allocate(width, height);
+	canvasTrace.begin();
+		ofSetColor(255);
+		ofRect(0,0,width, height);
+	canvasTrace.end();
 }

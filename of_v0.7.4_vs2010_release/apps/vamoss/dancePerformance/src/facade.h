@@ -4,14 +4,11 @@
 #include "ofxKinectNui.h"
 #include "MSAPhysics3D.h"
 
-//#define USE_KINECT
+#define USE_KINECT
 
 
 
 //Particles
-
-#define	SPRING_MIN_WIDTH		10
-#define SPRING_MAX_WIDTH		30
 
 #define NODE_MIN_RADIUS			2
 #define NODE_MAX_RADIUS			4
@@ -75,6 +72,7 @@ public:
 	void setMouseAttract(bool a);
 	void setMouseSpring(bool b);
 	void setStrength(float min, float max);
+	void setOrbit(float min, float max);
 	void addRandomForce(float f);
 	void setMass(float m);
 	void setCollision(bool c);
@@ -91,6 +89,9 @@ public:
 	
 	float				min_strength;
 	float				max_strength;
+	
+	float				min_width;
+	float				max_width;
 
 	float				rotSpeed;
 	float				mouseMass;
@@ -111,6 +112,8 @@ public:
 	float minZ;
 	float maxZ;
 		
+	//canvas
+	void initCanvas();
 	ofFbo canvas;
 	ofFbo canvasTrace;
 	int canvasFade;
