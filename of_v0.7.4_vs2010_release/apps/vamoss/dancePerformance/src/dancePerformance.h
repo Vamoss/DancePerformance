@@ -4,7 +4,6 @@
 #include "ofMain.h"
 #include "ofxFensterManager.h"
 #include "panelWindow.h"
-#include "colorWindow.h"
 
 
 
@@ -28,7 +27,6 @@ class dancePerformance : public ofBaseApp {
 
 		facade		m_facade;
 		panelWindow m_panelWindow;
-		colorWindow m_colorWindow;
 		
 		void mouseMoved(int x, int y, ofxFenster* win);
 		ofxFenster* test;

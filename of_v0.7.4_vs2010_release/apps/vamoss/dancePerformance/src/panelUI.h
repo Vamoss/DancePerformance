@@ -35,6 +35,7 @@ public:
         float length = 455-xInit; 
         
         gui1 = new ofxUICanvas(0, 0, length+xInit, ofGetHeight());
+		gui1->setName("PanelUI");
 		gui1->setWidgetSpacing(20);
         gui1->addWidgetDown(new ofxUILabel("DANCE PERFORMANCE", OFX_UI_FONT_LARGE)); 
         gui1->addWidgetDown(new ofxUIFPS(OFX_UI_FONT_MEDIUM)); 
@@ -42,16 +43,19 @@ public:
 		gui1->addSpacer(2);
         gui1->addWidgetDown(new ofxUILabel("PHYSICS", OFX_UI_FONT_MEDIUM));
         gui1->addWidgetDown(new ofxUIToggle( dim, dim, false, "RENDER")); 
+        gui1->addWidgetRight(new ofxUIToggle( dim, dim, false, "COLLISION")); 	
+        gui1->addWidgetDown(new ofxUISlider(length-xInit, dim, 0.0, 1.0, 1.0, "PROBABILITY"));
         gui1->addWidgetDown(new ofxUIToggle( dim, dim, false, "SPRING"));
-        gui1->addWidgetDown(new ofxUIToggle( dim, dim, false, "ATTRACT")); 
-        gui1->addWidgetDown(new ofxUIToggle( dim, dim, false, "COLLISION")); 	
+        gui1->addWidgetRight(new ofxUIToggle( dim, dim, false, "ATTRACT")); 
         gui1->addWidgetDown(new ofxUIRangeSlider(length-xInit, dim,	0.0,1.0, 0.07, 0.5, "STRENGHT"));
         gui1->addWidgetDown(new ofxUIRangeSlider(length-xInit, dim,	0.0,100.0, 10.0, 30.0, "ORBIT"));
         gui1->addWidgetDown(new ofxUISlider(length-xInit, dim, 0.0,2000.0, 50, "PARTICLES"));	
         gui1->addWidgetDown(new ofxUISlider(length-xInit, dim, -0.9, 5.0, 1.5, "MASS"));
-		ofxUISlider * sliderRot = new ofxUISlider(length-xInit, dim, -3.0, 3.0, 0.0, "ROTATION SPEED");
+		sliderRot = new ofxUISlider(length-xInit-60, dim, -3.0, 3.0, 0.0, "ROTATION SPEED");
 		sliderRot->setIncrement(0.1);
 		gui1->addWidgetDown(sliderRot);
+        gui1->addWidgetRight(new ofxUILabelButton( 50, false, "CENTER", OFX_UI_FONT_MEDIUM));
+
         gui1->addWidgetDown(new ofxUILabelButton( length-xInit, false, "SHAKE", OFX_UI_FONT_MEDIUM));
         gui1->addWidgetDown(new ofxUILabelButton( length-xInit, false, "RESTART", OFX_UI_FONT_MEDIUM));
 
@@ -110,6 +114,11 @@ public:
 			for(int i=app->physics.numberOfParticles(); i < slider->getScaledValue(); i++) app->addRandomParticle();
 			for(int i=app->physics.numberOfParticles(); i > slider->getScaledValue(); i--) app->killRandomParticle();
         }
+		else if(name == "PROBABILITY")
+		{
+			ofxUISlider *slider = (ofxUISlider *) e.widget; 
+			app->probability = slider->getScaledValue();
+		}
         else if(name == "SPRING")
         {
 			ofxUIToggle *toggle = (ofxUIToggle *) e.widget; 
@@ -153,6 +162,11 @@ public:
 			ofxUISlider *slider = (ofxUISlider *) e.widget; 
 			app->rotSpeed = slider->getScaledValue(); 
 		}
+		else if(name == "CENTER")
+		{
+			app->rotSpeed = 0; 
+			sliderRot->setValue(0);
+		}
 		else if(name == "MASS")
 		{
 			ofxUISlider *slider = (ofxUISlider *) e.widget; 
@@ -168,5 +182,7 @@ public:
     {
         gui1->saveSettings("GUI/settings.xml");
     }
+
+	ofxUISlider * sliderRot;
     
 };

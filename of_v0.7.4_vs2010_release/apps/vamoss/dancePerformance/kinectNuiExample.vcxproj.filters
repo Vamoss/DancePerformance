@@ -476,7 +476,6 @@
       <Filter>addons\ofxFenster\libs\string\include</Filter>
     </ClInclude>
     <ClInclude Include="src\colorUI.h" />
-    <ClInclude Include="src\colorWindow.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="addons">

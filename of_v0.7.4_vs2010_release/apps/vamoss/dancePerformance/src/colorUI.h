@@ -34,7 +34,8 @@ public:
         float xInit = OFX_UI_GLOBAL_WIDGET_SPACING; 
         float length = 455-xInit; 
         
-        gui1 = new ofxUICanvas(0, 0, length+xInit, ofGetHeight());
+        gui1 = new ofxUICanvas(465, 0, length+xInit, ofGetHeight());
+		gui1->setName("ColorUI");
 		gui1->setWidgetSpacing(20);
         gui1->addWidgetDown(new ofxUILabel("DANCE PERFORMANCE", OFX_UI_FONT_LARGE)); 
         gui1->addWidgetDown(new ofxUIFPS(OFX_UI_FONT_MEDIUM)); 

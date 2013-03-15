@@ -6,18 +6,12 @@ void dancePerformance::setup() {
 	//ofSetVerticalSync(true);
 	ofSetFrameRate(60);
 
-	ofxFenster* win=ofxFensterManager::get()->createFenster(1024, 0, 455, 768, OF_WINDOW);
+	ofxFenster* win=ofxFensterManager::get()->createFenster(1024, 0, 800, 768, OF_WINDOW);
 	win->addListener(&m_panelWindow);
 	win->setBackgroundColor(13, 104, 107);
 	win->setWindowTitle("Control Panel");
 	m_panelWindow.m_panel.setup(&m_facade);
-	
-
-	win=ofxFensterManager::get()->createFenster(1024+455, 0, 455, 768, OF_WINDOW);
-	win->addListener(&m_colorWindow);
-	win->setBackgroundColor(13, 104, 107);
-	win->setWindowTitle("Color Panel");
-	m_colorWindow.m_panel.setup(&m_facade);
+	m_panelWindow.m_color.setup(&m_facade);
 
 	//IF the following code is uncommented, all the following windows should be created on the second display, if there is one available
 	/*ofxDisplayList displays = ofxDisplayManager::get()->getDisplays();
@@ -47,8 +41,6 @@ void dancePerformance::keyPressed(int key){
 	m_facade.keyPressed(key);
 	
     m_panelWindow.m_panel.keyPressed(key);
-	
-    m_colorWindow.m_panel.keyPressed(key);
 	
 	if (key == 'f') ofToggleFullscreen();
 }

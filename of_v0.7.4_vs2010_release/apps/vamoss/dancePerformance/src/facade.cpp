@@ -13,7 +13,7 @@ facade::facade(void)
 	initSetting.grabSkeleton = true;
 	initSetting.grabCalibratedVideo = false;
 	initSetting.grabLabelCv = false;
-	initSetting.videoResolution = NUI_IMAGE_RESOLUTION_320x240;
+	initSetting.videoResolution = NUI_IMAGE_RESOLUTION_640x480;
 	initSetting.depthResolution = NUI_IMAGE_RESOLUTION_320x240;
 	kinect.init(initSetting);
 	kinect.open();
@@ -46,6 +46,7 @@ facade::facade(void)
 	min_width = 10;
 	max_width = 30;
 
+	probability = 1;
 
 	ballImage.loadImage("ball.png");
 	
@@ -492,11 +493,11 @@ void facade::addRandomParticle() {
 	// add an attraction to the mouseNode
 #ifdef USE_KINECT
 	if(mouseAttract) physics.makeAttraction(bone[(physics.numberOfParticles()%kinect::nui::SkeletonData::POSITION_COUNT) + (kinect::nui::SkeletonData::POSITION_COUNT*currentSkeletonIndex)], p, ofRandom(MIN_ATTRACTION, MAX_ATTRACTION));
-	if(mouseSpring) physics.makeSpring(bone[(physics.numberOfParticles()%kinect::nui::SkeletonData::POSITION_COUNT) + (kinect::nui::SkeletonData::POSITION_COUNT*currentSkeletonIndex)], p, ofRandom(min_strength, max_strength), ofRandom(min_width, max_width));
-	if(mouseSpring) physics.makeSpring(bone[((physics.numberOfParticles()+1)%kinect::nui::SkeletonData::POSITION_COUNT) + (kinect::nui::SkeletonData::POSITION_COUNT*currentSkeletonIndex)], p, ofRandom(min_strength, max_strength), ofRandom(min_width, max_width));
+	if(mouseSpring && canIGo()) physics.makeSpring(bone[(physics.numberOfParticles()%kinect::nui::SkeletonData::POSITION_COUNT) + (kinect::nui::SkeletonData::POSITION_COUNT*currentSkeletonIndex)], p, ofRandom(min_strength, max_strength), ofRandom(min_width, max_width));
+	if(mouseSpring && canIGo()) physics.makeSpring(bone[((physics.numberOfParticles()+1)%kinect::nui::SkeletonData::POSITION_COUNT) + (kinect::nui::SkeletonData::POSITION_COUNT*currentSkeletonIndex)], p, ofRandom(min_strength, max_strength), ofRandom(min_width, max_width));
 #else
-	if(mouseAttract) physics.makeAttraction(&mouseNode, p, ofRandom(MIN_ATTRACTION, MAX_ATTRACTION));
-	if(mouseSpring) physics.makeSpring(&mouseNode, p, ofRandom(min_strength, max_strength), ofRandom(min_width, max_width));
+	if(mouseAttract && canIGo()) physics.makeAttraction(&mouseNode, p, ofRandom(MIN_ATTRACTION, MAX_ATTRACTION));
+	if(mouseSpring && canIGo()) physics.makeSpring(&mouseNode, p, ofRandom(min_strength, max_strength), ofRandom(min_width, max_width));
 #endif
 }
 
@@ -517,14 +518,14 @@ void facade::setMouseSpring(bool s) {
 		for(int i=0; i<physics.numberOfParticles() && currentSkeletonIndex>-1; i++) {
 			msa::physics::Particle3D *a = physics.getParticle(i);
 			msa::physics::Particle3D *b = bone[(i%kinect::nui::SkeletonData::POSITION_COUNT) + (kinect::nui::SkeletonData::POSITION_COUNT*currentSkeletonIndex)];
-			physics.makeSpring(a, b, ofMap(i, 0, physics.numberOfParticles(), min_strength, max_strength), ofRandom(min_width, max_width));
+			if(canIGo()) physics.makeSpring(a, b, ofMap(i, 0, physics.numberOfParticles(), min_strength, max_strength), ofRandom(min_width, max_width));
 			k++;
 		}
 #else
 		for(int i=0; i<physics.numberOfParticles(); i++) {
 			msa::physics::Particle3D *a = physics.getParticle(i);
 			msa::physics::Particle3D *b = &mouseNode;
-			physics.makeSpring(a, b, ofMap(i, 0, physics.numberOfParticles(), min_strength, max_strength), ofRandom(min_width, max_width));
+			if(canIGo()) physics.makeSpring(a, b, ofMap(i, 0, physics.numberOfParticles(), min_strength, max_strength), ofRandom(min_width, max_width));
 		}
 #endif
 	}else{
@@ -578,10 +579,10 @@ void facade::setMouseAttract(bool a) {
 		int k = 0;
 		for(int i=0; i<physics.numberOfParticles() && currentSkeletonIndex>-1; i++) {
 #ifdef USE_KINECT
-			physics.makeAttraction(bone[(i%kinect::nui::SkeletonData::POSITION_COUNT) + (kinect::nui::SkeletonData::POSITION_COUNT*currentSkeletonIndex)], physics.getParticle(i), ofRandom(MIN_ATTRACTION, MAX_ATTRACTION));
+			if(canIGo()) physics.makeAttraction(bone[(i%kinect::nui::SkeletonData::POSITION_COUNT) + (kinect::nui::SkeletonData::POSITION_COUNT*currentSkeletonIndex)], physics.getParticle(i), ofRandom(MIN_ATTRACTION, MAX_ATTRACTION));
 			k++;
 #else
-			physics.makeAttraction(&mouseNode, physics.getParticle(i), ofRandom(MIN_ATTRACTION, MAX_ATTRACTION));
+			if(canIGo()) physics.makeAttraction(&mouseNode, physics.getParticle(i), ofRandom(MIN_ATTRACTION, MAX_ATTRACTION));
 #endif		
 		}
 	} else {
@@ -675,4 +676,9 @@ void facade::initCanvas() {
 		ofSetColor(255);
 		ofRect(0,0,width, height);
 	canvasTrace.end();
+}
+
+bool facade::canIGo()
+{
+	return ofRandom(1.0)<=probability;
 }

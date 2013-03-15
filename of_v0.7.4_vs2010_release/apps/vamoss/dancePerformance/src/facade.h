@@ -90,6 +90,10 @@ public:
 	float				min_strength;
 	float				max_strength;
 	
+
+	bool				canIGo();
+	float				probability;
+
 	float				min_width;
 	float				max_width;
 
