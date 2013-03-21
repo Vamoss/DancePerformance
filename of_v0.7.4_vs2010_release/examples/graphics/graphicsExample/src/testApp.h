@@ -21,6 +21,5 @@ class testApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);		
 		
 		float 	counter;
-		bool	bSmooth;
 };
 	
