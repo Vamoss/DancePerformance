@@ -75,6 +75,7 @@ facade::facade(void)
 	maxZ = 0;
 	
 	initCanvas();
+	blackout = 0;
 	canvasFade = 125;
 }
 
@@ -123,13 +124,7 @@ void facade::draw()
 	//Particles
 	if(doRender) {
 		
-		
-		// enable back-face culling (so we can see through the walls)
-		glCullFace(GL_BACK);
-		glEnable(GL_CULL_FACE);
-
-		ofEnableAlphaBlending();
-		glEnable(GL_DEPTH_TEST);
+		//ofEnableAlphaBlending();
 		
 		// center scene
 		glPushMatrix();
@@ -144,10 +139,18 @@ void facade::draw()
 			forceTimer--;
 		}
 
+		
+		/*
+		// enable back-face culling (so we can see through the walls)
+		glCullFace(GL_BACK);
+		glEnable(GL_CULL_FACE);
+
+		glEnable(GL_DEPTH_TEST);
+
 		ofFill();
 		
 		glBegin(GL_QUADS);
-		/*// draw right wall
+		// draw right wall
 		glColor3f(.1, 0.1, 0.1);		glVertex3f(width/2, height+1, width/2);
 		glColor3f(0, 0, 0);				glVertex3f(width/2, -height, width/2);
 		glColor3f(0.05, 0.05, 0.05);	glVertex3f(width/2, -height, -width/2);
@@ -169,7 +172,7 @@ void facade::draw()
 		glColor3f(0.05, 0.05, 0.05);	glVertex3f(width/2, -height, width/2);
 		glColor3f(.15, 0.15, 0.15);		glVertex3f(width/2, height+1, width/2);
 		glColor3f(.1, 0.1, 0.1);		glVertex3f(-width/2, height+1, width/2);
-		glColor3f(0, 0, 0);				glVertex3f(-width/2, -height, width/2);*/
+		glColor3f(0, 0, 0);				glVertex3f(-width/2, -height, width/2);
 		
 		// floor
 		glColor3f(.2, 0.2, 0.2);
@@ -180,7 +183,7 @@ void facade::draw()
 		glEnd();
 		glDisable(GL_DEPTH_TEST);
 		glDisable(GL_CULL_FACE);
-		
+		*/
 
 		//canvas
 		glRotatef(rot, 0, -1, 0);
@@ -193,7 +196,7 @@ void facade::draw()
 		glRotatef(rot, 0, 1, 0);
 
 		//particles
-		glAlphaFunc(GL_GREATER, 0.5);
+		//glAlphaFunc(GL_GREATER, 0.5);
 
 
 		if(currentSkeletonIndex>=0 && false){
@@ -253,27 +256,27 @@ void facade::draw()
 		
 		//ofEnableNormalizedTexCoords();
 		//ballImage.getTextureReference().bind();
+		msa::physics::Particle3D *p;
+		float alpha;
 		for(int i=0; i<physics.numberOfParticles(); i++) {
-			msa::physics::Particle3D *p = physics.getParticle(i);
+			p = physics.getParticle(i);
 			if(!p->isFixed()){
-				if(p->isFixed()) glColor4f(1, 0, 0, 1);
-				else ofSetColor(particleColor);
-
 				// draw ball
 				glPushMatrix();
-				glTranslatef(p->getPosition().x, p->getPosition().y, p->getPosition().z);
-				glRotatef(180-rot, 0, 1, 0);
-				drawParticle(p->getRadius());
+					glTranslatef(p->getPosition().x, p->getPosition().y, p->getPosition().z);
+					glRotatef(180-rot, 0, 1, 0);
+					ofSetColor(particleColor);
+					drawParticle(p->getRadius());
 				glPopMatrix();
 			
 				//draw shadow
-				float alpha = ofMap(p->getPosition().y, -height * 1.5, height, 0, 1);
+				alpha = ofMap(p->getPosition().y, -height * 1.5, height, 0, 1);
 				if(alpha>0) {
 					glPushMatrix();
-					glTranslatef(p->getPosition().x, height, p->getPosition().z);
-					glRotatef(-90, 1, 0, 0);
-					ofSetColor(particleColor.r, particleColor.g, particleColor.b, alpha * alpha * alpha * alpha * 255);
-					drawParticle(p->getRadius() * alpha);
+						glTranslatef(p->getPosition().x, height, p->getPosition().z);
+						glRotatef(-90, 1, 0, 0);
+						ofSetColor(particleColor.r, particleColor.g, particleColor.b, alpha * alpha * alpha * alpha * 255);
+						drawParticle(p->getRadius() * alpha);
 					glPopMatrix();
 				}
 			}
@@ -310,6 +313,10 @@ void facade::draw()
 			ofClear(0);
 		canvas.end();
 		
+		if(blackout>0){
+			ofSetColor(0,0,0,blackout);
+			ofRect(0,0,0,width, height);
+		}
 	}
 
 	
@@ -362,15 +369,17 @@ void facade::draw()
 
 	
 
-	glDisable(GL_BLEND);
+	//glDisable(GL_BLEND);
+
+	
 	glColor4f(1, 1, 1, 1);
 
-	/*ofDrawBitmapString(" FPS: " + ofToString(ofGetFrameRate(), 2)
+	ofDrawBitmapString(" FPS: " + ofToString(ofGetFrameRate(), 2)
                 + " | Number of particles: " + ofToString(physics.numberOfParticles(), 2)
                 + " | Number of springs: " + ofToString(physics.numberOfSprings(), 2)
                 + " | Mouse Mass: " + ofToString(mouseNode.getMass(), 2)
                 + "\nLook at source code keyPressed to see keyboard shortcuts"
-			   , 20, 15);*/
+			   , 20, 15);
 }
 
 
@@ -674,7 +683,7 @@ void facade::initCanvas() {
 	canvas.allocate(width, height);
 	canvasTrace.allocate(width, height);
 	canvasTrace.begin();
-		ofSetColor(255);
+		ofSetColor(0);
 		ofRect(0,0,width, height);
 	canvasTrace.end();
 }

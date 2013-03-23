@@ -61,6 +61,7 @@ public:
 
         gui1->addSpacer(2);
 		gui1->addWidgetDown(new ofxUISlider(length-xInit,dim, 0.0, 255.0, 125, "FADE"));	
+		gui1->addWidgetDown(new ofxUISlider(length-xInit,dim, 0.0, 255.0, 125, "BLACKOUT"));
         
 		gui1->addSpacer(2);
 		gui1->addWidgetDown(new ofxUILabelButton( length-xInit, false, "SAVE", OFX_UI_FONT_MEDIUM)); 	
@@ -151,6 +152,11 @@ public:
 		{
 			ofxUISlider *slider = (ofxUISlider *) e.widget; 
 			app->canvasFade = slider->getScaledValue();
+		}
+		else if(name == "BLACKOUT")
+		{
+			ofxUISlider *slider = (ofxUISlider *) e.widget; 
+			app->blackout = slider->getScaledValue();
 		}
 		else if(name == "COLLISION")
 		{
