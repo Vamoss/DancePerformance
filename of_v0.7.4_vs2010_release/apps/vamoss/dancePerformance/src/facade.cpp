@@ -26,6 +26,10 @@ facade::facade(void)
 	farClipping = kinect.getFarClippingDistance();
 	currentSkeletonIndex = -1;
 #endif	
+
+	//shader
+	radialBlur.load("shaders/radialBlur");
+
 	//Particles
 	mouseAttract	= false;
 	mouseSpring		= false;
@@ -113,7 +117,7 @@ void facade::update()
 
 void facade::draw()
 {
-	ofBackground(100, 100, 100);
+	ofBackground(0, 0, 0);
 	ofSetColor(255);
 
 	//Particles
@@ -143,7 +147,7 @@ void facade::draw()
 		ofFill();
 		
 		glBegin(GL_QUADS);
-		// draw right wall
+		/*// draw right wall
 		glColor3f(.1, 0.1, 0.1);		glVertex3f(width/2, height+1, width/2);
 		glColor3f(0, 0, 0);				glVertex3f(width/2, -height, width/2);
 		glColor3f(0.05, 0.05, 0.05);	glVertex3f(width/2, -height, -width/2);
@@ -165,7 +169,7 @@ void facade::draw()
 		glColor3f(0.05, 0.05, 0.05);	glVertex3f(width/2, -height, width/2);
 		glColor3f(.15, 0.15, 0.15);		glVertex3f(width/2, height+1, width/2);
 		glColor3f(.1, 0.1, 0.1);		glVertex3f(-width/2, height+1, width/2);
-		glColor3f(0, 0, 0);				glVertex3f(-width/2, -height, width/2);
+		glColor3f(0, 0, 0);				glVertex3f(-width/2, -height, width/2);*/
 		
 		// floor
 		glColor3f(.2, 0.2, 0.2);
@@ -244,6 +248,9 @@ void facade::draw()
 			pLine.draw();
 			ofPopStyle();
 		}
+
+		//radialBlur.begin();
+		//radialBlur.setUniformTexture("tex", canvas.getTextureReference(), 1);
 		
 		//ofEnableNormalizedTexCoords();
 		//ballImage.getTextureReference().bind();
@@ -275,6 +282,9 @@ void facade::draw()
 		}
 		//ballImage.getTextureReference().unbind();
 		//ofDisableNormalizedTexCoords();
+
+		
+		//radialBlur.end();
 
 		
 		canvas.end();

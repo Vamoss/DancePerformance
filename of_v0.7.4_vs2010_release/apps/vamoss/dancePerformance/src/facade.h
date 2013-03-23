@@ -124,5 +124,8 @@ public:
 	ofFbo canvas;
 	ofFbo canvasTrace;
 	int canvasFade;
+
+	//ofShader
+	ofShader radialBlur;
 };
 

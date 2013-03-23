@@ -186,13 +186,11 @@ public:
 	
 	void mousePressed(int x, int y, int button)
 	{
-		cout << "a" << endl;
 		isMouseDown=true;
 	}
 
 	void mouseReleased(int x, int y, int button)
 	{
-		cout << "B" << endl;
 		isMouseDown=false;
 	}
     

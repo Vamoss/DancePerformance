@@ -70,6 +70,8 @@ public:
 	// set attributes that vary per vertex (look up the location before glBegin)
 	GLint getAttributeLocation(const char* name);
 	
+	GLint getUniformLocation(const char* name);
+
 	void setAttribute1s(GLint location, short v1);
 	void setAttribute2s(GLint location, short v1, short v2);
 	void setAttribute3s(GLint location, short v1, short v2, short v3);
@@ -105,9 +107,6 @@ public:
 private:
 	GLuint program;
 	map<GLenum, GLuint> shaders;
-	
-	
-	GLint getUniformLocation(const char* name);
 	
 	void checkProgramInfoLog(GLuint program);
 	bool checkProgramLinkStatus(GLuint program);
