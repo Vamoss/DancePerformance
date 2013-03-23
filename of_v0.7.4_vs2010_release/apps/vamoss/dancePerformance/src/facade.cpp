@@ -93,10 +93,6 @@ void facade::update()
 	for(int i = 0; i < kinect::nui::SkeletonFrame::SKELETON_COUNT; ++i){
 		for(int j = 0; j < kinect::nui::SkeletonData::POSITION_COUNT; ++j){
 			if(kinect.skeletonPoints[i][0].z > 0){
-				if(currentSkeletonIndex>-1 && i!=currentSkeletonIndex){
-					bone[currentSkeletonIndex]->moveTo(ofVec3f(9999999, 9999999, 9999999));
-				}
-
 				currentSkeletonIndex = i;
 				//if(kinect.skeletonPoints[i][0].x<minZ) minZ = kinect.skeletonPoints[i][0].x;
 				//if(kinect.skeletonPoints[i][0].x>maxZ) maxZ = kinect.skeletonPoints[i][0].x;
@@ -104,10 +100,14 @@ void facade::update()
 				float x = ofMap(kinect.skeletonPoints[i][j].x, 0, 310, -width/2, width/2);
 				float y = (kinect.skeletonPoints[i][j].y-ofGetMouseY()) * scale;
 				float z = ofMap(kinect.skeletonPoints[i][j].z, 0, 40000, width/2, -width/2);
-				bone[(i*kinect::nui::SkeletonData::POSITION_COUNT) + j]->moveTo(ofVec3f(x, y, z));
-			}else if(i!=currentSkeletonIndex){
-				bone[(i*kinect::nui::SkeletonData::POSITION_COUNT) + j]->moveTo(ofVec3f(9999999, 9999999, 9999999));
+				bone[j]->moveTo(ofVec3f(x, y, z));
 			}
+		}
+	}
+
+	if(currentSkeletonIndex==-1){
+		for(int j = 0; j < kinect::nui::SkeletonData::POSITION_COUNT; ++j){
+			bone[j]->moveTo(ofVec3f(9999999, 9999999, 9999999));
 		}
 	}
 #endif
@@ -202,49 +202,48 @@ void facade::draw()
 			ofSetColor(255, 0, 0);
 			ofNoFill();
 			ofSetLineWidth(4);
-			int k = kinect::nui::SkeletonData::POSITION_COUNT * currentSkeletonIndex;
 			// HEAD
 			pLine.clear();
-			pLine.addVertex(bone[NUI_SKELETON_POSITION_HIP_CENTER+k]->getPosition().x, bone[NUI_SKELETON_POSITION_HIP_CENTER+k]->getPosition().y, bone[NUI_SKELETON_POSITION_HIP_CENTER+k]->getPosition().z);
-			pLine.addVertex(bone[NUI_SKELETON_POSITION_SPINE+k]->getPosition().x, bone[NUI_SKELETON_POSITION_SPINE+k]->getPosition().y, bone[NUI_SKELETON_POSITION_SPINE+k]->getPosition().z);
-			pLine.addVertex(bone[NUI_SKELETON_POSITION_SHOULDER_CENTER+k]->getPosition().x, bone[NUI_SKELETON_POSITION_SHOULDER_CENTER+k]->getPosition().y, bone[NUI_SKELETON_POSITION_SHOULDER_CENTER+k]->getPosition().z);
-			pLine.addVertex(bone[NUI_SKELETON_POSITION_HEAD+k]->getPosition().x, bone[NUI_SKELETON_POSITION_HEAD+k]->getPosition().y, bone[NUI_SKELETON_POSITION_HEAD+k]->getPosition().z);
+			pLine.addVertex(bone[NUI_SKELETON_POSITION_HIP_CENTER]->getPosition().x, bone[NUI_SKELETON_POSITION_HIP_CENTER]->getPosition().y, bone[NUI_SKELETON_POSITION_HIP_CENTER]->getPosition().z);
+			pLine.addVertex(bone[NUI_SKELETON_POSITION_SPINE]->getPosition().x, bone[NUI_SKELETON_POSITION_SPINE]->getPosition().y, bone[NUI_SKELETON_POSITION_SPINE]->getPosition().z);
+			pLine.addVertex(bone[NUI_SKELETON_POSITION_SHOULDER_CENTER]->getPosition().x, bone[NUI_SKELETON_POSITION_SHOULDER_CENTER]->getPosition().y, bone[NUI_SKELETON_POSITION_SHOULDER_CENTER]->getPosition().z);
+			pLine.addVertex(bone[NUI_SKELETON_POSITION_HEAD]->getPosition().x, bone[NUI_SKELETON_POSITION_HEAD]->getPosition().y, bone[NUI_SKELETON_POSITION_HEAD]->getPosition().z);
 			pLine.draw();
 	
 			// BODY_LEFT
 			pLine.clear();
-			pLine.addVertex(bone[NUI_SKELETON_POSITION_SHOULDER_CENTER+k]->getPosition().x, bone[NUI_SKELETON_POSITION_SHOULDER_CENTER+k]->getPosition().y, bone[NUI_SKELETON_POSITION_SHOULDER_CENTER+k]->getPosition().z);
-			pLine.addVertex(bone[NUI_SKELETON_POSITION_SHOULDER_LEFT+k]->getPosition().x, bone[NUI_SKELETON_POSITION_SHOULDER_LEFT+k]->getPosition().y, bone[NUI_SKELETON_POSITION_SHOULDER_LEFT+k]->getPosition().z);
-			pLine.addVertex(bone[NUI_SKELETON_POSITION_ELBOW_LEFT+k]->getPosition().x, bone[NUI_SKELETON_POSITION_ELBOW_LEFT+k]->getPosition().y, bone[NUI_SKELETON_POSITION_ELBOW_LEFT+k]->getPosition().z);
-			pLine.addVertex(bone[NUI_SKELETON_POSITION_WRIST_LEFT+k]->getPosition().x, bone[NUI_SKELETON_POSITION_WRIST_LEFT+k]->getPosition().y, bone[NUI_SKELETON_POSITION_WRIST_LEFT+k]->getPosition().z);
-			pLine.addVertex(bone[NUI_SKELETON_POSITION_HAND_LEFT+k]->getPosition().x, bone[NUI_SKELETON_POSITION_HAND_LEFT+k]->getPosition().y, bone[NUI_SKELETON_POSITION_HAND_LEFT+k]->getPosition().z);
+			pLine.addVertex(bone[NUI_SKELETON_POSITION_SHOULDER_CENTER]->getPosition().x, bone[NUI_SKELETON_POSITION_SHOULDER_CENTER]->getPosition().y, bone[NUI_SKELETON_POSITION_SHOULDER_CENTER]->getPosition().z);
+			pLine.addVertex(bone[NUI_SKELETON_POSITION_SHOULDER_LEFT]->getPosition().x, bone[NUI_SKELETON_POSITION_SHOULDER_LEFT]->getPosition().y, bone[NUI_SKELETON_POSITION_SHOULDER_LEFT]->getPosition().z);
+			pLine.addVertex(bone[NUI_SKELETON_POSITION_ELBOW_LEFT]->getPosition().x, bone[NUI_SKELETON_POSITION_ELBOW_LEFT]->getPosition().y, bone[NUI_SKELETON_POSITION_ELBOW_LEFT]->getPosition().z);
+			pLine.addVertex(bone[NUI_SKELETON_POSITION_WRIST_LEFT]->getPosition().x, bone[NUI_SKELETON_POSITION_WRIST_LEFT]->getPosition().y, bone[NUI_SKELETON_POSITION_WRIST_LEFT]->getPosition().z);
+			pLine.addVertex(bone[NUI_SKELETON_POSITION_HAND_LEFT]->getPosition().x, bone[NUI_SKELETON_POSITION_HAND_LEFT]->getPosition().y, bone[NUI_SKELETON_POSITION_HAND_LEFT]->getPosition().z);
 			pLine.draw();
 
 			// BODY_RIGHT
 			pLine.clear();
-			pLine.addVertex(bone[NUI_SKELETON_POSITION_SHOULDER_CENTER+k]->getPosition().x, bone[NUI_SKELETON_POSITION_SHOULDER_CENTER+k]->getPosition().y, bone[NUI_SKELETON_POSITION_SHOULDER_CENTER+k]->getPosition().z);
-			pLine.addVertex(bone[NUI_SKELETON_POSITION_SHOULDER_RIGHT+k]->getPosition().x, bone[NUI_SKELETON_POSITION_SHOULDER_RIGHT+k]->getPosition().y, bone[NUI_SKELETON_POSITION_SHOULDER_RIGHT+k]->getPosition().z);
-			pLine.addVertex(bone[NUI_SKELETON_POSITION_ELBOW_RIGHT+k]->getPosition().x, bone[NUI_SKELETON_POSITION_ELBOW_RIGHT+k]->getPosition().y, bone[NUI_SKELETON_POSITION_ELBOW_RIGHT+k]->getPosition().z);
-			pLine.addVertex(bone[NUI_SKELETON_POSITION_WRIST_RIGHT+k]->getPosition().x, bone[NUI_SKELETON_POSITION_WRIST_RIGHT+k]->getPosition().y, bone[NUI_SKELETON_POSITION_WRIST_RIGHT+k]->getPosition().z);
-			pLine.addVertex(bone[NUI_SKELETON_POSITION_HAND_RIGHT+k]->getPosition().x, bone[NUI_SKELETON_POSITION_HAND_RIGHT+k]->getPosition().y, bone[NUI_SKELETON_POSITION_HAND_RIGHT+k]->getPosition().z);
+			pLine.addVertex(bone[NUI_SKELETON_POSITION_SHOULDER_CENTER]->getPosition().x, bone[NUI_SKELETON_POSITION_SHOULDER_CENTER]->getPosition().y, bone[NUI_SKELETON_POSITION_SHOULDER_CENTER]->getPosition().z);
+			pLine.addVertex(bone[NUI_SKELETON_POSITION_SHOULDER_RIGHT]->getPosition().x, bone[NUI_SKELETON_POSITION_SHOULDER_RIGHT]->getPosition().y, bone[NUI_SKELETON_POSITION_SHOULDER_RIGHT]->getPosition().z);
+			pLine.addVertex(bone[NUI_SKELETON_POSITION_ELBOW_RIGHT]->getPosition().x, bone[NUI_SKELETON_POSITION_ELBOW_RIGHT]->getPosition().y, bone[NUI_SKELETON_POSITION_ELBOW_RIGHT]->getPosition().z);
+			pLine.addVertex(bone[NUI_SKELETON_POSITION_WRIST_RIGHT]->getPosition().x, bone[NUI_SKELETON_POSITION_WRIST_RIGHT]->getPosition().y, bone[NUI_SKELETON_POSITION_WRIST_RIGHT]->getPosition().z);
+			pLine.addVertex(bone[NUI_SKELETON_POSITION_HAND_RIGHT]->getPosition().x, bone[NUI_SKELETON_POSITION_HAND_RIGHT]->getPosition().y, bone[NUI_SKELETON_POSITION_HAND_RIGHT]->getPosition().z);
 			pLine.draw();
 
 			// LEG_LEFT
 			pLine.clear();
-			pLine.addVertex(bone[NUI_SKELETON_POSITION_HIP_CENTER+k]->getPosition().x, bone[NUI_SKELETON_POSITION_HIP_CENTER+k]->getPosition().y, bone[NUI_SKELETON_POSITION_HIP_CENTER+k]->getPosition().z);
-			pLine.addVertex(bone[NUI_SKELETON_POSITION_HIP_LEFT+k]->getPosition().x, bone[NUI_SKELETON_POSITION_HIP_LEFT+k]->getPosition().y, bone[NUI_SKELETON_POSITION_HIP_LEFT+k]->getPosition().z);
-			pLine.addVertex(bone[NUI_SKELETON_POSITION_KNEE_LEFT+k]->getPosition().x, bone[NUI_SKELETON_POSITION_KNEE_LEFT+k]->getPosition().y, bone[NUI_SKELETON_POSITION_KNEE_LEFT+k]->getPosition().z);
-			pLine.addVertex(bone[NUI_SKELETON_POSITION_ANKLE_LEFT+k]->getPosition().x, bone[NUI_SKELETON_POSITION_ANKLE_LEFT+k]->getPosition().y, bone[NUI_SKELETON_POSITION_ANKLE_LEFT+k]->getPosition().z);
-			pLine.addVertex(bone[NUI_SKELETON_POSITION_FOOT_LEFT+k]->getPosition().x, bone[NUI_SKELETON_POSITION_FOOT_LEFT+k]->getPosition().y, bone[NUI_SKELETON_POSITION_FOOT_LEFT+k]->getPosition().z);
+			pLine.addVertex(bone[NUI_SKELETON_POSITION_HIP_CENTER]->getPosition().x, bone[NUI_SKELETON_POSITION_HIP_CENTER]->getPosition().y, bone[NUI_SKELETON_POSITION_HIP_CENTER]->getPosition().z);
+			pLine.addVertex(bone[NUI_SKELETON_POSITION_HIP_LEFT]->getPosition().x, bone[NUI_SKELETON_POSITION_HIP_LEFT]->getPosition().y, bone[NUI_SKELETON_POSITION_HIP_LEFT]->getPosition().z);
+			pLine.addVertex(bone[NUI_SKELETON_POSITION_KNEE_LEFT]->getPosition().x, bone[NUI_SKELETON_POSITION_KNEE_LEFT]->getPosition().y, bone[NUI_SKELETON_POSITION_KNEE_LEFT]->getPosition().z);
+			pLine.addVertex(bone[NUI_SKELETON_POSITION_ANKLE_LEFT]->getPosition().x, bone[NUI_SKELETON_POSITION_ANKLE_LEFT]->getPosition().y, bone[NUI_SKELETON_POSITION_ANKLE_LEFT]->getPosition().z);
+			pLine.addVertex(bone[NUI_SKELETON_POSITION_FOOT_LEFT]->getPosition().x, bone[NUI_SKELETON_POSITION_FOOT_LEFT]->getPosition().y, bone[NUI_SKELETON_POSITION_FOOT_LEFT]->getPosition().z);
 			pLine.draw();
 
 			// LEG_RIGHT
 			pLine.clear();
-			pLine.addVertex(bone[NUI_SKELETON_POSITION_HIP_CENTER+k]->getPosition().x, bone[NUI_SKELETON_POSITION_HIP_CENTER+k]->getPosition().y, bone[NUI_SKELETON_POSITION_HIP_CENTER+k]->getPosition().z);
-			pLine.addVertex(bone[NUI_SKELETON_POSITION_HIP_RIGHT+k]->getPosition().x, bone[NUI_SKELETON_POSITION_HIP_RIGHT+k]->getPosition().y, bone[NUI_SKELETON_POSITION_HIP_RIGHT+k]->getPosition().z);
-			pLine.addVertex(bone[NUI_SKELETON_POSITION_KNEE_RIGHT+k]->getPosition().x, bone[NUI_SKELETON_POSITION_KNEE_RIGHT+k]->getPosition().y, bone[NUI_SKELETON_POSITION_KNEE_RIGHT+k]->getPosition().z);
-			pLine.addVertex(bone[NUI_SKELETON_POSITION_ANKLE_RIGHT+k]->getPosition().x, bone[NUI_SKELETON_POSITION_ANKLE_RIGHT+k]->getPosition().y, bone[NUI_SKELETON_POSITION_ANKLE_RIGHT+k]->getPosition().z);
-			pLine.addVertex(bone[NUI_SKELETON_POSITION_FOOT_RIGHT+k]->getPosition().x, bone[NUI_SKELETON_POSITION_FOOT_RIGHT+k]->getPosition().y, bone[NUI_SKELETON_POSITION_FOOT_RIGHT+k]->getPosition().z);
+			pLine.addVertex(bone[NUI_SKELETON_POSITION_HIP_CENTER]->getPosition().x, bone[NUI_SKELETON_POSITION_HIP_CENTER]->getPosition().y, bone[NUI_SKELETON_POSITION_HIP_CENTER]->getPosition().z);
+			pLine.addVertex(bone[NUI_SKELETON_POSITION_HIP_RIGHT]->getPosition().x, bone[NUI_SKELETON_POSITION_HIP_RIGHT]->getPosition().y, bone[NUI_SKELETON_POSITION_HIP_RIGHT]->getPosition().z);
+			pLine.addVertex(bone[NUI_SKELETON_POSITION_KNEE_RIGHT]->getPosition().x, bone[NUI_SKELETON_POSITION_KNEE_RIGHT]->getPosition().y, bone[NUI_SKELETON_POSITION_KNEE_RIGHT]->getPosition().z);
+			pLine.addVertex(bone[NUI_SKELETON_POSITION_ANKLE_RIGHT]->getPosition().x, bone[NUI_SKELETON_POSITION_ANKLE_RIGHT]->getPosition().y, bone[NUI_SKELETON_POSITION_ANKLE_RIGHT]->getPosition().z);
+			pLine.addVertex(bone[NUI_SKELETON_POSITION_FOOT_RIGHT]->getPosition().x, bone[NUI_SKELETON_POSITION_FOOT_RIGHT]->getPosition().y, bone[NUI_SKELETON_POSITION_FOOT_RIGHT]->getPosition().z);
 			pLine.draw();
 			ofPopStyle();
 		}
@@ -468,17 +467,15 @@ void facade::initScene() {
 
 
 #ifdef USE_KINECT
-	for(int i = 0; i < kinect::nui::SkeletonFrame::SKELETON_COUNT; ++i){
-		for(int j = 0; j < kinect::nui::SkeletonData::POSITION_COUNT; ++j){
-			msa::physics::Particle3D * joint = new msa::physics::Particle3D();
-			physics.addParticle(joint);
-			joint->makeFixed();
-			joint->setMass(MIN_MASS);
-			joint->moveTo(ofVec3f(0, 0, 0));
-			joint->setRadius(j==3 ? NODE_MAX_RADIUS*6 : NODE_MAX_RADIUS*3);
+	for(int j = 0; j < kinect::nui::SkeletonData::POSITION_COUNT; ++j){
+		msa::physics::Particle3D * joint = new msa::physics::Particle3D();
+		physics.addParticle(joint);
+		joint->makeFixed();
+		joint->setMass(MIN_MASS);
+		joint->moveTo(ofVec3f(0, 0, 0));
+		joint->setRadius(j==3 ? NODE_MAX_RADIUS*6 : NODE_MAX_RADIUS*3);
 
-			bone.push_back(joint);
-		}
+		bone.push_back(joint);
 	}
 #endif
 }
@@ -502,9 +499,9 @@ void facade::addRandomParticle() {
 	
 	// add an attraction to the mouseNode
 #ifdef USE_KINECT
-	if(mouseAttract) physics.makeAttraction(bone[(physics.numberOfParticles()%kinect::nui::SkeletonData::POSITION_COUNT) + (kinect::nui::SkeletonData::POSITION_COUNT*currentSkeletonIndex)], p, ofRandom(MIN_ATTRACTION, MAX_ATTRACTION));
-	if(mouseSpring && canIGo()) physics.makeSpring(bone[(physics.numberOfParticles()%kinect::nui::SkeletonData::POSITION_COUNT) + (kinect::nui::SkeletonData::POSITION_COUNT*currentSkeletonIndex)], p, ofRandom(min_strength, max_strength), ofRandom(min_width, max_width));
-	if(mouseSpring && canIGo()) physics.makeSpring(bone[((physics.numberOfParticles()+1)%kinect::nui::SkeletonData::POSITION_COUNT) + (kinect::nui::SkeletonData::POSITION_COUNT*currentSkeletonIndex)], p, ofRandom(min_strength, max_strength), ofRandom(min_width, max_width));
+	if(mouseAttract) physics.makeAttraction(bone[physics.numberOfParticles()%kinect::nui::SkeletonData::POSITION_COUNT], p, ofRandom(MIN_ATTRACTION, MAX_ATTRACTION));
+	if(mouseSpring && canIGo()) physics.makeSpring(bone[physics.numberOfParticles()%kinect::nui::SkeletonData::POSITION_COUNT], p, ofRandom(min_strength, max_strength), ofRandom(min_width, max_width));
+	if(mouseSpring && canIGo()) physics.makeSpring(bone[(physics.numberOfParticles()+1)%kinect::nui::SkeletonData::POSITION_COUNT], p, ofRandom(min_strength, max_strength), ofRandom(min_width, max_width));
 #else
 	if(mouseAttract && canIGo()) physics.makeAttraction(&mouseNode, p, ofRandom(MIN_ATTRACTION, MAX_ATTRACTION));
 	if(mouseSpring && canIGo()) physics.makeSpring(&mouseNode, p, ofRandom(min_strength, max_strength), ofRandom(min_width, max_width));
@@ -527,7 +524,7 @@ void facade::setMouseSpring(bool s) {
 		int k = 0;
 		for(int i=0; i<physics.numberOfParticles() && currentSkeletonIndex>-1; i++) {
 			msa::physics::Particle3D *a = physics.getParticle(i);
-			msa::physics::Particle3D *b = bone[(i%kinect::nui::SkeletonData::POSITION_COUNT) + (kinect::nui::SkeletonData::POSITION_COUNT*currentSkeletonIndex)];
+			msa::physics::Particle3D *b = bone[i%kinect::nui::SkeletonData::POSITION_COUNT];
 			if(canIGo()) physics.makeSpring(a, b, ofMap(i, 0, physics.numberOfParticles(), min_strength, max_strength), ofRandom(min_width, max_width));
 			k++;
 		}
@@ -551,10 +548,8 @@ void facade::setMouseSpring(bool s) {
 
 void facade::setMass(float m) {
 #ifdef USE_KINECT
-	for(int i = 0; i < kinect::nui::SkeletonFrame::SKELETON_COUNT; ++i){
-		for(int j = 0; j < kinect::nui::SkeletonData::POSITION_COUNT; ++j){
-			bone[(i*kinect::nui::SkeletonData::POSITION_COUNT) + j]->setMass(m);
-		}
+	for(int j = 0; j < kinect::nui::SkeletonData::POSITION_COUNT; ++j){
+		bone[j]->setMass(m);
 	}
 #else
 	mouseNode.setMass(m);
@@ -589,7 +584,7 @@ void facade::setMouseAttract(bool a) {
 		int k = 0;
 		for(int i=0; i<physics.numberOfParticles() && currentSkeletonIndex>-1; i++) {
 #ifdef USE_KINECT
-			if(canIGo()) physics.makeAttraction(bone[(i%kinect::nui::SkeletonData::POSITION_COUNT) + (kinect::nui::SkeletonData::POSITION_COUNT*currentSkeletonIndex)], physics.getParticle(i), ofRandom(MIN_ATTRACTION, MAX_ATTRACTION));
+			if(canIGo()) physics.makeAttraction(bone[i%kinect::nui::SkeletonData::POSITION_COUNT], physics.getParticle(i), ofRandom(MIN_ATTRACTION, MAX_ATTRACTION));
 			k++;
 #else
 			if(canIGo()) physics.makeAttraction(&mouseNode, physics.getParticle(i), ofRandom(MIN_ATTRACTION, MAX_ATTRACTION));
@@ -607,10 +602,8 @@ void facade::setCollision(bool c) {
 	if(c){
 		physics.enableCollision();
 #ifdef USE_KINECT
-		for(int i = 0; i < kinect::nui::SkeletonFrame::SKELETON_COUNT; ++i){
-			for(int j = 0; j < kinect::nui::SkeletonData::POSITION_COUNT; ++j){
-				bone[(i*kinect::nui::SkeletonData::POSITION_COUNT) + j]->enableCollision();
-			}
+		for(int j = 0; j < kinect::nui::SkeletonData::POSITION_COUNT; ++j){
+			bone[j]->enableCollision();
 		}
 #else
 		mouseNode.enableCollision();
@@ -618,10 +611,8 @@ void facade::setCollision(bool c) {
 	}else{
 		physics.disableCollision();
 #ifdef USE_KINECT
-		for(int i = 0; i < kinect::nui::SkeletonFrame::SKELETON_COUNT; ++i){
-			for(int j = 0; j < kinect::nui::SkeletonData::POSITION_COUNT; ++j){
-				bone[(i*kinect::nui::SkeletonData::POSITION_COUNT) + j]->disableCollision();
-			}
+		for(int j = 0; j < kinect::nui::SkeletonData::POSITION_COUNT; ++j){
+			bone[j]->disableCollision();
 		}
 #else
 		mouseNode.disableCollision();
