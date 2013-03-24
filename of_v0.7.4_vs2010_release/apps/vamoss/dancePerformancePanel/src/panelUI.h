@@ -93,37 +93,37 @@ public:
         if(name == "RENDER")
 		{
 			ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
-			server::send(name+"/"+ofToString(toggle->getValue()));
+			server::send(name, toggle->getValue());
 		}
 		else if(name == "PARTICLES")
         {
             ofxUISlider *slider = (ofxUISlider *) e.widget; 
-			server::send(name+"/"+ofToString(slider->getScaledValue()));
+			server::send(name, slider->getScaledValue());
         }
 		else if(name == "PROBABILITY")
 		{
 			ofxUISlider *slider = (ofxUISlider *) e.widget; 
-			server::send(name+"/"+ofToString(slider->getScaledValue()));
+			server::send(name, slider->getScaledValue());
 		}
         else if(name == "SPRING")
         {
 			ofxUIToggle *toggle = (ofxUIToggle *) e.widget; 
-			server::send(name+"/"+ofToString(toggle->getValue()));
+			server::send(name, toggle->getValue());
         }
         else if(name == "ATTRACT")
         {
 			ofxUIToggle *toggle = (ofxUIToggle *) e.widget; 
-			server::send(name+"/"+ofToString(toggle->getValue()));
+			server::send(name, toggle->getValue());
         }
 		else if(name == "STRENGHT")
 		{
 			ofxUIRangeSlider *slider = (ofxUIRangeSlider *) e.widget; 
-			server::send(name+"/"+ofToString(slider->getScaledValueLow())+"/"+ofToString(slider->getScaledValueHigh()));
+			server::send(name, slider->getScaledValueLow(), slider->getScaledValueHigh());
 		}
 		else if(name == "ORBIT")
 		{
 			ofxUIRangeSlider *slider = (ofxUIRangeSlider *) e.widget;
-			server::send(name+"/"+ofToString(slider->getScaledValueLow())+"/"+ofToString(slider->getScaledValueHigh()));
+			server::send(name, slider->getScaledValueLow(), slider->getScaledValueHigh());
 		}
         else if(name == "SHAKE")
         {
@@ -136,31 +136,31 @@ public:
 		else if(name == "FADE")
 		{
 			ofxUISlider *slider = (ofxUISlider *) e.widget; 
-			server::send(name+"/"+ofToString(slider->getScaledValue()));
+			server::send(name, slider->getScaledValue());
 		}
 		else if(name == "BLACKOUT")
 		{
 			ofxUISlider *slider = (ofxUISlider *) e.widget; 
-			server::send(name+"/"+ofToString(slider->getScaledValue()));
+			server::send(name, slider->getScaledValue());
 		}
 		else if(name == "COLLISION")
 		{
 			ofxUIToggle *toggle = (ofxUIToggle *) e.widget; 
-			server::send(name+"/"+ofToString(toggle->getValue()));
+			server::send(name, toggle->getValue());
 		}
 		else if(name == "ROTATION SPEED")
 		{
 			ofxUISlider *slider = (ofxUISlider *) e.widget; 
-			server::send(name+"/"+ofToString(slider->getScaledValue()));
+			server::send(name, slider->getScaledValue());
 		}
 		else if(name == "CENTER")
 		{
-			server::send("ROTATION SPEED/"+ofToString(0));
+			server::send("ROTATION SPEED", 0.0f);
 		}
 		else if(name == "MASS")
 		{
 			ofxUISlider *slider = (ofxUISlider *) e.widget; 
-			server::send(name+"/"+ofToString(slider->getScaledValue()));
+			server::send(name, slider->getScaledValue());
 		}
         else if(name == "SAVE")
         {

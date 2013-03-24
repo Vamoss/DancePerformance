@@ -86,7 +86,7 @@ public:
 		}
 
 		if(playRed || playGreen || playBlue){
-			server::send("COLOR/"+ofToString(redSlider->getScaledValue())+"/"+ofToString(greenSlider->getScaledValue())+"/"+ofToString(blueSlider->getScaledValue()));
+			server::send("COLOR", redSlider->getScaledValue(), greenSlider->getScaledValue(), blueSlider->getScaledValue());
 		}
 	}
 
@@ -117,7 +117,7 @@ public:
         
         if(name == "RED" || name == "GREEN" || name == "BLUE")
 		{
-			server::send("COLOR/"+ofToString(redSlider->getScaledValue())+"/"+ofToString(greenSlider->getScaledValue())+"/"+ofToString(blueSlider->getScaledValue()));
+			server::send("COLOR", redSlider->getScaledValue(), greenSlider->getScaledValue(), blueSlider->getScaledValue());
 		}
         else if((name == "PLAY 1" || name == "STOP 1") && isMouseDown)
         {
@@ -155,7 +155,7 @@ public:
 			greenSlider->setValue(ofRandom(255));
 			blueSlider->setValue(ofRandom(255));
 			
-			server::send("COLOR/"+ofToString(redSlider->getScaledValue())+"/"+ofToString(greenSlider->getScaledValue())+"/"+ofToString(blueSlider->getScaledValue()));
+			server::send("COLOR", redSlider->getScaledValue(), greenSlider->getScaledValue(), blueSlider->getScaledValue());
         }
         else if(name == "SAVE")
         {

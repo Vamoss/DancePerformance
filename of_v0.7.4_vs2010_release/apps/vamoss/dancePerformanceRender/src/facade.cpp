@@ -124,7 +124,7 @@ void facade::draw()
 	//Particles
 	if(doRender) {
 		
-		//ofEnableAlphaBlending();
+		ofEnableAlphaBlending();
 		
 		// center scene
 		glPushMatrix();
@@ -317,6 +317,8 @@ void facade::draw()
 			ofSetColor(0,0,0,blackout);
 			ofRect(0,0,0,width, height);
 		}
+
+		ofDisableAlphaBlending();
 	}
 
 	
