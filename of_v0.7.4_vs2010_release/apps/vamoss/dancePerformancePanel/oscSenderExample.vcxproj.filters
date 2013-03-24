@@ -182,5 +182,11 @@
     <ClInclude Include="..\..\..\addons\ofxXmlSettings\libs\tinyxml.h">
       <Filter>addons\ofxXmlSettings\libs</Filter>
     </ClInclude>
+    <ClInclude Include="src\kinectUI.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\canvasUI.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

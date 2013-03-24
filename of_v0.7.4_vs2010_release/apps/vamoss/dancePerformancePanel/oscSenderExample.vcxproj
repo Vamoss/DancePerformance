@@ -123,8 +123,10 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\addons\ofxXmlSettings\libs\tinyxml.h" />
     <ClInclude Include="..\..\..\addons\ofxXmlSettings\src\ofxXmlSettings.h" />
+    <ClInclude Include="src\canvasUI.h" />
     <ClInclude Include="src\colorUI.h" />
     <ClInclude Include="src\dancePerformance.h" />
+    <ClInclude Include="src\kinectUI.h" />
     <ClInclude Include="src\panelUI.h" />
     <ClInclude Include="src\server.h" />
     <ClInclude Include="..\..\..\addons\ofxOsc\src\ofxOscSender.h" />

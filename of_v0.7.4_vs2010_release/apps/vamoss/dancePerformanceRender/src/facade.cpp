@@ -50,6 +50,8 @@ facade::facade(void)
 	min_width = 10;
 	max_width = 30;
 
+	scale = 3;
+
 	probability = 1;
 
 	ballImage.loadImage("ball.png");
@@ -68,7 +70,6 @@ facade::facade(void)
 	physics.enableCollision();
 	
 	initScene();
-	
 	
 	//integration kinect + physics
 	minZ = 0;
@@ -90,7 +91,6 @@ void facade::update()
 	kinectSource->update();
 
 	// Update kinect coords
-	float scale = 3;
 	for(int i = 0; i < kinect::nui::SkeletonFrame::SKELETON_COUNT; ++i){
 		for(int j = 0; j < kinect::nui::SkeletonData::POSITION_COUNT; ++j){
 			if(kinect.skeletonPoints[i][0].z > 0){
@@ -99,7 +99,7 @@ void facade::update()
 				//if(kinect.skeletonPoints[i][0].x>maxZ) maxZ = kinect.skeletonPoints[i][0].x;
 				//cout << minZ << " " << maxZ << endl;
 				float x = ofMap(kinect.skeletonPoints[i][j].x, 0, 310, -width/2, width/2);
-				float y = (kinect.skeletonPoints[i][j].y-ofGetMouseY()) * scale;
+				float y = kinect.skeletonPoints[i][j].y * scale;
 				float z = ofMap(kinect.skeletonPoints[i][j].z, 0, 40000, width/2, -width/2);
 				bone[j]->moveTo(ofVec3f(x, y, z));
 			}
@@ -254,8 +254,8 @@ void facade::draw()
 		//radialBlur.begin();
 		//radialBlur.setUniformTexture("tex", canvas.getTextureReference(), 1);
 		
-		//ofEnableNormalizedTexCoords();
-		//ballImage.getTextureReference().bind();
+		ofEnableNormalizedTexCoords();
+		ballImage.getTextureReference().bind();
 		msa::physics::Particle3D *p;
 		float alpha;
 		for(int i=0; i<physics.numberOfParticles(); i++) {
@@ -282,8 +282,8 @@ void facade::draw()
 			}
 			
 		}
-		//ballImage.getTextureReference().unbind();
-		//ofDisableNormalizedTexCoords();
+		ballImage.getTextureReference().unbind();
+		ofDisableNormalizedTexCoords();
 
 		
 		//radialBlur.end();
@@ -386,17 +386,19 @@ void facade::draw()
 
 
 void facade::drawParticle(float r)
-{
-	ofCircle(0,0,r);
+{	
+	//particleBuffer.draw(0,0);
+
+	//ofCircle(0,0,r);
 			
 	//ofSphere(r);
 
-	/*glBegin(GL_QUADS);
+	glBegin(GL_QUADS);
 	glTexCoord2f(0, 0); glVertex2f(-r, -r);
 	glTexCoord2f(1, 0); glVertex2f(r, -r);
 	glTexCoord2f(1, 1); glVertex2f(r, r);
 	glTexCoord2f(0, 1); glVertex2f(-r, r);
-	glEnd();*/
+	glEnd();
 }
 
 
@@ -489,6 +491,13 @@ void facade::initScene() {
 		bone.push_back(joint);
 	}
 #endif
+
+	//particle buffer
+	particleBuffer.allocate(10,10);
+	particleBuffer.begin();
+		ofSetColor(255);
+		ofCircle(5,5,5);
+	particleBuffer.end();
 }
 
 

@@ -3,13 +3,14 @@
 //--------------------------------------------------------------
 void dancePerformance::setup() {
 	ofSetLogLevel(OF_LOG_VERBOSE);
-	//ofSetVerticalSync(true);
 	ofSetFrameRate(60);
 	ofSetBackgroundColor(13, 104, 107);
 	
 	server::setup("127.0.0.1", 11999);
 
 	m_panel.setup();
+	m_canvas.setup();
+	m_kinect.setup();
 	m_color.setup();
 }
 
@@ -22,8 +23,7 @@ void dancePerformance::update() {
 
 //--------------------------------------------------------------
 void dancePerformance::draw() {
-	//m_panel.draw();
-	//m_color.draw();
+
 }
 
 void dancePerformance::keyPressed(int key){

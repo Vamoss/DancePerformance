@@ -104,11 +104,16 @@ public:
 		else if(name == "MASS")
 		{
 			app->setMass(m.getArgAsFloat(0)); 
-		}else if(name == "COLOR")
+		}
+		else if(name == "COLOR")
 		{
 			app->particleColor.r = m.getArgAsFloat(0);
 			app->particleColor.g = m.getArgAsFloat(1);
 			app->particleColor.b = m.getArgAsFloat(2);
+		}
+		else if(name == "SCALE")
+		{
+			app->scale = m.getArgAsFloat(0);
 		}
 	}
 };

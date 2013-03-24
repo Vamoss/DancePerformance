@@ -2,6 +2,8 @@
 
 #include "ofMain.h"
 #include "panelUI.h"
+#include "canvasUI.h"
+#include "kinectUI.h"
 #include "colorUI.h"
 #include "server.h"
 
@@ -24,6 +26,8 @@ class dancePerformance : public ofBaseApp {
 		void exit();
 	
 		panelUI m_panel;
+		canvasUI m_canvas;
+		kinectUI m_kinect;
 		colorUI m_color;
 		
 };

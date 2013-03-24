@@ -112,6 +112,8 @@ public:
 	//integration kinect + physics
 	vector<msa::physics::Particle3D *> bone;
 	int currentSkeletonIndex;
+	
+	float scale;
 
 	float minZ;
 	float maxZ;
@@ -125,6 +127,8 @@ public:
 	ofFbo canvasTrace;
 	int canvasFade;
 	float blackout;
+
+	ofFbo particleBuffer;
 
 	//ofShader
 	ofShader radialBlur;

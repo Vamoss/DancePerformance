@@ -19,7 +19,8 @@ public:
         gui1->loadSettings("GUI/colorSettings.xml");
         gui1->setVisible(true);
     
-		velRed = velGreen = velBlue = 1;
+		colorSpeed = 1;
+		velRed = velGreen = velBlue = colorSpeed;
 		playRed = playGreen = playBlue = false;
 		isMouseDown = false;
     }
@@ -30,13 +31,9 @@ public:
         float xInit = OFX_UI_GLOBAL_WIDGET_SPACING; 
         float length = 455-xInit; 
         
-        gui1 = new ofxUICanvas(465, 0, length+xInit, ofGetHeight());
+        gui1 = new ofxUICanvas(465*2, 0, length+xInit, ofGetHeight());
 		gui1->setName("ColorUI");
 		gui1->setWidgetSpacing(20);
-        gui1->addWidgetDown(new ofxUILabel("DANCE PERFORMANCE", OFX_UI_FONT_LARGE)); 
-        gui1->addWidgetDown(new ofxUIFPS(OFX_UI_FONT_MEDIUM)); 
-        
-		gui1->addSpacer(2);
         gui1->addWidgetDown(new ofxUILabel("COLORS", OFX_UI_FONT_MEDIUM));
 
 		redSlider = new ofxUISlider(length-xInit-80, dim, 0.0, 255.0, 255.0, "RED");
@@ -57,6 +54,8 @@ public:
 		ofxUILabelButton * b3 = new ofxUILabelButton( 70, false, "PLAY 3", OFX_UI_FONT_MEDIUM);
         gui1->addWidgetRight(b3);
 
+		gui1->addWidgetDown(new ofxUISlider(length-xInit-80, dim, 0.0, 30.0, &colorSpeed, "PLAY SPEED"));
+
         gui1->addWidgetDown(new ofxUILabelButton( length-xInit, false, "RANDOM", OFX_UI_FONT_MEDIUM));
         
 		gui1->addSpacer(2);
@@ -69,18 +68,21 @@ public:
 	{
 		if(playRed)
 		{
+			velRed = velRed>0 ? colorSpeed : -colorSpeed;
 			redSlider->setValue(redSlider->getScaledValue()+velRed);
 			if(redSlider->getScaledValue()>=255 || redSlider->getScaledValue()<=0) velRed *= -1;
 		}
 		
 		if(playGreen)
 		{
+			velGreen = velGreen>0 ? colorSpeed : -colorSpeed;
 			greenSlider->setValue(greenSlider->getScaledValue()+velGreen);
 			if(greenSlider->getScaledValue()>=255 || greenSlider->getScaledValue()<=0) velGreen *= -1;
 		}
 		
 		if(playBlue)
 		{
+			velBlue = velBlue>0 ? colorSpeed : -colorSpeed;
 			blueSlider->setValue(blueSlider->getScaledValue()+velBlue);
 			if(blueSlider->getScaledValue()>=255 || blueSlider->getScaledValue()<=0) velBlue *= -1;
 		}
@@ -182,4 +184,5 @@ public:
 	int velRed, velGreen, velBlue;
 	bool playRed, playGreen, playBlue;
 	ofxUISlider * redSlider, * greenSlider, * blueSlider;
+	float colorSpeed;
 };
