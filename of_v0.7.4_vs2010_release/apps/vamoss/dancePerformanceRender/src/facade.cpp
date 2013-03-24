@@ -258,14 +258,20 @@ void facade::draw()
 		ballImage.getTextureReference().bind();
 		msa::physics::Particle3D *p;
 		float alpha;
+		ofColor c;
 		for(int i=0; i<physics.numberOfParticles(); i++) {
 			p = physics.getParticle(i);
 			if(!p->isFixed()){
+				
+				c.r = particleColor.r*colorSpaceVariation + ofMap(p->getPosition().x, -width/2, width/2, 0, 255-(255*colorSpaceVariation));
+				c.g = particleColor.g*colorSpaceVariation + ofMap(p->getPosition().y, -height, height, 0, 255-(255*colorSpaceVariation));
+				c.b = particleColor.b*colorSpaceVariation + ofMap(p->getPosition().z, -width/2, width/2, 0, 255-(255*colorSpaceVariation));
+					
 				// draw ball
 				glPushMatrix();
 					glTranslatef(p->getPosition().x, p->getPosition().y, p->getPosition().z);
 					glRotatef(180-rot, 0, 1, 0);
-					ofSetColor(particleColor);
+					ofSetColor(c);
 					drawParticle(p->getRadius());
 				glPopMatrix();
 			
@@ -275,7 +281,7 @@ void facade::draw()
 					glPushMatrix();
 						glTranslatef(p->getPosition().x, height, p->getPosition().z);
 						glRotatef(-90, 1, 0, 0);
-						ofSetColor(particleColor.r, particleColor.g, particleColor.b, alpha * alpha * alpha * alpha * 255);
+						ofSetColor(c.r, c.g, c.b, alpha * alpha * alpha * alpha * 255);
 						drawParticle(p->getRadius() * alpha);
 					glPopMatrix();
 				}

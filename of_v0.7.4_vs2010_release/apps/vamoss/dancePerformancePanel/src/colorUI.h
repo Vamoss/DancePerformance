@@ -54,7 +54,9 @@ public:
 		ofxUILabelButton * b3 = new ofxUILabelButton( 70, false, "PLAY 3", OFX_UI_FONT_MEDIUM);
         gui1->addWidgetRight(b3);
 
-		gui1->addWidgetDown(new ofxUISlider(length-xInit-80, dim, 0.0, 30.0, &colorSpeed, "PLAY SPEED"));
+		gui1->addWidgetDown(new ofxUISlider(length-xInit, dim, 0.0, 30.0, &colorSpeed, "PLAY SPEED"));
+
+		gui1->addWidgetDown(new ofxUISlider(length-xInit, dim, 0.0, 1.0, 0.0, "SPACE VARIATION"));
 
         gui1->addWidgetDown(new ofxUILabelButton( length-xInit, false, "RANDOM", OFX_UI_FONT_MEDIUM));
         
@@ -159,6 +161,11 @@ public:
 			
 			server::send("COLOR", redSlider->getScaledValue(), greenSlider->getScaledValue(), blueSlider->getScaledValue());
         }
+		else if(name == "SPACE VARIATION")
+		{
+			ofxUISlider *slider = (ofxUISlider*) e.widget; 
+			server::send(name, slider->getScaledValue());
+		}
         else if(name == "SAVE")
         {
             save();

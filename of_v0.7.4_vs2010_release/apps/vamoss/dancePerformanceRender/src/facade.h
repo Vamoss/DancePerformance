@@ -120,7 +120,8 @@ public:
 
 	//colors
 	ofColor particleColor;
-		
+	float colorSpaceVariation;
+
 	//canvas
 	void initCanvas();
 	ofFbo canvas;
