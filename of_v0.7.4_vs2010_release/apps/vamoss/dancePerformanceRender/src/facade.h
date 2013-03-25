@@ -13,9 +13,6 @@
 #define NODE_MIN_RADIUS			2
 #define NODE_MAX_RADIUS			4
 
-#define MIN_BOUNCE				0.2
-#define MAX_BOUNCE				0.4
-
 #define FORCE_AMOUNT			10
 
 #define MAX_ATTRACTION			2
@@ -66,6 +63,7 @@ public:
 	void setMouseSpring(bool b);
 	void setStrength(float min, float max);
 	void setGravity(float g);
+	void setBounce(float min, float max);
 	void setOrbit(float min, float max);
 	void addRandomForce(float f);
 	void setMass(float min, float max);
@@ -91,6 +89,9 @@ public:
 
 	float				min_mass;
 	float				max_mass;
+
+	float				min_bounce;
+	float				max_bounce;
 
 	float				gravity;
 

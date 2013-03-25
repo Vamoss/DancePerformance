@@ -50,6 +50,9 @@ facade::facade(void)
 	min_mass		= 1;
 	max_mass		= 3;
 	
+	min_bounce		= 0.2;
+	max_bounce		= 0.4;
+	
 	min_strength = 0.07;
 	max_strength = 0.5;
 
@@ -522,7 +525,7 @@ void facade::addRandomParticle() {
 	float posY		= ofRandom(0, height);
 	float posZ		= ofRandom(-width/2, width/2);
 	float mass		= ofRandom(min_mass, max_mass);
-	float bounce	= ofRandom(MIN_BOUNCE, MAX_BOUNCE);
+	float bounce	= ofRandom(min_bounce, max_bounce);
 	float radius	= ofMap(mass, min_mass, max_mass, NODE_MIN_RADIUS, NODE_MAX_RADIUS);
 	
 	// physics.makeParticle returns a particle pointer so you can customize it
@@ -584,6 +587,20 @@ void facade::setGravity(float g) {
 	gravity = g;
 	physics.setGravity(ofVec3f(0, gravity, 0));
 }
+
+
+
+
+void facade::setBounce(float min, float max) {
+	min_bounce = min;
+	max_bounce - max;
+		
+	for(int i=0; i<physics.numberOfParticles(); i++) {
+		physics.getParticle(i)->setBounce(ofRandom(min_bounce, max_bounce));
+	}
+}
+
+
 
 
 
