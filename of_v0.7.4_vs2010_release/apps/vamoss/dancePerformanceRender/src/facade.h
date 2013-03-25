@@ -4,7 +4,7 @@
 #include "ofxKinectNui.h"
 #include "MSAPhysics3D.h"
 
-//#define USE_KINECT
+#define USE_KINECT
 
 
 
@@ -133,5 +133,8 @@ public:
 
 	//ofShader
 	ofShader radialBlur;
+
+	//debug
+	bool showFPS;
 };
 

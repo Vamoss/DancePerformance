@@ -27,6 +27,9 @@ facade::facade(void)
 	currentSkeletonIndex = -1;
 #endif	
 
+	//debug
+	showFPS = false;
+
 	//shader
 	radialBlur.load("shaders/radialBlur");
 
@@ -67,7 +70,7 @@ facade::facade(void)
 	physics.setSectorCount(SECTOR_COUNT);
     physics.setDrag(0.97f);
 	physics.setDrag(1);		// FIXTHIS
-	physics.enableCollision();
+	//physics.enableCollision();
 	
 	initScene();
 	
@@ -82,9 +85,6 @@ facade::facade(void)
 
 void facade::update()
 {
-	//PARTICLE
-	width = ofGetWidth();
-	height = ofGetHeight();
 
 #ifdef USE_KINECT
 	//kinect
@@ -258,20 +258,20 @@ void facade::draw()
 		ballImage.getTextureReference().bind();
 		msa::physics::Particle3D *p;
 		float alpha;
-		ofColor c;
+		int red, green, blue;
 		for(int i=0; i<physics.numberOfParticles(); i++) {
 			p = physics.getParticle(i);
 			if(!p->isFixed()){
 				
-				c.r = particleColor.r*colorSpaceVariation + ofMap(p->getPosition().x, -width/2, width/2, 0, 255-(255*colorSpaceVariation));
-				c.g = particleColor.g*colorSpaceVariation + ofMap(p->getPosition().y, -height, height, 0, 255-(255*colorSpaceVariation));
-				c.b = particleColor.b*colorSpaceVariation + ofMap(p->getPosition().z, -width/2, width/2, 0, 255-(255*colorSpaceVariation));
+				red = particleColor.r*colorSpaceVariation + ofMap(p->getPosition().x, -width/2, width/2, 0, 255-(255*colorSpaceVariation));
+				green = particleColor.g*colorSpaceVariation + ofMap(p->getPosition().y, -height, height, 0, 255-(255*colorSpaceVariation));
+				blue = particleColor.b*colorSpaceVariation + ofMap(p->getPosition().z, -width/2, width/2, 0, 255-(255*colorSpaceVariation));
 					
 				// draw ball
 				glPushMatrix();
 					glTranslatef(p->getPosition().x, p->getPosition().y, p->getPosition().z);
 					glRotatef(180-rot, 0, 1, 0);
-					ofSetColor(c);
+					ofSetColor(red, green, blue);
 					drawParticle(p->getRadius());
 				glPopMatrix();
 			
@@ -281,7 +281,7 @@ void facade::draw()
 					glPushMatrix();
 						glTranslatef(p->getPosition().x, height, p->getPosition().z);
 						glRotatef(-90, 1, 0, 0);
-						ofSetColor(c.r, c.g, c.b, alpha * alpha * alpha * alpha * 255);
+						ofSetColor(red, green, blue, alpha * alpha * alpha * alpha * 255);
 						drawParticle(p->getRadius() * alpha);
 					glPopMatrix();
 				}
@@ -380,14 +380,14 @@ void facade::draw()
 	//glDisable(GL_BLEND);
 
 	
-	glColor4f(1, 1, 1, 1);
-
-	ofDrawBitmapString(" FPS: " + ofToString(ofGetFrameRate(), 2)
-                + " | Number of particles: " + ofToString(physics.numberOfParticles(), 2)
-                + " | Number of springs: " + ofToString(physics.numberOfSprings(), 2)
-                + " | Mouse Mass: " + ofToString(mouseNode.getMass(), 2)
-                + "\nLook at source code keyPressed to see keyboard shortcuts"
-			   , 20, 15);
+	if(showFPS)
+	{
+		glColor4f(1, 1, 1, 1);
+		ofDrawBitmapString(" FPS: " + ofToString(ofGetFrameRate(), 2)
+					+ " | particles: " + ofToString(physics.numberOfParticles(), 2)
+					+ " | springs: " + ofToString(physics.numberOfSprings(), 2)
+				   , 20, 15);
+	}
 }
 
 
@@ -410,7 +410,9 @@ void facade::drawParticle(float r)
 
 //--------------------------------------------------------------
 void facade::keyPressed (int key) {
-	
+	if(key==' '){
+		showFPS = !showFPS;
+	}
 }
 
 void facade::keyReleased  (int key){
@@ -459,6 +461,9 @@ void facade::mouseReleased(int x, int y, int button){
 void facade::windowResized(int w, int h){
 	width = w;
 	height = h;
+	
+	physics.setWorldSize(ofVec3f(-width/2, -height, -width/2), ofVec3f(width/2, height, width/2));
+
 	initCanvas();
 }
 

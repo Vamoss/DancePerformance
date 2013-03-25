@@ -29,9 +29,9 @@ public:
     {
         float dim = 16; 
         float xInit = OFX_UI_GLOBAL_WIDGET_SPACING; 
-        float length = 455-xInit; 
+        float length = 435-xInit; 
         
-        gui1 = new ofxUICanvas(465*2, 0, length+xInit, ofGetHeight());
+        gui1 = new ofxUICanvas(405*2, 0, length, ofGetHeight());
 		gui1->setName("ColorUI");
 		gui1->setWidgetSpacing(20);
         gui1->addWidgetDown(new ofxUILabel("COLORS", OFX_UI_FONT_MEDIUM));
