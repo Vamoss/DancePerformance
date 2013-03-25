@@ -13,13 +13,8 @@
 #define NODE_MIN_RADIUS			2
 #define NODE_MAX_RADIUS			4
 
-#define MIN_MASS				1
-#define MAX_MASS				3
-
 #define MIN_BOUNCE				0.2
 #define MAX_BOUNCE				0.4
-
-#define	FIX_PROBABILITY			10		// % probability of a particle being fixed on creation
 
 #define FORCE_AMOUNT			10
 
@@ -74,10 +69,8 @@ public:
 	void setStrength(float min, float max);
 	void setOrbit(float min, float max);
 	void addRandomForce(float f);
-	void setMass(float m);
+	void setMass(float min, float max);
 	void setCollision(bool c);
-	void lockRandomParticles();
-	void unlockRandomParticles();
 	void drawParticle(float r);
 	
 	bool				mouseAttract;
@@ -96,6 +89,9 @@ public:
 
 	float				min_width;
 	float				max_width;
+
+	float				min_mass;
+	float				max_mass;
 
 	float				rotSpeed;
 	float				mouseMass;

@@ -103,7 +103,7 @@ public:
 		}
 		else if(name == "MASS")
 		{
-			app->setMass(m.getArgAsFloat(0)); 
+			app->setMass(m.getArgAsFloat(0), m.getArgAsFloat(1)); 
 		}
 		else if(name == "COLOR")
 		{

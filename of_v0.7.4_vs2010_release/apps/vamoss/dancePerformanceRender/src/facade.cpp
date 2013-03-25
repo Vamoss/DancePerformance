@@ -44,8 +44,9 @@ facade::facade(void)
 
 	rotSpeed		= 0;
 	mouseMass		= 1;
-
 	
+	min_mass		= 1;
+	max_mass		= 3;
 	
 	min_strength = 0.07;
 	max_strength = 0.5;
@@ -485,7 +486,7 @@ void facade::initScene() {
 	// you can add your own particles to the physics system
 	physics.addParticle(&mouseNode);
 	mouseNode.makeFixed();
-	mouseNode.setMass(MIN_MASS);
+	mouseNode.setMass(min_mass);
 	mouseNode.moveTo(ofVec3f(0, 0, 0));
 	mouseNode.setRadius(NODE_MAX_RADIUS*3);
 
@@ -495,7 +496,7 @@ void facade::initScene() {
 		msa::physics::Particle3D * joint = new msa::physics::Particle3D();
 		physics.addParticle(joint);
 		joint->makeFixed();
-		joint->setMass(MIN_MASS);
+		joint->setMass(min_mass);
 		joint->moveTo(ofVec3f(0, 0, 0));
 		joint->setRadius(j==3 ? NODE_MAX_RADIUS*6 : NODE_MAX_RADIUS*3);
 
@@ -518,9 +519,9 @@ void facade::addRandomParticle() {
 	float posX		= ofRandom(-width/2, width/2);
 	float posY		= ofRandom(0, height);
 	float posZ		= ofRandom(-width/2, width/2);
-	float mass		= ofRandom(MIN_MASS, MAX_MASS);
+	float mass		= ofRandom(min_mass, max_mass);
 	float bounce	= ofRandom(MIN_BOUNCE, MAX_BOUNCE);
-	float radius	= ofMap(mass, MIN_MASS, MAX_MASS, NODE_MIN_RADIUS, NODE_MAX_RADIUS);
+	float radius	= ofMap(mass, min_mass, max_mass, NODE_MIN_RADIUS, NODE_MAX_RADIUS);
 	
 	// physics.makeParticle returns a particle pointer so you can customize it
 	msa::physics::Particle3D *p = physics.makeParticle(ofVec3f(posX, posY, posZ));
@@ -577,14 +578,21 @@ void facade::setMouseSpring(bool s) {
 
 
 
-void facade::setMass(float m) {
+void facade::setMass(float min, float max) {
+	min_mass = min;
+	max_mass = max;
+
+	for(int i=0; i<physics.numberOfParticles(); i++) {
+		physics.getParticle(i)->setMass(ofRandom(min_mass, max_mass));
+	}
+	/*
 #ifdef USE_KINECT
 	for(int j = 0; j < kinect::nui::SkeletonData::POSITION_COUNT; ++j){
-		bone[j]->setMass(m);
+		bone[j]->setMass(mass);
 	}
 #else
 	mouseNode.setMass(m);
-#endif
+#endif*/
 }
 
 
@@ -681,23 +689,6 @@ void facade::addRandomForce(float f) {
 		msa::physics::Particle3D *p = physics.getParticle(i);
 		if(p->isFree()) p->addVelocity(ofVec3f(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
 	}
-}
-
-void facade::lockRandomParticles() {
-	for(int i=0; i<physics.numberOfParticles(); i++) {
-		msa::physics::Particle3D *p = physics.getParticle(i);
-		if(ofRandom(0, 100) < FIX_PROBABILITY) p->makeFixed();
-		else p->makeFree();
-	}
-	mouseNode.makeFixed();
-}
-
-void facade::unlockRandomParticles() {
-	for(int i=0; i<physics.numberOfParticles(); i++) {
-		msa::physics::Particle3D *p = physics.getParticle(i);
-		p->makeFree();
-	}
-	mouseNode.makeFixed();
 }
 
 void facade::initCanvas() {

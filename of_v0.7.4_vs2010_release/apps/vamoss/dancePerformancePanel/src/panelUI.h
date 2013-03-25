@@ -35,13 +35,13 @@ public:
 		gui1->addSpacer(2);
         gui1->addWidgetDown(new ofxUILabel("PHYSICS", OFX_UI_FONT_MEDIUM));
         gui1->addWidgetDown(new ofxUIToggle( dim, dim, false, "COLLISION")); 	
+        gui1->addWidgetDown(new ofxUISlider(length-xInit, dim, 0.0,3000.0, 50, "PARTICLES"));	
         gui1->addWidgetDown(new ofxUISlider(length-xInit, dim, 0.0, 1.0, 1.0, "PROBABILITY"));
         gui1->addWidgetDown(new ofxUIToggle( dim, dim, false, "SPRING"));
         gui1->addWidgetRight(new ofxUIToggle( dim, dim, false, "ATTRACT")); 
         gui1->addWidgetDown(new ofxUIRangeSlider(length-xInit, dim,	0.0,1.0, 0.07, 0.5, "STRENGHT"));
         gui1->addWidgetDown(new ofxUIRangeSlider(length-xInit, dim,	0.0,100.0, 10.0, 30.0, "ORBIT"));
-        gui1->addWidgetDown(new ofxUISlider(length-xInit, dim, 0.0,2000.0, 50, "PARTICLES"));	
-        gui1->addWidgetDown(new ofxUISlider(length-xInit, dim, -0.9, 5.0, 1.5, "MASS"));
+        gui1->addWidgetDown(new ofxUIRangeSlider(length-xInit, dim, -0.9, 5.0, 1.0, 1.5, "MASS"));
 		gui1->addWidgetDown(new ofxUILabelButton( length-xInit, false, "SHAKE", OFX_UI_FONT_MEDIUM));
         gui1->addWidgetDown(new ofxUILabelButton( length-xInit, false, "RESTART", OFX_UI_FONT_MEDIUM));
 
@@ -121,8 +121,8 @@ public:
 		}
 		else if(name == "MASS")
 		{
-			ofxUISlider *slider = (ofxUISlider *) e.widget; 
-			server::send(name, slider->getScaledValue());
+			ofxUIRangeSlider *slider = (ofxUIRangeSlider *) e.widget; 
+			server::send(name, slider->getScaledValueLow(), slider->getScaledValueHigh());
 		}
         else if(name == "SAVE")
         {
