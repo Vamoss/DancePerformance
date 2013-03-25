@@ -91,6 +91,7 @@ public:
 		}
 		else if(name == "CENTER")
 		{
+			sliderRot->setValue(0);
 			server::send("ROTATION SPEED", 0.0f);
 		}
 		else if(name == "SAVE")

@@ -44,6 +44,8 @@ facade::facade(void)
 
 	rotSpeed		= 0;
 	mouseMass		= 1;
+
+	gravity			= 0;
 	
 	min_mass		= 1;
 	max_mass		= 3;
@@ -64,7 +66,7 @@ facade::facade(void)
 	height = ofGetHeight();
 	
 	//	physics.verbose = true;			// dump activity to log
-	physics.setGravity(ofVec3f(0, GRAVITY, 0));
+	physics.setGravity(ofVec3f(0, gravity, 0));
 	
 	// set world dimensions, not essential, but speeds up collision
 	physics.setWorldSize(ofVec3f(-width/2, -height, -width/2), ofVec3f(width/2, height, width/2));
@@ -575,6 +577,13 @@ void facade::setMouseSpring(bool s) {
 	}
 }
 
+
+
+
+void facade::setGravity(float g) {
+	gravity = g;
+	physics.setGravity(ofVec3f(0, gravity, 0));
+}
 
 
 

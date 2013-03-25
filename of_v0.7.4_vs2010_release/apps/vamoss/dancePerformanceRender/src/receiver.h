@@ -105,6 +105,10 @@ public:
 		{
 			app->setMass(m.getArgAsFloat(0), m.getArgAsFloat(1)); 
 		}
+		else if(name == "GRAVITY")
+		{
+			app->setGravity(m.getArgAsFloat(0)); 
+		}
 		else if(name == "COLOR")
 		{
 			app->particleColor.r = m.getArgAsFloat(0);

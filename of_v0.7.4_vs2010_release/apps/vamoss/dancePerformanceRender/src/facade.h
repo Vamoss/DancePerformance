@@ -18,8 +18,6 @@
 
 #define FORCE_AMOUNT			10
 
-#define	GRAVITY					0
-
 #define MAX_ATTRACTION			2
 #define MIN_ATTRACTION			1
 
@@ -67,6 +65,7 @@ public:
 	void setMouseAttract(bool a);
 	void setMouseSpring(bool b);
 	void setStrength(float min, float max);
+	void setGravity(float g);
 	void setOrbit(float min, float max);
 	void addRandomForce(float f);
 	void setMass(float min, float max);
@@ -92,6 +91,8 @@ public:
 
 	float				min_mass;
 	float				max_mass;
+
+	float				gravity;
 
 	float				rotSpeed;
 	float				mouseMass;
