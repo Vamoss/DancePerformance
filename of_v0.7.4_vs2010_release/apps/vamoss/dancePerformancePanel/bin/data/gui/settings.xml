@@ -6,12 +6,12 @@
 <Widget>
     <Kind>4</Kind>
     <Name>PARTICLES</Name>
-    <Value>997.183105469</Value>
+    <Value>464.788726807</Value>
 </Widget>
 <Widget>
     <Kind>4</Kind>
     <Name>PROBABILITY</Name>
-    <Value>1.000000000</Value>
+    <Value>0.816901386</Value>
 </Widget>
 <Widget>
     <Kind>2</Kind>
@@ -26,18 +26,29 @@
 <Widget>
     <Kind>6</Kind>
     <Name>STRENGHT</Name>
-    <HighValue>0.500000000</HighValue>
-    <LowValue>0.070000000</LowValue>
+    <HighValue>0.463380009</HighValue>
+    <LowValue>0.197183102</LowValue>
 </Widget>
 <Widget>
     <Kind>6</Kind>
     <Name>ORBIT</Name>
-    <HighValue>30.000001907</HighValue>
-    <LowValue>10.000000000</LowValue>
+    <HighValue>69.577468872</HighValue>
+    <LowValue>49.718315125</LowValue>
 </Widget>
 <Widget>
     <Kind>6</Kind>
     <Name>MASS</Name>
-    <HighValue>3.105352163</HighValue>
-    <LowValue>0.999999940</LowValue>
+    <HighValue>2.174646378</HighValue>
+    <LowValue>0.936478794</LowValue>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>GRAVITY</Name>
+    <Value>0.000000000</Value>
+</Widget>
+<Widget>
+    <Kind>6</Kind>
+    <Name>BOUNCE</Name>
+    <HighValue>1.076056361</HighValue>
+    <LowValue>0.800000012</LowValue>
 </Widget>

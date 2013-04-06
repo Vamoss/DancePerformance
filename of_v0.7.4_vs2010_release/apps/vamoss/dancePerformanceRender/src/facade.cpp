@@ -135,7 +135,7 @@ void facade::draw()
 		// center scene
 		glPushMatrix();
 		glTranslatef(width/2, 0, -width / 3);
-		static float rot = 0;
+		static float rot = 180;
 		glRotatef(rot, 0, 1, 0);
 		rot += rotSpeed;
 		
