@@ -85,13 +85,19 @@ public:
         
         if(name == "SCALE")
 		{
-			ofxUISlider *toggle = (ofxUISlider *) e.widget;
-			server::send(name, toggle->getScaledValue());
+			ofxUISlider *slider = (ofxUISlider *) e.widget;
+			server::send(name, slider->getScaledValue());
 		}
 		else if(name == "SAVE")
         {
             save();
         }
+		else
+		{
+			ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
+			server::send(name, toggle->getValue());
+		}
+		
 	}
     
     void save()

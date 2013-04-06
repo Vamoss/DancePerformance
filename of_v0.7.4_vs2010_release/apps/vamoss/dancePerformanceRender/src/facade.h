@@ -109,6 +109,7 @@ public:
 
 	//integration kinect + physics
 	vector<msa::physics::Particle3D *> bone;
+	vector<bool> boneEnabled;
 	int currentSkeletonIndex;
 	
 	float scale;

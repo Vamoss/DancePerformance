@@ -127,5 +127,92 @@ public:
 		{
 			app->scale = m.getArgAsFloat(0);
 		}
+		else if(name == "HEAD")
+		{
+			toggleJoint(m.getArgAsInt32(0), NUI_SKELETON_POSITION_HEAD);
+		}
+		else if(name == "SHOULDER LEFT")
+		{
+			toggleJoint(m.getArgAsInt32(0), NUI_SKELETON_POSITION_SHOULDER_LEFT);
+		}
+		else if(name == "SHOULDER CENTER")
+		{
+			toggleJoint(m.getArgAsInt32(0), NUI_SKELETON_POSITION_SHOULDER_CENTER);
+		}
+		else if(name == "SHOULDER RIGHT")
+		{
+			toggleJoint(m.getArgAsInt32(0), NUI_SKELETON_POSITION_SHOULDER_RIGHT);
+		}
+		else if(name == "ELBOW LEFT")
+		{
+			toggleJoint(m.getArgAsInt32(0), NUI_SKELETON_POSITION_ELBOW_LEFT);
+		}
+		else if(name == "ELBOW RIGHT")
+		{
+			toggleJoint(m.getArgAsInt32(0), NUI_SKELETON_POSITION_ELBOW_RIGHT);
+		}
+		else if(name == "WRIST LEFT")
+		{
+			toggleJoint(m.getArgAsInt32(0), NUI_SKELETON_POSITION_WRIST_LEFT);
+		}
+		else if(name == "WRIST RIGHT")
+		{
+			toggleJoint(m.getArgAsInt32(0), NUI_SKELETON_POSITION_WRIST_RIGHT);
+		}
+		else if(name == "HAND LEFT")
+		{
+			toggleJoint(m.getArgAsInt32(0), NUI_SKELETON_POSITION_HAND_LEFT);
+		}
+		else if(name == "HAND RIGHT")
+		{
+			toggleJoint(m.getArgAsInt32(0), NUI_SKELETON_POSITION_HAND_RIGHT);
+		}
+		else if(name == "SPINE")
+		{
+			toggleJoint(m.getArgAsInt32(0), NUI_SKELETON_POSITION_SPINE);
+		}
+		else if(name == "HIP LEFT")
+		{
+			toggleJoint(m.getArgAsInt32(0), NUI_SKELETON_POSITION_HIP_LEFT);
+		}
+		else if(name == "HIP CENTER")
+		{
+			toggleJoint(m.getArgAsInt32(0), NUI_SKELETON_POSITION_HIP_CENTER);
+		}
+		else if(name == "HIP RIGHT")
+		{
+			toggleJoint(m.getArgAsInt32(0), NUI_SKELETON_POSITION_HIP_RIGHT);
+		}
+		else if(name == "KNEE LEFT")
+		{
+			toggleJoint(m.getArgAsInt32(0), NUI_SKELETON_POSITION_KNEE_LEFT);
+		}
+		else if(name == "KNEE RIGHT")
+		{
+			toggleJoint(m.getArgAsInt32(0), NUI_SKELETON_POSITION_KNEE_RIGHT);
+		}
+		else if(name == "ANKLE LEFT")
+		{
+			toggleJoint(m.getArgAsInt32(0), NUI_SKELETON_POSITION_ANKLE_LEFT);
+		}
+		else if(name == "ANKLE RIGHT")
+		{
+			toggleJoint(m.getArgAsInt32(0), NUI_SKELETON_POSITION_ANKLE_RIGHT);
+		}
+		else if(name == "FOOT LEFT")
+		{
+			toggleJoint(m.getArgAsInt32(0), NUI_SKELETON_POSITION_FOOT_LEFT);
+		}
+		else if(name == "FOOT RIGHT")
+		{
+			toggleJoint(m.getArgAsInt32(0), NUI_SKELETON_POSITION_FOOT_RIGHT);
+		}	
+	}
+
+private:
+
+	void toggleJoint(bool state, int index)
+	{
+		app->boneEnabled[index] = state;
 	}
 };

@@ -104,17 +104,21 @@ void facade::update()
 				//if(kinect.skeletonPoints[i][0].x<minZ) minZ = kinect.skeletonPoints[i][0].x;
 				//if(kinect.skeletonPoints[i][0].x>maxZ) maxZ = kinect.skeletonPoints[i][0].x;
 				//cout << minZ << " " << maxZ << endl;
-				float x = ofMap(kinect.skeletonPoints[i][j].x, 0, 310, -width/2, width/2) * scale;
-				float y = kinect.skeletonPoints[i][j].y * 3 * scale - ofMap(scale, 1, 2, -50, 800);
-				float z = ofMap(kinect.skeletonPoints[i][j].z, 0, 40000, width/2, -width/2);
-				bone[j]->moveTo(ofVec3f(x, y, z));
+				if(boneEnabled[j]){
+					float x = ofMap(kinect.skeletonPoints[i][j].x, 0, 310, -width/2, width/2) * scale;
+					float y = kinect.skeletonPoints[i][j].y * 3 * scale - ofMap(scale, 1, 2, -50, 800);
+					float z = ofMap(kinect.skeletonPoints[i][j].z, 0, 40000, width/2, -width/2);
+					bone[j]->moveTo(ofVec3f(x, y, z));
+				}else{
+					bone[j]->moveTo(ofVec3f(9999999, -9999999, 9999999));
+				}
 			}
 		}
 	}
 
 	if(currentSkeletonIndex==-1){
 		for(int j = 0; j < kinect::nui::SkeletonData::POSITION_COUNT; ++j){
-			bone[j]->moveTo(ofVec3f(9999999, 9999999, 9999999));
+			bone[j]->moveTo(ofVec3f(9999999, -9999999, 9999999));
 		}
 	}
 #endif
@@ -506,6 +510,7 @@ void facade::initScene() {
 		joint->setRadius(j==3 ? NODE_MAX_RADIUS*6 : NODE_MAX_RADIUS*3);
 
 		bone.push_back(joint);
+		boneEnabled.push_back(true);
 	}
 #endif
 
