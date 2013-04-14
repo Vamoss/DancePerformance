@@ -151,8 +151,10 @@ public:
 	void setParticles(float percent)
 	{
 		ofxUISlider *slider = (ofxUISlider *) gui1->getWidget("PARTICLES");
-		slider->setValue(percent * slider->getMax());
-		server::send("PARTICLES", slider->getScaledValue());
+		if(percent != slider->getValue()){
+			slider->setValue(percent * slider->getMax());
+			server::send("PARTICLES", slider->getScaledValue());
+		}
 	}
     
     void save()
