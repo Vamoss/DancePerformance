@@ -19,6 +19,9 @@ void dancePerformance::update() {
 	
 	m_color.update();
 
+	if(m_canvas.propagateFade){
+		m_panel.setParticles(m_canvas.propagatePercent);
+	}
 }
 
 //--------------------------------------------------------------

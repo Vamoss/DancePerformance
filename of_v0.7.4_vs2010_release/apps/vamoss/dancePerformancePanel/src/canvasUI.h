@@ -31,11 +31,12 @@ public:
 		gui1->setWidgetSpacing(20);
         gui1->addWidgetDown(new ofxUILabel("CANVAS", OFX_UI_FONT_MEDIUM));
         gui1->addWidgetDown(new ofxUIToggle( dim, dim, false, "RENDER")); 
-        sliderRot = new ofxUISlider(length-xInit-60, dim, -3.0, 3.0, 0.0, "ROTATION SPEED");
+        sliderRot = new ofxUISlider(length-xInit-80, dim, -3.0, 3.0, 0.0, "ROTATION SPEED");
 		sliderRot->setIncrement(0.1);
 		gui1->addWidgetDown(sliderRot);
         gui1->addWidgetRight(new ofxUILabelButton( 50, false, "CENTER", OFX_UI_FONT_MEDIUM));
-		gui1->addWidgetDown(new ofxUISlider(length-xInit,dim, 0.0, 255.0, 125, "FADE"));	
+		gui1->addWidgetDown(new ofxUISlider(length-xInit-80,dim, 0.0, 255.0, 125, "FADE"));	
+        gui1->addWidgetRight(new ofxUIToggle( dim, dim, false, "PARTICLES")); 
 		gui1->addWidgetDown(new ofxUISlider(length-xInit,dim, 0.0, 255.0, 125, "BLACKOUT"));
         
 		gui1->addSpacer(2);
@@ -78,6 +79,11 @@ public:
 		{
 			ofxUISlider *slider = (ofxUISlider *) e.widget; 
 			server::send(name, slider->getScaledValue());
+			propagatePercent = slider->getValue();
+		}else if(name == "PARTICLES")
+		{
+			ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
+			propagateFade = toggle->getValue();
 		}
 		else if(name == "BLACKOUT")
 		{
@@ -106,5 +112,8 @@ public:
     }
 
 	ofxUISlider * sliderRot;
+
+	bool propagateFade;
+	float propagatePercent;
     
 };
