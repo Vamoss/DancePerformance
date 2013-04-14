@@ -90,7 +90,7 @@ public:
 		}
 
 		if(playRed || playGreen || playBlue){
-			server::send("COLOR", redSlider->getScaledValue(), greenSlider->getScaledValue(), blueSlider->getScaledValue());
+			updateColor();
 		}
 	}
 
@@ -121,7 +121,7 @@ public:
         
         if(name == "RED" || name == "GREEN" || name == "BLUE")
 		{
-			server::send("COLOR", redSlider->getScaledValue(), greenSlider->getScaledValue(), blueSlider->getScaledValue());
+			updateColor();
 		}
         else if((name == "PLAY 1" || name == "STOP 1") && isMouseDown)
         {
@@ -159,7 +159,7 @@ public:
 			greenSlider->setValue(ofRandom(255));
 			blueSlider->setValue(ofRandom(255));
 			
-			server::send("COLOR", redSlider->getScaledValue(), greenSlider->getScaledValue(), blueSlider->getScaledValue());
+			updateColor();
         }
 		else if(name == "SPACE VARIATION")
 		{
@@ -176,6 +176,12 @@ public:
     {
         gui1->saveSettings("GUI/colorSettings.xml");
     }
+
+	void updateColor()
+	{
+		ofBackground(redSlider->getScaledValue(), greenSlider->getScaledValue(), blueSlider->getScaledValue());
+		server::send("COLOR", redSlider->getScaledValue(), greenSlider->getScaledValue(), blueSlider->getScaledValue());
+	}
 	
 	void mousePressed(int x, int y, int button)
 	{
