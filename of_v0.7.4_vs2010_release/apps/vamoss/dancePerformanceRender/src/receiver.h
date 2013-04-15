@@ -119,6 +119,14 @@ public:
 		{
 			app->colorSpaceVariation = m.getArgAsFloat(0);
 		}
+		else if(name == "DELAY")
+		{
+			app->delay = 1 - m.getArgAsFloat(0);
+		}
+		else if(name == "Y")
+		{
+			app->y = m.getArgAsFloat(0);
+		}
 		else if(name == "SCALE")
 		{
 			app->scale = m.getArgAsFloat(0);

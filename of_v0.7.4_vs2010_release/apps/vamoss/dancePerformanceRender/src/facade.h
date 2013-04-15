@@ -113,6 +113,9 @@ public:
 	int currentSkeletonIndex;
 	
 	float scale;
+	float y;
+
+	float delay;
 
 	float minZ;
 	float maxZ;

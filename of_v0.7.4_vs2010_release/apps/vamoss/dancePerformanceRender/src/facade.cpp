@@ -60,6 +60,9 @@ facade::facade(void)
 	max_width = 30;
 
 	scale = 3;
+	y = 0;
+
+	delay = 1;
 
 	probability = 1;
 
@@ -105,10 +108,16 @@ void facade::update()
 				//if(kinect.skeletonPoints[i][0].x>maxZ) maxZ = kinect.skeletonPoints[i][0].x;
 				//cout << minZ << " " << maxZ << endl;
 				if(boneEnabled[j]){
-					float x = ofMap(kinect.skeletonPoints[i][j].x, 0, 310, -width/2, width/2) * scale;
-					float y = kinect.skeletonPoints[i][j].y * 3 * scale - ofMap(scale, 1, 2, -50, 800);
-					float z = ofMap(kinect.skeletonPoints[i][j].z, 0, 40000, width/2, -width/2);
-					bone[j]->moveTo(ofVec3f(x, y, z));
+					float destX = ofMap(kinect.skeletonPoints[i][j].x, 0, 310, -width/2, width/2) * scale;
+					float destY = kinect.skeletonPoints[i][j].y * 3 * scale - ofMap(scale, 1, 2, -50, 800) + y;
+					float destZ = ofMap(kinect.skeletonPoints[i][j].z, 0, 40000, width/2, -width/2);
+					
+					//delay
+					destX += (destX - bone[j]->getPosition().x) * delay;
+					destY += (destY - bone[j]->getPosition().y) * delay;
+					destZ += (destZ - bone[j]->getPosition().z) * delay;
+
+					bone[j]->moveTo(ofVec3f(destX, destY, destZ));
 				}else{
 					bone[j]->moveTo(ofVec3f(9999999, -9999999, 9999999));
 				}

@@ -30,6 +30,10 @@ public:
 		gui1->setName("KinectUI");
 		gui1->setWidgetSpacing(20);
 		gui1->addWidgetDown(new ofxUILabel("KINECT", OFX_UI_FONT_MEDIUM));
+		gui1->addWidgetDown(new ofxUISlider(length-xInit, dim, 0.0, 1.0, 0.0, "DELAY"));
+		((ofxUISlider *) gui1->getWidget("DELAY"))->setIncrement(0.01f);
+
+		gui1->addWidgetDown(new ofxUISlider(length-xInit, dim, -500.0, 500.0, 3.0, "Y"));
 		gui1->addWidgetDown(new ofxUISlider(length-xInit, dim, 0.0, 10.0, 3.0, "SCALE"));
 		gui1->addWidgetDown(new ofxUILabelButton( length/2-xInit, false, "SELECT ALL", OFX_UI_FONT_MEDIUM)); 	
 		gui1->addWidgetRight(new ofxUILabelButton( length/2-xInit, false, "UNSELECT ALL", OFX_UI_FONT_MEDIUM)); 	
@@ -85,7 +89,17 @@ public:
         int kind = e.widget->getKind(); 
         cout << "got event from: " << name << endl; 	
         
-        if(name == "SCALE")
+        if(name == "DELAY")
+		{
+			ofxUISlider *slider = (ofxUISlider *) e.widget;
+			server::send(name, slider->getScaledValue());
+		}
+		else if(name == "Y")
+		{
+			ofxUISlider *slider = (ofxUISlider *) e.widget;
+			server::send(name, slider->getScaledValue());
+		}
+		else if(name == "SCALE")
 		{
 			ofxUISlider *slider = (ofxUISlider *) e.widget;
 			server::send(name, slider->getScaledValue());
