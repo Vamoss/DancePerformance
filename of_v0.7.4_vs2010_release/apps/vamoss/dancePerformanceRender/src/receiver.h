@@ -211,6 +211,15 @@ public:
 		{
 			toggleJoint(m.getArgAsInt32(0), NUI_SKELETON_POSITION_FOOT_RIGHT);
 		}	
+		else if(name == "/rightVolume")
+		{
+			app->particleColor.r = m.getArgAsFloat(0);
+		}
+		else if(name == "/leftVolume")
+		{
+			app->particleColor.r = m.getArgAsFloat(0);
+		}
+		
 	}
 
 private:
