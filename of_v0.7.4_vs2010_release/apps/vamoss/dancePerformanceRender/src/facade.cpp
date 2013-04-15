@@ -42,7 +42,7 @@ facade::facade(void)
 	forceTimer		= false;
 
 
-	rotSpeed		= 0;
+	rotation		= 0;
 	mouseMass		= 1;
 
 	gravity			= 0;
@@ -139,9 +139,7 @@ void facade::draw()
 		// center scene
 		glPushMatrix();
 		glTranslatef(width/2, 0, -width / 3);
-		static float rot = 180;
-		glRotatef(rot, 0, 1, 0);
-		rot += rotSpeed;
+		glRotatef(rotation, 0, 1, 0);
 		
 		if(forceTimer) {
 			float translateMax = forceTimer;
@@ -196,14 +194,14 @@ void facade::draw()
 		*/
 
 		//canvas
-		glRotatef(rot, 0, -1, 0);
+		glRotatef(rotation, 0, -1, 0);
 		canvas.begin();
 
 		ofSetColor(255, canvasFade);
 		canvasTrace.draw(0,0);
 
 		glTranslatef(width/2, 0, -width / 3);
-		glRotatef(rot, 0, 1, 0);
+		glRotatef(rotation, 0, 1, 0);
 
 		//particles
 		//glAlphaFunc(GL_GREATER, 0.5);
@@ -280,7 +278,7 @@ void facade::draw()
 				// draw ball
 				glPushMatrix();
 					glTranslatef(p->getPosition().x, p->getPosition().y, p->getPosition().z);
-					glRotatef(180-rot, 0, 1, 0);
+					glRotatef(180-rotation, 0, 1, 0);
 					ofSetColor(red, green, blue);
 					drawParticle(p->getRadius());
 				glPopMatrix();

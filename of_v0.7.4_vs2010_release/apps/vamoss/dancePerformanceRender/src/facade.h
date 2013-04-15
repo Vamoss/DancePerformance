@@ -95,7 +95,7 @@ public:
 
 	float				gravity;
 
-	float				rotSpeed;
+	float				rotation;
 	float				mouseMass;
 
 	int			width;

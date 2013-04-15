@@ -18,6 +18,7 @@ void dancePerformance::setup() {
 void dancePerformance::update() {
 	
 	m_color.update();
+	m_canvas.update();
 
 	if(m_canvas.propagateFade){
 		m_panel.setParticles(m_canvas.propagatePercent);
@@ -49,10 +50,12 @@ void dancePerformance::mouseDragged(int x, int y, int button){
 
 void dancePerformance::mousePressed(int x, int y, int button){
 	m_color.mousePressed(x, y, button);
+	m_canvas.mousePressed(x, y, button);
 }
 
 void dancePerformance::mouseReleased(int x, int y, int button){
 	m_color.mouseReleased(x, y, button);
+	m_canvas.mouseReleased(x, y, button);
 }
 
 void dancePerformance::windowResized(int w, int h){

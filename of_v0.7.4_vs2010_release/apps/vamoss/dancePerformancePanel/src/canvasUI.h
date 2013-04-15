@@ -16,6 +16,8 @@ public:
     {
         setGUI1();
         
+		playRotation = false;
+
         gui1->loadSettings("GUI/canvasSettings.xml");
         gui1->setVisible(true);
     }
@@ -31,10 +33,12 @@ public:
 		gui1->setWidgetSpacing(20);
         gui1->addWidgetDown(new ofxUILabel("CANVAS", OFX_UI_FONT_MEDIUM));
         gui1->addWidgetDown(new ofxUIToggle( dim, dim, false, "RENDER")); 
-        sliderRot = new ofxUISlider(length-xInit-80, dim, -3.0, 3.0, 0.0, "ROTATION SPEED");
+		gui1->addWidgetDown(new ofxUIRotarySlider(dim*3, 0, 360, 0.0, "ROTATION"));
+        gui1->addWidgetDown(new ofxUILabelButton( 80, false, "CENTER", OFX_UI_FONT_MEDIUM));
+        sliderRot = new ofxUISlider(length-xInit-160, dim, -3.0, 3.0, 0.0, "ROTATION SPEED");
 		sliderRot->setIncrement(0.1);
 		gui1->addWidgetDown(sliderRot);
-        gui1->addWidgetRight(new ofxUILabelButton( 50, false, "CENTER", OFX_UI_FONT_MEDIUM));
+        gui1->addWidgetRight(new ofxUILabelButton( 70, false, "PLAY", OFX_UI_FONT_MEDIUM));
 		gui1->addWidgetDown(new ofxUISlider(length-xInit-80,dim, 0.0, 255.0, 125, "FADE"));	
         gui1->addWidgetRight(new ofxUIToggle( dim, dim, false, "PARTICLES")); 
 		gui1->addWidgetDown(new ofxUISlider(length-xInit,dim, 0.0, 255.0, 125, "BLACKOUT"));
@@ -44,6 +48,14 @@ public:
         
         ofAddListener(gui1->newGUIEvent,this,&canvasUI::guiEvent);
     }
+
+	void update()
+	{
+		if(playRotation)
+		{
+			updateRotation(sliderRot->getScaledValue(), true);
+		}
+	}
 
 	void draw()
 	{
@@ -90,15 +102,28 @@ public:
 			ofxUISlider *slider = (ofxUISlider *) e.widget; 
 			server::send(name, slider->getScaledValue());
 		}
+		else if(name == "ROTATION")
+		{
+			updateRotation();
+		}
 		else if(name == "ROTATION SPEED")
 		{
 			ofxUISlider *slider = (ofxUISlider *) e.widget; 
 			server::send(name, slider->getScaledValue());
 		}
+        else if((name == "PLAY" || name == "STOP") && isMouseDown)
+        {
+			ofxUILabelButton *button = (ofxUILabelButton *) e.widget; 
+			playRotation = !playRotation;
+			if(playRotation){
+				button->setLabelText("STOP");
+			}else{
+				button->setLabelText("PLAY");
+			}
+        }
 		else if(name == "CENTER")
 		{
-			sliderRot->setValue(0);
-			server::send("ROTATION SPEED", 0.0f);
+			updateRotation(0);
 		}
 		else if(name == "SAVE")
         {
@@ -111,7 +136,32 @@ public:
         gui1->saveSettings("GUI/canvasSettings.xml");
     }
 
+	void updateRotation(float value = -9999.0f, bool relative = false)
+	{
+		ofxUIRotarySlider *slider = (ofxUIRotarySlider *) gui1->getWidget("ROTATION");
+		if(relative) {
+			value += slider->getScaledValue();
+			if(value>360) value = value - 360;
+			if(value<0) value = 360 - value;
+		}
+		if(value!=9999.0f) slider->setValue(value);
+		server::send("ROTATION", slider->getScaledValue());
+	}
+
+	void mousePressed(int x, int y, int button)
+	{
+		isMouseDown=true;
+	}
+
+	void mouseReleased(int x, int y, int button)
+	{
+		isMouseDown=false;
+	}
+    
+	bool isMouseDown;
+
 	ofxUISlider * sliderRot;
+	bool playRotation;
 
 	bool propagateFade;
 	float propagatePercent;

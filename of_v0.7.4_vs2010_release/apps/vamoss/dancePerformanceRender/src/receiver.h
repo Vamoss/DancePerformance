@@ -93,13 +93,9 @@ public:
 		{
 			app->setCollision( m.getArgAsInt32(0));
 		}
-		else if(name == "ROTATION SPEED")
+		else if(name == "ROTATION")
 		{
-			app->rotSpeed = m.getArgAsFloat(0);
-		}
-		else if(name == "CENTER")
-		{
-			app->rotSpeed = m.getArgAsFloat(0);
+			app->rotation = m.getArgAsFloat(0);
 		}
 		else if(name == "MASS")
 		{
