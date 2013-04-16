@@ -1,7 +1,17 @@
 <Widget>
     <Kind>4</Kind>
+    <Name>DELAY</Name>
+    <Value>1.000000000</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>Y</Name>
+    <Value>30.000448227</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
     <Name>SCALE</Name>
-    <Value>3.000000000</Value>
+    <Value>1.070423841</Value>
 </Widget>
 <Widget>
     <Kind>2</Kind>

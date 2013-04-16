@@ -4,7 +4,7 @@
 void dancePerformance::setup() {
 	ofSetLogLevel(OF_LOG_VERBOSE);
 	ofSetFrameRate(60);
-	ofSetBackgroundColor(13, 104, 107);
+	ofBackground(13, 104, 107);
 	
 	server::setup("127.0.0.1", 11999);
 

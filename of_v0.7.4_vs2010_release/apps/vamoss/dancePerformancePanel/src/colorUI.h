@@ -179,7 +179,7 @@ public:
 
 	void updateColor()
 	{
-		ofBackground(redSlider->getScaledValue(), greenSlider->getScaledValue(), blueSlider->getScaledValue());
+		//ofBackground(redSlider->getScaledValue(), greenSlider->getScaledValue(), blueSlider->getScaledValue());
 		server::send("COLOR", redSlider->getScaledValue(), greenSlider->getScaledValue(), blueSlider->getScaledValue());
 	}
 	
