@@ -27,22 +27,22 @@ pages = [[
 {
     "name":"R",
     "type":"Slider",
-    "x":0, "y":0,
-    "width":.75, "height":.25,
+    "x":0.5, "y":10,
+    "width":0.9, "height":50,
     "address" : "/red",
 },
 {
     "name":"G",
     "type":"Slider",
-    "x":0, "y":0,
-    "width":.75, "height":.25,
+    "x":0.5, "y":70,
+    "width":0.9, "height":50,
     "address" : "/green",
 },
 {
     "name":"B",
     "type":"Slider",
-    "x":0, "y":0,
-    "width":.75, "height":.25,
+    "x":0.5, "y":130,
+    "width":0.9, "height":50,
     "address" : "/blue",
 },
 
