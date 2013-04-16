@@ -42,7 +42,7 @@ public:
         gui1->addWidgetDown(new ofxUIRangeSlider(length-xInit, dim,	0.0,1.0, 0.07, 0.5, "STRENGHT"));
         gui1->addWidgetDown(new ofxUIRangeSlider(length-xInit, dim,	0.0,100.0, 10.0, 30.0, "ORBIT"));
         gui1->addWidgetDown(new ofxUIRangeSlider(length-xInit, dim, -0.9, 5.0, 1.0, 1.5, "MASS"));	
-        gui1->addWidgetDown(new ofxUISlider(length-xInit-60, dim, -10.0, 10.0, 0.0, "GRAVITY"));
+        gui1->addWidgetDown(new ofxUISlider(length-xInit-60, dim, -3.0, 3.0, 0.0, "GRAVITY"));
         gui1->addWidgetRight(new ofxUILabelButton( 50, false, "CENTER", OFX_UI_FONT_MEDIUM));
         gui1->addWidgetDown(new ofxUIRangeSlider(length-xInit, dim, 0, 2.0, 0.2, 0.4, "BOUNCE"));	
 		gui1->addWidgetDown(new ofxUILabelButton( length-xInit, false, "SHAKE", OFX_UI_FONT_MEDIUM));
