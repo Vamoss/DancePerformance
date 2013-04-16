@@ -54,6 +54,9 @@ public:
 		ofxUILabelButton * b3 = new ofxUILabelButton( 70, false, "PLAY 3", OFX_UI_FONT_MEDIUM);
         gui1->addWidgetRight(b3);
 
+		gui1->addWidgetDown(new ofxUILabelButton( 90, false, "BLACK", OFX_UI_FONT_MEDIUM));
+        gui1->addWidgetRight(new ofxUILabelButton( 90, false, "WHITE", OFX_UI_FONT_MEDIUM));
+
 		gui1->addWidgetDown(new ofxUISlider(length-xInit, dim, 0.0, 30.0, &colorSpeed, "PLAY SPEED"));
 
 		gui1->addWidgetDown(new ofxUISlider(length-xInit, dim, 0.0, 1.0, 0.0, "SPACE VARIATION"));
@@ -152,6 +155,22 @@ public:
 			}else{
 				button->setLabelText("PLAY 3");
 			}
+        }
+        else if(name == "BLACK" && isMouseDown)
+        {
+			redSlider->setValue(0);
+			greenSlider->setValue(0);
+			blueSlider->setValue(0);
+
+			updateColor();
+        }
+        else if(name == "WHITE" && isMouseDown)
+        {
+			redSlider->setValue(255);
+			greenSlider->setValue(255);
+			blueSlider->setValue(255);
+
+			updateColor();
         }
         else if(name == "RANDOM" && isMouseDown)
         {
