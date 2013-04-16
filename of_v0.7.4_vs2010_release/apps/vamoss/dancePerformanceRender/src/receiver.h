@@ -211,13 +211,18 @@ public:
 		{
 			toggleJoint(m.getArgAsInt32(0), NUI_SKELETON_POSITION_FOOT_RIGHT);
 		}	
-		else if(name == "/rightVolume")
+		//iphone
+		else if(name == "RED")
 		{
 			app->particleColor.r = m.getArgAsFloat(0);
 		}
-		else if(name == "/leftVolume")
+		else if(name == "GREEN")
 		{
-			app->particleColor.r = m.getArgAsFloat(0);
+			app->particleColor.g = m.getArgAsFloat(0);
+		}
+		else if(name == "BLUE")
+		{
+			app->particleColor.b = m.getArgAsFloat(0);
 		}
 		
 	}
