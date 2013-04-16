@@ -106,12 +106,7 @@ public:
 		{
 			updateRotation();
 		}
-		else if(name == "ROTATION SPEED")
-		{
-			ofxUISlider *slider = (ofxUISlider *) e.widget; 
-			server::send(name, slider->getScaledValue());
-		}
-        else if((name == "PLAY" || name == "STOP") && isMouseDown)
+		else if((name == "PLAY" || name == "STOP") && isMouseDown)
         {
 			ofxUILabelButton *button = (ofxUILabelButton *) e.widget; 
 			playRotation = !playRotation;
@@ -144,7 +139,7 @@ public:
 			if(value>360) value = value - 360;
 			if(value<0) value = 360 - value;
 		}
-		if(value!=9999.0f) slider->setValue(value);
+		if(value!=-9999.0f) slider->setValue(value);
 		server::send("ROTATION", slider->getScaledValue());
 	}
 
