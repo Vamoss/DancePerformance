@@ -167,6 +167,7 @@
     <ClInclude Include="src\canvasUI.h" />
     <ClInclude Include="src\colorUI.h" />
     <ClInclude Include="src\dancePerformance.h" />
+    <ClInclude Include="src\gestureUI.h" />
     <ClInclude Include="src\kinectUI.h" />
     <ClInclude Include="src\panelUI.h" />
     <ClInclude Include="src\server.h" />

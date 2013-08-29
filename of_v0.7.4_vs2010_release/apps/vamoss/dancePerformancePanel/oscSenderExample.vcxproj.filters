@@ -314,5 +314,8 @@
     <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIWidgetWithLabel.h">
       <Filter>addons\ofxUI</Filter>
     </ClInclude>
+    <ClInclude Include="src\gestureUI.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
