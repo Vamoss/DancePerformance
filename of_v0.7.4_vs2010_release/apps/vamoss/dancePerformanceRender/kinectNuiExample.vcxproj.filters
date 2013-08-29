@@ -88,6 +88,7 @@
     <ClCompile Include="..\..\..\addons\ofxOsc\libs\oscpack\src\ip\posix\NetworkingUtils.cpp">
       <Filter>addons\ofxOsc\libs\oscpack\src\ip\posix</Filter>
     </ClCompile>
+    <ClCompile Include="src\server.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\addons\ofxKinectNui\src\ofxKinectNuiSoundRecorder.h">
@@ -274,6 +275,7 @@
     </ClInclude>
     <ClInclude Include="src\receiver.h" />
     <ClInclude Include="src\gestures.h" />
+    <ClInclude Include="src\server.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="addons">

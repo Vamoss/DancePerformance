@@ -253,6 +253,7 @@ if not exist "$(ProjectDir)\bin\data" mkdir  "$(ProjectDir)\bin\data"
     <ClCompile Include="src\facade.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\dancePerformance.cpp" />
+    <ClCompile Include="src\server.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\addons\ofxKinectNui\src\kinect\nui\AudioStream.h" />
@@ -319,6 +320,7 @@ if not exist "$(ProjectDir)\bin\data" mkdir  "$(ProjectDir)\bin\data"
     <ClInclude Include="src\facade.h" />
     <ClInclude Include="src\gestures.h" />
     <ClInclude Include="src\receiver.h" />
+    <ClInclude Include="src\server.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\libs\openFrameworksCompiled\project\vs2010\openframeworksLib.vcxproj">

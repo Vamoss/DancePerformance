@@ -211,15 +211,25 @@ public:
 		{
 			toggleJoint(m.getArgAsInt32(0), NUI_SKELETON_POSITION_FOOT_RIGHT);
 		}
-		//gestures
 		else if(name == "VOLUME")
 		{
-			app->gestureControl.volume = m.getArgAsFloat(0);
+			server::send("/VOLUME", m.getArgAsFloat(0));
+		}
+		//gestures
+		else if(name == "VAL HEAD X")
+		{
+			app->gestureControl.headX.min = m.getArgAsFloat(0);
+			app->gestureControl.headX.max = m.getArgAsFloat(1);
 		}
 		else if(name == "VAL HEAD Y")
 		{
 			app->gestureControl.headY.min = m.getArgAsFloat(0);
 			app->gestureControl.headY.max = m.getArgAsFloat(1);
+		}
+		else if(name == "VAL HEAD Z")
+		{
+			app->gestureControl.headZ.min = m.getArgAsFloat(0);
+			app->gestureControl.headZ.max = m.getArgAsFloat(1);
 		}
 		else if(name == "VAL HAND DIST")
 		{
@@ -251,14 +261,17 @@ public:
 			app->gestureControl.footRightY.min = m.getArgAsFloat(0);
 			app->gestureControl.footRightY.max = m.getArgAsFloat(1);
 		}
-		else if(name == "VAL SPACE POS")
+		else if(name == "HEAD X")
 		{
-			app->gestureControl.spacePos.min = m.getArgAsFloat(0);
-			app->gestureControl.spacePos.max = m.getArgAsFloat(1);
+			app->gestureControl.headX.enabled = m.getArgAsInt32(0);
 		}
 		else if(name == "HEAD Y")
 		{
 			app->gestureControl.headY.enabled = m.getArgAsInt32(0);
+		}
+		else if(name == "HEAD Z")
+		{
+			app->gestureControl.headZ.enabled = m.getArgAsInt32(0);
 		}
 		else if(name == "HAND DIST")
 		{
@@ -283,10 +296,6 @@ public:
 		else if(name == "FOOT RIGHT Y")
 		{
 			app->gestureControl.footRightY.enabled = m.getArgAsInt32(0);
-		}
-		else if(name == "SPACE POS")
-		{
-			app->gestureControl.spacePos.enabled = m.getArgAsInt32(0);
 		}
 		//iphone
 		else if(name == "RED")

@@ -5,7 +5,9 @@ void dancePerformance::setup() {
 	ofSetLogLevel(OF_LOG_VERBOSE);
 	//ofSetVerticalSync(true);
 	ofSetFrameRate(60);
+	
 
+	server::setup("192.168.1.3", 10000);
 	m_receiver.setup(&m_facade, 11999);
 }
 
