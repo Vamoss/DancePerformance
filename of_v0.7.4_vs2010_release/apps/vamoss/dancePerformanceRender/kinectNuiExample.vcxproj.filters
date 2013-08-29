@@ -89,6 +89,7 @@
       <Filter>addons\ofxOsc\libs\oscpack\src\ip\posix</Filter>
     </ClCompile>
     <ClCompile Include="src\server.cpp" />
+    <ClCompile Include="src\NanoSoftSensor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\addons\ofxKinectNui\src\ofxKinectNuiSoundRecorder.h">
@@ -276,6 +277,7 @@
     <ClInclude Include="src\receiver.h" />
     <ClInclude Include="src\gestures.h" />
     <ClInclude Include="src\server.h" />
+    <ClInclude Include="src\NanoSoftSensor.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="addons">

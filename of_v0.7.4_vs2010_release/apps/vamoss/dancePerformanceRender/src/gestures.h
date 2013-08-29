@@ -4,6 +4,7 @@
 #include "MSAPhysics3D.h"
 #include "ofMain.h"
 #include "server.h"
+#include "NanoSoftSensor.h"
 
 struct gesture {
   float value;
@@ -11,6 +12,7 @@ struct gesture {
   float max;
   string name;
   bool enabled;
+  NanoSoftSensor stabilizer;
 };
 
 class gestures {
@@ -50,6 +52,7 @@ public:
 			list[i].max = 1;
 			list[i].value = 0.5;
 			list[i].enabled = false;
+			list[i].stabilizer.setup(10);
 		}
 	}
 
@@ -86,7 +89,7 @@ public:
 private:
 	void updateValue(gesture gest, float value)
 	{
-		gest.value = ofMap(value, gest.min, gest.max, 0, 1, true);
+		gest.value = gest.stabilizer.update(ofMap(value, gest.min, gest.max, 0.0f, 1.0f, true));
 	}
 
 	vector<gesture> list;
