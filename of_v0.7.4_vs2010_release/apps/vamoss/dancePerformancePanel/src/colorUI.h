@@ -31,9 +31,10 @@ public:
         float xInit = OFX_UI_GLOBAL_WIDGET_SPACING; 
         float length = 435-xInit; 
         
-        gui1 = new ofxUICanvas(405*2, 0, length, ofGetHeight());
+        gui1 = new ofxUICanvas(405, 380, length, 387);
+		gui1->setWidgetFontSize(OFX_UI_FONT_SMALL);
 		gui1->setName("ColorUI");
-		gui1->setWidgetSpacing(20);
+		gui1->setWidgetSpacing(15);
         gui1->addWidgetDown(new ofxUILabel("COLORS", OFX_UI_FONT_MEDIUM));
 
 		redSlider = new ofxUISlider(length-xInit-80, dim, 0.0, 255.0, 255.0, "RED");

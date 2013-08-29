@@ -5,6 +5,7 @@
 #include "canvasUI.h"
 #include "kinectUI.h"
 #include "colorUI.h"
+#include "gestureUI.h"
 #include "server.h"
 
 class dancePerformance : public ofBaseApp {
@@ -29,5 +30,6 @@ class dancePerformance : public ofBaseApp {
 		canvasUI m_canvas;
 		kinectUI m_kinect;
 		colorUI m_color;
+		gestureUI m_gesture;
 		
 };

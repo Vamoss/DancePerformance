@@ -26,9 +26,10 @@ public:
         float xInit = OFX_UI_GLOBAL_WIDGET_SPACING; 
         float length = 435-xInit; 
         
-        gui1 = new ofxUICanvas(0, 0, length, ofGetHeight());
+        gui1 = new ofxUICanvas(0, 0, length, 768);
+		gui1->setWidgetFontSize(OFX_UI_FONT_SMALL);
 		gui1->setName("PanelUI");
-		gui1->setWidgetSpacing(20);
+		gui1->setWidgetSpacing(15);
         gui1->addWidgetDown(new ofxUILabel("DANCE PERFORMANCE", OFX_UI_FONT_LARGE)); 
         gui1->addWidgetDown(new ofxUIFPS(OFX_UI_FONT_MEDIUM)); 
         

@@ -26,9 +26,10 @@ public:
         float xInit = OFX_UI_GLOBAL_WIDGET_SPACING; 
         float length = 435-xInit; 
         
-		gui1 = new ofxUICanvas(405*3, 0, length, ofGetHeight());
+		gui1 = new ofxUICanvas(405*2, 0, length, 768);
+		gui1->setWidgetFontSize(OFX_UI_FONT_SMALL);
 		gui1->setName("KinectUI");
-		gui1->setWidgetSpacing(20);
+		gui1->setWidgetSpacing(15);
 		gui1->addWidgetDown(new ofxUILabel("KINECT", OFX_UI_FONT_MEDIUM));
 		gui1->addWidgetDown(new ofxUISlider(length-xInit, dim, 0.0, 1.0, 0.0, "DELAY"));
 		((ofxUISlider *) gui1->getWidget("DELAY"))->setIncrement(0.01f);

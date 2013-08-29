@@ -12,6 +12,7 @@ void dancePerformance::setup() {
 	m_canvas.setup();
 	m_kinect.setup();
 	m_color.setup();
+	m_gesture.setup();
 }
 
 //--------------------------------------------------------------
