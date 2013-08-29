@@ -273,6 +273,7 @@
       <Filter>addons\ofxOsc\libs\oscpack\src\ip</Filter>
     </ClInclude>
     <ClInclude Include="src\receiver.h" />
+    <ClInclude Include="src\gestures.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="addons">

@@ -3,6 +3,7 @@
 
 #include "ofxKinectNui.h"
 #include "MSAPhysics3D.h"
+#include "gestures.h"
 
 #define USE_KINECT
 
@@ -135,6 +136,9 @@ public:
 
 	//ofShader
 	ofShader radialBlur;
+
+	//gestures
+	gestures gestureControl;
 
 	//debug
 	bool showFPS;

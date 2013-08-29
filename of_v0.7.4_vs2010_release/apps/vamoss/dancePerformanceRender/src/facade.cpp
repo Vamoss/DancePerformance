@@ -90,6 +90,9 @@ facade::facade(void)
 	initCanvas();
 	blackout = 0;
 	canvasFade = 125;
+
+	//gestures
+	gestureControl.setup();
 }
 
 void facade::update()
@@ -101,12 +104,12 @@ void facade::update()
 
 	// Update kinect coords
 	for(int i = 0; i < kinect::nui::SkeletonFrame::SKELETON_COUNT; ++i){
-		for(int j = 0; j < kinect::nui::SkeletonData::POSITION_COUNT; ++j){
-			if(kinect.skeletonPoints[i][0].z > 0){
-				currentSkeletonIndex = i;
-				//if(kinect.skeletonPoints[i][0].x<minZ) minZ = kinect.skeletonPoints[i][0].x;
-				//if(kinect.skeletonPoints[i][0].x>maxZ) maxZ = kinect.skeletonPoints[i][0].x;
-				//cout << minZ << " " << maxZ << endl;
+		if(kinect.skeletonPoints[i][0].z > 0){
+			currentSkeletonIndex = i;
+			//if(kinect.skeletonPoints[i][0].x<minZ) minZ = kinect.skeletonPoints[i][0].x;
+			//if(kinect.skeletonPoints[i][0].x>maxZ) maxZ = kinect.skeletonPoints[i][0].x;
+			//cout << minZ << " " << maxZ << endl;
+			for(int j = 0; j < kinect::nui::SkeletonData::POSITION_COUNT; ++j){
 				if(boneEnabled[j]){
 					float destX = ofMap(kinect.skeletonPoints[i][j].x, 0, 310, -width/2, width/2) * scale;
 					float destY = kinect.skeletonPoints[i][j].y * 3 * scale - ofMap(scale, 1, 2, -50, 800) + y;
@@ -129,6 +132,9 @@ void facade::update()
 		for(int j = 0; j < kinect::nui::SkeletonData::POSITION_COUNT; ++j){
 			bone[j]->moveTo(ofVec3f(9999999, -9999999, 9999999));
 		}
+	}else{
+		//gestures
+		gestureControl.updateGestures(bone);
 	}
 #endif
 	

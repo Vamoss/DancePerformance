@@ -210,7 +210,84 @@ public:
 		else if(name == "FOOT RIGHT")
 		{
 			toggleJoint(m.getArgAsInt32(0), NUI_SKELETON_POSITION_FOOT_RIGHT);
-		}	
+		}
+		//gestures
+		else if(name == "VOLUME")
+		{
+			app->gestureControl.volume = m.getArgAsFloat(0);
+		}
+		else if(name == "VAL HEAD Y")
+		{
+			app->gestureControl.headY.min = m.getArgAsFloat(0);
+			app->gestureControl.headY.max = m.getArgAsFloat(1);
+		}
+		else if(name == "VAL HAND DIST")
+		{
+			app->gestureControl.handDist.min = m.getArgAsFloat(0);
+			app->gestureControl.handDist.max = m.getArgAsFloat(1);
+		}
+		else if(name == "VAL HAND LEFT Y")
+		{
+			app->gestureControl.handLeftY.min = m.getArgAsFloat(0);
+			app->gestureControl.handLeftY.max = m.getArgAsFloat(1);
+		}
+		else if(name == "VAL HAND RIGHT Y")
+		{
+			app->gestureControl.handRightY.min = m.getArgAsFloat(0);
+			app->gestureControl.handRightY.max = m.getArgAsFloat(1);
+		}
+		else if(name == "VAL FOOT DIST")
+		{
+			app->gestureControl.footDist.min = m.getArgAsFloat(0);
+			app->gestureControl.footDist.max = m.getArgAsFloat(1);
+		}
+		else if(name == "VAL FOOT LEFT Y")
+		{
+			app->gestureControl.footLeftY.min = m.getArgAsFloat(0);
+			app->gestureControl.footLeftY.max = m.getArgAsFloat(1);
+		}
+		else if(name == "VAL FOOT RIGHT Y")
+		{
+			app->gestureControl.footRightY.min = m.getArgAsFloat(0);
+			app->gestureControl.footRightY.max = m.getArgAsFloat(1);
+		}
+		else if(name == "VAL SPACE POS")
+		{
+			app->gestureControl.spacePos.min = m.getArgAsFloat(0);
+			app->gestureControl.spacePos.max = m.getArgAsFloat(1);
+		}
+		else if(name == "HEAD Y")
+		{
+			app->gestureControl.headY.enabled = m.getArgAsInt32(0);
+		}
+		else if(name == "HAND DIST")
+		{
+			app->gestureControl.handDist.enabled = m.getArgAsInt32(0);
+		}
+		else if(name == "HAND LEFT Y")
+		{
+			app->gestureControl.handLeftY.enabled = m.getArgAsInt32(0);
+		}
+		else if(name == "HAND RIGHT Y")
+		{
+			app->gestureControl.handRightY.enabled = m.getArgAsInt32(0);
+		}
+		else if(name == "FOOT DIST")
+		{
+			app->gestureControl.footDist.enabled = m.getArgAsInt32(0);
+		}
+		else if(name == "FOOT LEFT Y")
+		{
+			app->gestureControl.footLeftY.enabled = m.getArgAsInt32(0);
+		}
+		else if(name == "FOOT RIGHT Y")
+		{
+			app->gestureControl.footRightY.enabled = m.getArgAsInt32(0);
+		}
+		else if(name == "SPACE POS")
+		{
+			app->gestureControl.spacePos.enabled = m.getArgAsInt32(0);
+		}
 		//iphone
 		else if(name == "RED")
 		{
