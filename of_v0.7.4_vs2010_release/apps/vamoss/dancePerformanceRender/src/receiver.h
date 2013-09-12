@@ -297,6 +297,42 @@ public:
 		{
 			app->gestureControl.footRightY->enabled = m.getArgAsInt32(0);
 		}
+		else if(name == "INV 0")
+		{
+			app->gestureControl.headX->inverted = m.getArgAsInt32(0);
+		}
+		else if(name == "INV 1")
+		{
+			app->gestureControl.headY->inverted = m.getArgAsInt32(0);
+		}
+		else if(name == "INV 2")
+		{
+			app->gestureControl.headZ->inverted = m.getArgAsInt32(0);
+		}
+		else if(name == "INV 3")
+		{
+			app->gestureControl.handDist->inverted = m.getArgAsInt32(0);
+		}
+		else if(name == "INV 4")
+		{
+			app->gestureControl.handLeftY->inverted = m.getArgAsInt32(0);
+		}
+		else if(name == "INV 5")
+		{
+			app->gestureControl.handRightY->inverted = m.getArgAsInt32(0);
+		}
+		else if(name == "INV 6")
+		{
+			app->gestureControl.footDist->inverted = m.getArgAsInt32(0);
+		}
+		else if(name == "INV 7")
+		{
+			app->gestureControl.footLeftY->inverted = m.getArgAsInt32(0);
+		}
+		else if(name == "INV 8")
+		{
+			app->gestureControl.footRightY->inverted = m.getArgAsInt32(0);
+		}
 		//iphone
 		else if(name == "RED")
 		{

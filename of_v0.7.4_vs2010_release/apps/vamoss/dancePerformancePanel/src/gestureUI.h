@@ -35,31 +35,40 @@ public:
 		
 		gui1->addWidgetDown(new ofxUISlider(length-xInit, dim, 0.0, 1.0, 0.0, "VOLUME"));
 		
-        gui1->addWidgetDown(new ofxUIRangeSlider(length-xInit-100, dim,	0.0, 2000.0, 100.00, 1900.0, "VAL HEAD X"));
+        gui1->addWidgetDown(new ofxUIRangeSlider(length-xInit-150, dim,	0.0, 2000.0, 100.00, 1900.0, "VAL HEAD X"));
+        gui1->addWidgetRight(new ofxUIToggle( dim, dim, false, "INV 0"));
         gui1->addWidgetRight(new ofxUIToggle( dim, dim, true, "HEAD X"));
 
-        gui1->addWidgetDown(new ofxUIRangeSlider(length-xInit-100, dim,	0.0, 2000.0, 100.00, 1900.0, "VAL HEAD Y"));
-        gui1->addWidgetRight(new ofxUIToggle( dim, dim, true, "HEAD Y"));
+        gui1->addWidgetDown(new ofxUIRangeSlider(length-xInit-150, dim,	0.0, 2000.0, 100.00, 1900.0, "VAL HEAD Y"));
+        gui1->addWidgetRight(new ofxUIToggle( dim, dim, false, "INV 1"));
+		gui1->addWidgetRight(new ofxUIToggle( dim, dim, true, "HEAD Y"));
 		
-        gui1->addWidgetDown(new ofxUIRangeSlider(length-xInit-100, dim,	0.0, 2000.0, 100.00, 1900.0, "VAL HEAD Z"));
+        gui1->addWidgetDown(new ofxUIRangeSlider(length-xInit-150, dim,	0.0, 2000.0, 100.00, 1900.0, "VAL HEAD Z"));
+		gui1->addWidgetRight(new ofxUIToggle( dim, dim, false, "INV 2"));
         gui1->addWidgetRight(new ofxUIToggle( dim, dim, true, "HEAD Z"));
 		
-        gui1->addWidgetDown(new ofxUIRangeSlider(length-xInit-100, dim,	0.0, 2000.0, 100.00, 1900.0, "VAL HAND DIST"));
+        gui1->addWidgetDown(new ofxUIRangeSlider(length-xInit-150, dim,	0.0, 2000.0, 100.00, 1900.0, "VAL HAND DIST"));
+		gui1->addWidgetRight(new ofxUIToggle( dim, dim, false, "INV 3"));
         gui1->addWidgetRight(new ofxUIToggle( dim, dim, true, "HAND DIST"));
 		
-        gui1->addWidgetDown(new ofxUIRangeSlider(length-xInit-100, dim,	0.0, 2000.0, 100.00, 1900.0, "VAL HAND LEFT Y"));
+        gui1->addWidgetDown(new ofxUIRangeSlider(length-xInit-150, dim,	0.0, 2000.0, 100.00, 1900.0, "VAL HAND LEFT Y"));
+		gui1->addWidgetRight(new ofxUIToggle( dim, dim, false, "INV 4"));
         gui1->addWidgetRight(new ofxUIToggle( dim, dim, true, "HAND LEFT Y"));
 		
-        gui1->addWidgetDown(new ofxUIRangeSlider(length-xInit-100, dim,	0.0, 2000.0, 100.00, 1900.0, "VAL HAND RIGHT Y"));
+        gui1->addWidgetDown(new ofxUIRangeSlider(length-xInit-150, dim,	0.0, 2000.0, 100.00, 1900.0, "VAL HAND RIGHT Y"));
+		gui1->addWidgetRight(new ofxUIToggle( dim, dim, false, "INV 5"));
         gui1->addWidgetRight(new ofxUIToggle( dim, dim, true, "HAND RIGHT Y"));
 		
-        gui1->addWidgetDown(new ofxUIRangeSlider(length-xInit-100, dim,	0.0, 2000.0, 100.00, 1900.0, "VAL FOOT DIST"));
+        gui1->addWidgetDown(new ofxUIRangeSlider(length-xInit-150, dim,	0.0, 2000.0, 100.00, 1900.0, "VAL FOOT DIST"));
+		gui1->addWidgetRight(new ofxUIToggle( dim, dim, false, "INV 6"));
         gui1->addWidgetRight(new ofxUIToggle( dim, dim, true, "FOOT DIST"));
 		
-        gui1->addWidgetDown(new ofxUIRangeSlider(length-xInit-100, dim,	0.0, 2000.0, 100.00, 1900.0, "VAL FOOT LEFT Y"));
+        gui1->addWidgetDown(new ofxUIRangeSlider(length-xInit-150, dim,	0.0, 2000.0, 100.00, 1900.0, "VAL FOOT LEFT Y"));
+		gui1->addWidgetRight(new ofxUIToggle( dim, dim, false, "INV 7"));
         gui1->addWidgetRight(new ofxUIToggle( dim, dim, true, "FOOT LEFT Y"));
 		
-        gui1->addWidgetDown(new ofxUIRangeSlider(length-xInit-100, dim,	0.0, 2000.0, 100.00, 1900.0, "VAL FOOT RIGHT Y"));
+        gui1->addWidgetDown(new ofxUIRangeSlider(length-xInit-150, dim,	0.0, 2000.0, 100.00, 1900.0, "VAL FOOT RIGHT Y"));
+		gui1->addWidgetRight(new ofxUIToggle( dim, dim, false, "INV 8"));
         gui1->addWidgetRight(new ofxUIToggle( dim, dim, true, "FOOT RIGHT Y"));
 
 		gui1->addSpacer(2);

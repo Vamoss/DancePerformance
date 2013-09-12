@@ -12,6 +12,7 @@ struct gesture {
   float max;
   string name;
   bool enabled;
+  bool inverted;
   NanoSoftSensor stabilizer;
 };
 
@@ -61,7 +62,7 @@ public:
 			list[i]->max = 1;
 			list[i]->value = 0.5;
 			list[i]->enabled = false;
-			list[i]->stabilizer.setup(10);
+			list[i]->inverted = false;
 		}
 	}
 
@@ -99,7 +100,7 @@ private:
 	void updateValue(gesture * gest, float value)
 	{
 		gest->value = ofMap(value, gest->min, gest->max, 0.0f, 1.0f, true);
-		//gest.value = gest.stabilizer.update(ofMap(value, gest.min, gest.max, 0.0f, 1.0f, true));
+		if(gest->inverted) gest->value = 1 - gest->value;
 	}
 
 	vector<gesture *> list;
