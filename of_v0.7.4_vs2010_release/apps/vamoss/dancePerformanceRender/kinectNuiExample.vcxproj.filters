@@ -90,6 +90,19 @@
     </ClCompile>
     <ClCompile Include="src\server.cpp" />
     <ClCompile Include="src\NanoSoftSensor.cpp" />
+    <ClCompile Include="src\config.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxXmlSettings\src\ofxXmlSettings.cpp">
+      <Filter>addons\ofxXmlSettings\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxXmlSettings\libs\tinyxml.cpp">
+      <Filter>addons\ofxXmlSettings\libs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxXmlSettings\libs\tinyxmlerror.cpp">
+      <Filter>addons\ofxXmlSettings\libs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxXmlSettings\libs\tinyxmlparser.cpp">
+      <Filter>addons\ofxXmlSettings\libs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\addons\ofxKinectNui\src\ofxKinectNuiSoundRecorder.h">
@@ -278,6 +291,13 @@
     <ClInclude Include="src\gestures.h" />
     <ClInclude Include="src\server.h" />
     <ClInclude Include="src\NanoSoftSensor.h" />
+    <ClInclude Include="src\config.h" />
+    <ClInclude Include="..\..\..\addons\ofxXmlSettings\src\ofxXmlSettings.h">
+      <Filter>addons\ofxXmlSettings\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxXmlSettings\libs\tinyxml.h">
+      <Filter>addons\ofxXmlSettings\libs</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="addons">
@@ -330,6 +350,15 @@
     </Filter>
     <Filter Include="addons\ofxOsc\libs\oscpack\src\ip\win32">
       <UniqueIdentifier>{9c25c451-2fd7-4425-818a-cac67182d3a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxXmlSettings">
+      <UniqueIdentifier>{51f2d6a1-5e58-43a6-b204-87f45c96a27a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxXmlSettings\src">
+      <UniqueIdentifier>{d1d49c16-feda-4ced-a176-2d9069f98e57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxXmlSettings\libs">
+      <UniqueIdentifier>{b2499009-7d30-4002-bd5f-a44ec72465cd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

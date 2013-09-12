@@ -4,6 +4,7 @@
 #include "ofMain.h"
 #include "receiver.h"
 #include "server.h"
+#include "config.h"
 
 
 
