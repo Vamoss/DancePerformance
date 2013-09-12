@@ -32,6 +32,8 @@ void server::send(string name, int value1, int value2, int value3)
 
 void server::send(string name, float value1, float value2, float value3)
 {
+	if(!config::synthesizerEnabled) return;
+
 	ofxOscMessage m;
 	m.setAddress(name);
 	if(value1!=-999999) m.addFloatArg(value1);
