@@ -2,13 +2,24 @@
 
 //--------------------------------------------------------------
 void dancePerformance::setup() {
-	ofSetLogLevel(OF_LOG_VERBOSE);
-	//ofSetVerticalSync(true);
-	ofSetFrameRate(60);
 	
+	config::setup("config.xml");
 
-	server::setup("192.168.1.3", 10000);
+	ofSetLogLevel(OF_LOG_VERBOSE);
+	
+	//window
+	ofSetFrameRate(30);
+	ofSetBackgroundColor(0, 0, 0);
+	ofSetWindowPosition(config::window.x, config::window.y);
+	ofSetWindowShape(config::window.width, config::window.height);
+	ofSetFullscreen(config::fullscreen);
+
+	//synthesizer
+	if(config::synthesizerEnabled) server::setup(config::synthesizerIp, config::synthesizerPort);
+	
+	//panel receiver
 	m_receiver.setup(&m_facade, 11999);
+
 }
 
 //--------------------------------------------------------------
@@ -29,8 +40,6 @@ void dancePerformance::draw() {
 
 void dancePerformance::keyPressed(int key){
 	m_facade.keyPressed(key);
-	
-    //m_panelWindow.m_panel.keyPressed(key);
 	
 	if (key == 'f') ofToggleFullscreen();
 }
