@@ -30,9 +30,6 @@ facade::facade(void)
 	//debug
 	showFPS = false;
 
-	//shader
-	radialBlur.load("shaders/radialBlur");
-
 	//Particles
 	mouseAttract	= false;
 	mouseSpring		= false;
@@ -274,9 +271,6 @@ void facade::draw()
 			ofPopStyle();
 		}
 
-		//radialBlur.begin();
-		//radialBlur.setUniformTexture("tex", canvas.getTextureReference(), 1);
-		
 		ofEnableNormalizedTexCoords();
 		ballImage.getTextureReference().bind();
 		msa::physics::Particle3D *p;
@@ -314,10 +308,6 @@ void facade::draw()
 		ballImage.getTextureReference().unbind();
 		ofDisableNormalizedTexCoords();
 
-		
-		//radialBlur.end();
-
-		
 		canvas.end();
 
 		glPopMatrix();

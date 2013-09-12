@@ -134,9 +134,6 @@ public:
 
 	ofFbo particleBuffer;
 
-	//ofShader
-	ofShader radialBlur;
-
 	//gestures
 	gestures gestureControl;
 
