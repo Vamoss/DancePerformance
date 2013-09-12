@@ -33,6 +33,10 @@ void dancePerformance::draw() {
 
 void dancePerformance::keyPressed(int key){
 	m_panel.keyPressed(key);
+	m_canvas.keyPressed(key);
+	m_kinect.keyPressed(key);
+	m_color.keyPressed(key);
+	m_gesture.keyPressed(key);
 	
 	if (key == 'f') ofToggleFullscreen();
 }

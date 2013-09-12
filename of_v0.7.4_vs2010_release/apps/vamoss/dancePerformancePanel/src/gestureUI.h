@@ -108,6 +108,10 @@ public:
 			ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
 			server::send(name, toggle->getValue());
 		}
+		else if(name == "SAVE")
+        {
+            save();
+        }
 		
 	}
     
