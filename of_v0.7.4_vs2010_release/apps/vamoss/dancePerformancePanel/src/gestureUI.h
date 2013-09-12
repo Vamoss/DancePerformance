@@ -55,20 +55,28 @@ public:
 		gui1->addWidgetRight(new ofxUIToggle( dim, dim, false, "INV 4"));
         gui1->addWidgetRight(new ofxUIToggle( dim, dim, true, "HAND LEFT Y"));
 		
-        gui1->addWidgetDown(new ofxUIRangeSlider(length-xInit-150, dim,	0.0, 2000.0, 100.00, 1900.0, "VAL HAND RIGHT Y"));
+        gui1->addWidgetDown(new ofxUIRangeSlider(length-xInit-150, dim,	0.0, 1000.0, 100.00, 1900.0, "VAL HAND LEFT VEL"));
 		gui1->addWidgetRight(new ofxUIToggle( dim, dim, false, "INV 5"));
+        gui1->addWidgetRight(new ofxUIToggle( dim, dim, true, "HAND LEFT VEL"));
+		
+        gui1->addWidgetDown(new ofxUIRangeSlider(length-xInit-150, dim,	0.0, 2000.0, 100.00, 1900.0, "VAL HAND RIGHT Y"));
+		gui1->addWidgetRight(new ofxUIToggle( dim, dim, false, "INV 6"));
         gui1->addWidgetRight(new ofxUIToggle( dim, dim, true, "HAND RIGHT Y"));
 		
+        gui1->addWidgetDown(new ofxUIRangeSlider(length-xInit-150, dim,	0.0, 1000.0, 100.00, 1900.0, "VAL HAND RIGHT VEL"));
+		gui1->addWidgetRight(new ofxUIToggle( dim, dim, false, "INV 7"));
+        gui1->addWidgetRight(new ofxUIToggle( dim, dim, true, "HAND RIGHT VEL"));
+		
         gui1->addWidgetDown(new ofxUIRangeSlider(length-xInit-150, dim,	0.0, 2000.0, 100.00, 1900.0, "VAL FOOT DIST"));
-		gui1->addWidgetRight(new ofxUIToggle( dim, dim, false, "INV 6"));
+		gui1->addWidgetRight(new ofxUIToggle( dim, dim, false, "INV 8"));
         gui1->addWidgetRight(new ofxUIToggle( dim, dim, true, "FOOT DIST"));
 		
         gui1->addWidgetDown(new ofxUIRangeSlider(length-xInit-150, dim,	0.0, 2000.0, 100.00, 1900.0, "VAL FOOT LEFT Y"));
-		gui1->addWidgetRight(new ofxUIToggle( dim, dim, false, "INV 7"));
+		gui1->addWidgetRight(new ofxUIToggle( dim, dim, false, "INV 9"));
         gui1->addWidgetRight(new ofxUIToggle( dim, dim, true, "FOOT LEFT Y"));
 		
         gui1->addWidgetDown(new ofxUIRangeSlider(length-xInit-150, dim,	0.0, 2000.0, 100.00, 1900.0, "VAL FOOT RIGHT Y"));
-		gui1->addWidgetRight(new ofxUIToggle( dim, dim, false, "INV 8"));
+		gui1->addWidgetRight(new ofxUIToggle( dim, dim, false, "INV 10"));
         gui1->addWidgetRight(new ofxUIToggle( dim, dim, true, "FOOT RIGHT Y"));
 
 		gui1->addSpacer(2);

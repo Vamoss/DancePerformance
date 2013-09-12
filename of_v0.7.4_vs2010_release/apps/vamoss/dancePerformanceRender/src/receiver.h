@@ -319,17 +319,25 @@ public:
 		}
 		else if(name == "INV 5")
 		{
-			app->gestureControl.handRightY->inverted = m.getArgAsInt32(0);
+			app->gestureControl.handLeftVel->inverted = m.getArgAsInt32(0);
 		}
 		else if(name == "INV 6")
 		{
-			app->gestureControl.footDist->inverted = m.getArgAsInt32(0);
+			app->gestureControl.handRightY->inverted = m.getArgAsInt32(0);
 		}
 		else if(name == "INV 7")
 		{
-			app->gestureControl.footLeftY->inverted = m.getArgAsInt32(0);
+			app->gestureControl.handRightVel->inverted = m.getArgAsInt32(0);
 		}
 		else if(name == "INV 8")
+		{
+			app->gestureControl.footDist->inverted = m.getArgAsInt32(0);
+		}
+		else if(name == "INV 9")
+		{
+			app->gestureControl.footLeftY->inverted = m.getArgAsInt32(0);
+		}
+		else if(name == "INV 10")
 		{
 			app->gestureControl.footRightY->inverted = m.getArgAsInt32(0);
 		}

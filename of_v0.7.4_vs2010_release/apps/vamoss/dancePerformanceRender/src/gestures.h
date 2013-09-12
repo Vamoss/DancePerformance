@@ -8,6 +8,7 @@
 
 struct gesture {
   float value;
+  float lastValue;
   float min;
   float max;
   string name;
@@ -41,9 +42,17 @@ public:
 		handLeftY->name = "/handLeftY";
 		list.push_back(handLeftY);
 		
+		handLeftVel = new gesture();
+		handLeftVel->name = "/handLeftVel";
+		list.push_back(handLeftVel);
+		
 		handRightY = new gesture();
 		handRightY->name = "/handRightY";
 		list.push_back(handRightY);
+		
+		handRightVel = new gesture();
+		handRightVel->name = "/handRightVel";
+		list.push_back(handRightVel);
 		
 		footDist = new gesture();
 		footDist->name = "/footDist";
@@ -61,6 +70,7 @@ public:
 			list[i]->min = 0.1;
 			list[i]->max = 1;
 			list[i]->value = 0.5;
+			list[i]->lastValue = 0.5;
 			list[i]->enabled = false;
 			list[i]->inverted = false;
 		}
@@ -74,7 +84,9 @@ public:
 		updateValue(headZ, bone[NUI_SKELETON_POSITION_HEAD]->getPosition().z);
 		updateValue(handDist, ofDist(bone[NUI_SKELETON_POSITION_HAND_LEFT]->getPosition().x, bone[NUI_SKELETON_POSITION_HAND_LEFT]->getPosition().y, bone[NUI_SKELETON_POSITION_HAND_RIGHT]->getPosition().x, bone[NUI_SKELETON_POSITION_HAND_RIGHT]->getPosition().y));
 		updateValue(handLeftY, bone[NUI_SKELETON_POSITION_HAND_LEFT]->getPosition().y);
+		updateValue(handLeftVel, abs(bone[NUI_SKELETON_POSITION_HAND_LEFT]->getPosition().y-handLeftVel->lastValue));
 		updateValue(handRightY, bone[NUI_SKELETON_POSITION_HAND_RIGHT]->getPosition().y);
+		updateValue(handRightVel, abs(bone[NUI_SKELETON_POSITION_HAND_RIGHT]->getPosition().y-handRightVel->lastValue));
 		updateValue(footDist, ofDist(bone[NUI_SKELETON_POSITION_FOOT_LEFT]->getPosition().x, bone[NUI_SKELETON_POSITION_FOOT_LEFT]->getPosition().y, bone[NUI_SKELETON_POSITION_FOOT_RIGHT]->getPosition().x, bone[NUI_SKELETON_POSITION_FOOT_RIGHT]->getPosition().y));
 		updateValue(footLeftY, bone[NUI_SKELETON_POSITION_FOOT_LEFT]->getPosition().y);
 		updateValue(footRightY, bone[NUI_SKELETON_POSITION_FOOT_RIGHT]->getPosition().y);
@@ -91,7 +103,9 @@ public:
 	gesture * headZ;
 	gesture * handDist;
 	gesture * handLeftY;
+	gesture * handLeftVel;
 	gesture * handRightY;
+	gesture * handRightVel;
 	gesture * footDist;
 	gesture * footLeftY;
 	gesture * footRightY;
@@ -99,6 +113,7 @@ public:
 private:
 	void updateValue(gesture * gest, float value)
 	{
+		gest->lastValue = value;
 		gest->value = ofMap(value, gest->min, gest->max, 0.0f, 1.0f, true);
 		if(gest->inverted) gest->value = 1 - gest->value;
 	}
