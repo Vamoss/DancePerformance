@@ -281,9 +281,17 @@ public:
 		{
 			app->gestureControl.handLeftY->enabled = m.getArgAsInt32(0);
 		}
+		else if(name == "HAND LEFT VEL")
+		{
+			app->gestureControl.handLeftVel->enabled = m.getArgAsInt32(0);
+		}
 		else if(name == "HAND RIGHT Y")
 		{
 			app->gestureControl.handRightY->enabled = m.getArgAsInt32(0);
+		}
+		else if(name == "HAND RIGHT VEL")
+		{
+			app->gestureControl.handRightVel->enabled = m.getArgAsInt32(0);
 		}
 		else if(name == "FOOT DIST")
 		{

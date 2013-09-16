@@ -84,12 +84,15 @@ public:
 		updateValue(headZ, bone[NUI_SKELETON_POSITION_HEAD]->getPosition().z);
 		updateValue(handDist, ofDist(bone[NUI_SKELETON_POSITION_HAND_LEFT]->getPosition().x, bone[NUI_SKELETON_POSITION_HAND_LEFT]->getPosition().y, bone[NUI_SKELETON_POSITION_HAND_RIGHT]->getPosition().x, bone[NUI_SKELETON_POSITION_HAND_RIGHT]->getPosition().y));
 		updateValue(handLeftY, bone[NUI_SKELETON_POSITION_HAND_LEFT]->getPosition().y);
-		updateValue(handLeftVel, abs(bone[NUI_SKELETON_POSITION_HAND_LEFT]->getPosition().y-handLeftVel->lastValue));
 		updateValue(handRightY, bone[NUI_SKELETON_POSITION_HAND_RIGHT]->getPosition().y);
-		updateValue(handRightVel, abs(bone[NUI_SKELETON_POSITION_HAND_RIGHT]->getPosition().y-handRightVel->lastValue));
 		updateValue(footDist, ofDist(bone[NUI_SKELETON_POSITION_FOOT_LEFT]->getPosition().x, bone[NUI_SKELETON_POSITION_FOOT_LEFT]->getPosition().y, bone[NUI_SKELETON_POSITION_FOOT_RIGHT]->getPosition().x, bone[NUI_SKELETON_POSITION_FOOT_RIGHT]->getPosition().y));
 		updateValue(footLeftY, bone[NUI_SKELETON_POSITION_FOOT_LEFT]->getPosition().y);
 		updateValue(footRightY, bone[NUI_SKELETON_POSITION_FOOT_RIGHT]->getPosition().y);
+		
+		handLeftVel->value = ofMap(abs((bone[NUI_SKELETON_POSITION_HAND_LEFT]->getPosition().y/100)-handLeftVel->lastValue), handLeftVel->min, handLeftVel->max, 0.0f, 1.0f, true);
+		handRightVel->value = ofMap(abs((bone[NUI_SKELETON_POSITION_HAND_RIGHT]->getPosition().y/100)-handRightVel->lastValue), handLeftVel->min, handRightVel->max, 0.0f, 1.0f, true);
+		handLeftVel->lastValue = bone[NUI_SKELETON_POSITION_HAND_LEFT]->getPosition().y/100;
+		handRightVel->lastValue = bone[NUI_SKELETON_POSITION_HAND_RIGHT]->getPosition().y/100;
 		
 		for(int i=0; i<list.size(); i++) {
 			if(list[i]->enabled) {
