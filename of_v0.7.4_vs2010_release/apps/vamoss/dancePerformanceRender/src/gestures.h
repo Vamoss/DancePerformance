@@ -89,10 +89,8 @@ public:
 		updateValue(footLeftY, bone[NUI_SKELETON_POSITION_FOOT_LEFT]->getPosition().y);
 		updateValue(footRightY, bone[NUI_SKELETON_POSITION_FOOT_RIGHT]->getPosition().y);
 		
-		handLeftVel->value = ofMap(abs((bone[NUI_SKELETON_POSITION_HAND_LEFT]->getPosition().y/100)-handLeftVel->lastValue), handLeftVel->min, handLeftVel->max, 0.0f, 1.0f, true);
-		handRightVel->value = ofMap(abs((bone[NUI_SKELETON_POSITION_HAND_RIGHT]->getPosition().y/100)-handRightVel->lastValue), handLeftVel->min, handRightVel->max, 0.0f, 1.0f, true);
-		handLeftVel->lastValue = bone[NUI_SKELETON_POSITION_HAND_LEFT]->getPosition().y/100;
-		handRightVel->lastValue = bone[NUI_SKELETON_POSITION_HAND_RIGHT]->getPosition().y/100;
+		updateVelocity(handLeftVel, bone[NUI_SKELETON_POSITION_HAND_LEFT]->getPosition().y/100);
+		updateVelocity(handRightVel, bone[NUI_SKELETON_POSITION_HAND_RIGHT]->getPosition().y/100);
 		
 		for(int i=0; i<list.size(); i++) {
 			if(list[i]->enabled) {
@@ -116,9 +114,16 @@ public:
 private:
 	void updateValue(gesture * gest, float value)
 	{
-		gest->lastValue = value;
 		gest->value = ofMap(value, gest->min, gest->max, 0.0f, 1.0f, true);
 		if(gest->inverted) gest->value = 1 - gest->value;
+		gest->lastValue = value;
+	}
+
+	void updateVelocity(gesture * gest, float value)
+	{
+		gest->value = ofMap(abs(value - gest->lastValue), gest->min, gest->max, 0.0f, 1.0f, true);
+		if(gest->inverted) gest->value = 1 - gest->value;
+		gest->lastValue = value;
 	}
 
 	vector<gesture *> list;
