@@ -21,4 +21,6 @@ public:
 	static int synthesizerPort;
 	
 	static bool useLog;
+	
+	static bool useCanvas;
 };

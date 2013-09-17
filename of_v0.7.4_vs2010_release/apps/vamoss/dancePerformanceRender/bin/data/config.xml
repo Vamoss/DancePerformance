@@ -1,9 +1,11 @@
 <root>
-	<log>0</log>
+  <log>0</log>
+  
+  <canvas>0</canvas>
 
 	<window x="0" y="0" width="1024" height="768" fullscreen="1" />
 
-	<synthesizer enable="0" ip="192.168.1.9" baudRate="10000" />
-	<!--<synthesizer enable="0" ip="192.168.1.23" baudRate="10000" />-->
-	<!--<synthesizer enable="0" ip="172.20.10.5" baudRate="10000" />-->
+	<!--<synthesizer enable="1" ip="192.168.1.9" baudRate="10000" />-->
+	<synthesizer enable="1" ip="192.168.0.23" baudRate="10000" />
+	<!--<synthesizer enable="1" ip="172.20.10.5" baudRate="10000" />-->
 </root>

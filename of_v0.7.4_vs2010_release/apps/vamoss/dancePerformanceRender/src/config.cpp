@@ -5,6 +5,8 @@ bool config::fullscreen;
 
 bool config::useLog;
 
+bool config::useCanvas;
+
 
 bool config::synthesizerEnabled;
 string config::synthesizerIp;
@@ -24,6 +26,8 @@ void config::setup(string xmlPath)
 			fullscreen = xml.getAttribute("window", "fullscreen", "1", 0) == "1";
 
 			useLog = xml.getValue("log", "1", 0) == "1";
+
+			useCanvas = xml.getValue("canvas", "1", 0) == "1";
 
 			synthesizerEnabled = xml.getAttribute("synthesizer", "enable", "1", 0) == "1";
 			synthesizerIp = xml.getAttribute("synthesizer", "ip", "192.168.0.23", 0);

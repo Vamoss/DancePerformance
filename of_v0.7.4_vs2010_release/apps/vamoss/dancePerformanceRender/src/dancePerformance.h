@@ -1,5 +1,7 @@
 #pragma once
 
+#define TARGET_OPENGLES
+
 #include "facade.h"
 #include "ofMain.h"
 #include "receiver.h"

@@ -207,11 +207,12 @@ void facade::draw()
 
 		//canvas
 		glRotatef(rotation, 0, -1, 0);
-		canvas.begin();
+		if(config::useCanvas) {
+			canvas.begin();
 
-		ofSetColor(255, canvasFade);
-		canvasTrace.draw(0,0);
-
+			ofSetColor(255, canvasFade);
+			canvasTrace.draw(0,0);
+		}
 		glTranslatef(width/2, 0, -width / 3);
 		glRotatef(rotation, 0, 1, 0);
 
@@ -308,29 +309,32 @@ void facade::draw()
 		ballImage.getTextureReference().unbind();
 		ofDisableNormalizedTexCoords();
 
-		canvas.end();
-
+		if(config::useCanvas) {
+			canvas.end();
+		}
 		glPopMatrix();
 
 		
 		
 		
-		canvasTrace.begin();
+		if(config::useCanvas) {
+			canvasTrace.begin();
 
-			/*glColorMask(FALSE, FALSE, FALSE, TRUE);
-			glClearColor(0.0f, 0.0f, 0.0f, 0.5f);
-			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-			glColorMask(TRUE, TRUE, TRUE, TRUE);*/
+				/*glColorMask(FALSE, FALSE, FALSE, TRUE);
+				glClearColor(0.0f, 0.0f, 0.0f, 0.5f);
+				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+				glColorMask(TRUE, TRUE, TRUE, TRUE);*/
 
-			ofSetColor(255);
-			canvas.draw(0,0);
-		canvasTrace.end();
+				ofSetColor(255);
+				canvas.draw(0,0);
+			canvasTrace.end();
 		
-		canvasTrace.draw(0,0);
+			canvasTrace.draw(0,0);
 		
-		canvas.begin();
-			ofClear(0);
-		canvas.end();
+			canvas.begin();
+				ofClear(0);
+			canvas.end();
+		}
 		
 		if(blackout>0){
 			ofSetColor(0,0,0,blackout);
@@ -406,8 +410,6 @@ void facade::draw()
 
 void facade::drawParticle(float r)
 {	
-	//particleBuffer.draw(0,0);
-
 	//ofCircle(0,0,r);
 			
 	//ofSphere(r);
@@ -516,13 +518,6 @@ void facade::initScene() {
 		boneEnabled.push_back(true);
 	}
 #endif
-
-	//particle buffer
-	particleBuffer.allocate(10,10);
-	particleBuffer.begin();
-		ofSetColor(255);
-		ofCircle(5,5,5);
-	particleBuffer.end();
 }
 
 
@@ -726,13 +721,17 @@ void facade::addRandomForce(float f) {
 }
 
 void facade::initCanvas() {
-	cout << "initCanvas" << endl;
-	canvas.allocate(width, height);
-	canvasTrace.allocate(width, height);
-	canvasTrace.begin();
-		ofSetColor(0);
-		ofRect(0,0,width, height);
-	canvasTrace.end();
+	if(config::useCanvas){
+		cout << "initCanvas" << endl;
+		canvas.allocate(width, height);
+		canvasTrace.allocate(width, height);
+		canvasTrace.begin();
+			ofSetColor(0);
+			ofRect(0,0,width, height);
+		canvasTrace.end();
+	}else{
+		cout << "do not initCanvas" << endl;
+	}
 }
 
 bool facade::canIGo()

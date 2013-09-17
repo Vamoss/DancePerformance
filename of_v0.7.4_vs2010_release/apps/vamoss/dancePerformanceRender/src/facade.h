@@ -132,8 +132,6 @@ public:
 	int canvasFade;
 	float blackout;
 
-	ofFbo particleBuffer;
-
 	//gestures
 	gestures gestureControl;
 
