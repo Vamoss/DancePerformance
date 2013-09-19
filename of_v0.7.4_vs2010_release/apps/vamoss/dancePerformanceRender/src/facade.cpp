@@ -212,8 +212,8 @@ void facade::draw()
 
 			ofSetColor(255, canvasFade);
 			canvasTrace.draw(0,0);
+			glTranslatef(width/2, 0, -width / 3);
 		}
-		glTranslatef(width/2, 0, -width / 3);
 		glRotatef(rotation, 0, 1, 0);
 
 		//particles

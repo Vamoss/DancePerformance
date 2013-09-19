@@ -61,6 +61,9 @@
     <ClCompile Include="..\..\..\addons\ofxXmlSettings\libs\tinyxmlparser.cpp">
       <Filter>addons\ofxXmlSettings\libs</Filter>
     </ClCompile>
+    <ClCompile Include="src\config.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -315,6 +318,9 @@
       <Filter>addons\ofxUI</Filter>
     </ClInclude>
     <ClInclude Include="src\gestureUI.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\config.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

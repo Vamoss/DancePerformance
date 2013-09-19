@@ -3,9 +3,6 @@
 #include "server.h"
 #include "ofxUI.h"
 
-#undef OFX_UI_GLOBAL_WIDGET_SPACING
-#define OFX_UI_GLOBAL_WIDGET_SPACING 40
-
 class colorUI {
     
 public:
@@ -27,29 +24,26 @@ public:
     
     void setGUI1()
     {
-        float dim = 16; 
-        float xInit = OFX_UI_GLOBAL_WIDGET_SPACING; 
-        float length = 435-xInit; 
-        
-        gui1 = new ofxUICanvas(405, 380, length, 387);
+        gui1 = new ofxUICanvas(config::columnWidth + config::columnSpace, 380, config::columnWidth, 387);
+		gui1->setWidgetSpacing(config::UISpace);
 		gui1->setWidgetFontSize(OFX_UI_FONT_SMALL);
 		gui1->setName("ColorUI");
 		gui1->setWidgetSpacing(15);
         gui1->addWidgetDown(new ofxUILabel("COLORS", OFX_UI_FONT_MEDIUM));
 
-		redSlider = new ofxUISlider(length-xInit-80, dim, 0.0, 255.0, 255.0, "RED");
+		redSlider = new ofxUISlider(config::UIWidth-80, config::UIHeight, 0.0, 255.0, 255.0, "RED");
         gui1->addWidgetDown(redSlider);
 
 		ofxUILabelButton * b1 = new ofxUILabelButton( 70, false, "PLAY 1", OFX_UI_FONT_MEDIUM);
         gui1->addWidgetRight(b1);
 
-		greenSlider = new ofxUISlider(length-xInit-80, dim, 0.0, 255.0, 255.0, "GREEN");
+		greenSlider = new ofxUISlider(config::UIWidth-80, config::UIHeight, 0.0, 255.0, 255.0, "GREEN");
         gui1->addWidgetDown(greenSlider);
 
 		ofxUILabelButton * b2 = new ofxUILabelButton( 70, false, "PLAY 2", OFX_UI_FONT_MEDIUM);
         gui1->addWidgetRight(b2);
 
-		blueSlider = new ofxUISlider(length-xInit-80, dim, 0.0, 255.0, 255.0, "BLUE");
+		blueSlider = new ofxUISlider(config::UIWidth-80, config::UIHeight, 0.0, 255.0, 255.0, "BLUE");
         gui1->addWidgetDown(blueSlider);
 
 		ofxUILabelButton * b3 = new ofxUILabelButton( 70, false, "PLAY 3", OFX_UI_FONT_MEDIUM);
@@ -58,14 +52,14 @@ public:
 		gui1->addWidgetDown(new ofxUILabelButton( 90, false, "BLACK", OFX_UI_FONT_MEDIUM));
         gui1->addWidgetRight(new ofxUILabelButton( 90, false, "WHITE", OFX_UI_FONT_MEDIUM));
 
-		gui1->addWidgetDown(new ofxUISlider(length-xInit, dim, 0.0, 30.0, &colorSpeed, "PLAY SPEED"));
+		gui1->addWidgetDown(new ofxUISlider(config::UIWidth, config::UIHeight, 0.0, 30.0, &colorSpeed, "PLAY SPEED"));
 
-		gui1->addWidgetDown(new ofxUISlider(length-xInit, dim, 0.0, 1.0, 0.0, "SPACE VARIATION"));
+		gui1->addWidgetDown(new ofxUISlider(config::UIWidth, config::UIHeight, 0.0, 1.0, 0.0, "SPACE VARIATION"));
 
-        gui1->addWidgetDown(new ofxUILabelButton( length-xInit, false, "RANDOM", OFX_UI_FONT_MEDIUM));
+        gui1->addWidgetDown(new ofxUILabelButton( config::UIWidth, false, "RANDOM", OFX_UI_FONT_MEDIUM));
         
 		gui1->addSpacer(2);
-		gui1->addWidgetDown(new ofxUILabelButton( length-xInit, false, "SAVE", OFX_UI_FONT_MEDIUM)); 	
+		gui1->addWidgetDown(new ofxUILabelButton( config::UIWidth, false, "SAVE", OFX_UI_FONT_MEDIUM)); 	
         
         ofAddListener(gui1->newGUIEvent,this,&colorUI::guiEvent);
     }

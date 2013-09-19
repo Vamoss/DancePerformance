@@ -103,6 +103,7 @@
     <ClCompile Include="..\..\..\addons\ofxXmlSettings\libs\tinyxmlerror.cpp" />
     <ClCompile Include="..\..\..\addons\ofxXmlSettings\libs\tinyxmlparser.cpp" />
     <ClCompile Include="..\..\..\addons\ofxXmlSettings\src\ofxXmlSettings.cpp" />
+    <ClCompile Include="src\config.cpp" />
     <ClCompile Include="src\dancePerformance.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\server.cpp" />
@@ -166,6 +167,7 @@
     <ClInclude Include="..\..\..\addons\ofxXmlSettings\src\ofxXmlSettings.h" />
     <ClInclude Include="src\canvasUI.h" />
     <ClInclude Include="src\colorUI.h" />
+    <ClInclude Include="src\config.h" />
     <ClInclude Include="src\dancePerformance.h" />
     <ClInclude Include="src\gestureUI.h" />
     <ClInclude Include="src\kinectUI.h" />

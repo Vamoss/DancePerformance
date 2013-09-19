@@ -3,9 +3,6 @@
 #include "server.h"
 #include "ofxUI.h"
 
-#undef OFX_UI_GLOBAL_WIDGET_SPACING
-#define OFX_UI_GLOBAL_WIDGET_SPACING 40
-
 class canvasUI {
     
 public:
@@ -24,28 +21,25 @@ public:
     
     void setGUI1()
     {
-        float dim = 16; 
-        float xInit = OFX_UI_GLOBAL_WIDGET_SPACING; 
-        float length = 435-xInit; 
-        
-        gui1 = new ofxUICanvas(405, 0, length, 370);
+		gui1 = new ofxUICanvas(config::columnWidth + config::columnSpace, 0, config::columnWidth, 370);
+		gui1->setWidgetSpacing(config::UISpace);
 		gui1->setWidgetFontSize(OFX_UI_FONT_SMALL);
 		gui1->setName("CanvasUI");
 		gui1->setWidgetSpacing(15);
         gui1->addWidgetDown(new ofxUILabel("CANVAS", OFX_UI_FONT_MEDIUM));
-        gui1->addWidgetDown(new ofxUIToggle( dim, dim, false, "RENDER")); 
-		gui1->addWidgetDown(new ofxUIRotarySlider(dim*3, 0, 360, 0.0, "ROTATION"));
+        gui1->addWidgetDown(new ofxUIToggle( config::UIHeight, config::UIHeight, false, "RENDER")); 
+		gui1->addWidgetDown(new ofxUIRotarySlider(config::UIHeight*3, 0, 360, 0.0, "ROTATION"));
         gui1->addWidgetDown(new ofxUILabelButton( 80, false, "CENTER", OFX_UI_FONT_MEDIUM));
-        sliderRot = new ofxUISlider(length-xInit-160, dim, -3.0, 3.0, 0.0, "ROTATION SPEED");
+        sliderRot = new ofxUISlider(config::UIWidth-160, config::UIHeight, -3.0, 3.0, 0.0, "ROTATION SPEED");
 		sliderRot->setIncrement(0.1);
 		gui1->addWidgetDown(sliderRot);
         gui1->addWidgetRight(new ofxUILabelButton( 70, false, "PLAY", OFX_UI_FONT_MEDIUM));
-		gui1->addWidgetDown(new ofxUISlider(length-xInit-80,dim, 0.0, 255.0, 125, "FADE"));	
-        gui1->addWidgetRight(new ofxUIToggle( dim, dim, false, "PARTICLES")); 
-		gui1->addWidgetDown(new ofxUISlider(length-xInit,dim, 0.0, 255.0, 125, "BLACKOUT"));
+		gui1->addWidgetDown(new ofxUISlider(config::UIWidth-80,config::UIHeight, 0.0, 255.0, 125, "FADE"));	
+        gui1->addWidgetRight(new ofxUIToggle( config::UIHeight, config::UIHeight, false, "PARTICLES")); 
+		gui1->addWidgetDown(new ofxUISlider(config::UIWidth,config::UIHeight, 0.0, 255.0, 125, "BLACKOUT"));
         
 		gui1->addSpacer(2);
-		gui1->addWidgetDown(new ofxUILabelButton( length-xInit, false, "SAVE", OFX_UI_FONT_MEDIUM)); 	
+		gui1->addWidgetDown(new ofxUILabelButton( config::UIWidth, false, "SAVE", OFX_UI_FONT_MEDIUM)); 	
         
         ofAddListener(gui1->newGUIEvent,this,&canvasUI::guiEvent);
     }
