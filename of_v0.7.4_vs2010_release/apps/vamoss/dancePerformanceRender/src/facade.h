@@ -24,8 +24,6 @@
 class facade
 {
 public:
-	facade(void);
-
 	void setup();
 	void update();
 	void draw();
@@ -129,6 +127,7 @@ public:
 	void initCanvas();
 	ofFbo canvas;
 	ofFbo canvasTrace;
+	float canvasY;
 	int canvasFade;
 	float blackout;
 

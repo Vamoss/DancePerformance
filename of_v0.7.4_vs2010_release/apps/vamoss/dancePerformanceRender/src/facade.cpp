@@ -1,7 +1,6 @@
 #include "facade.h"
 
-
-facade::facade(void)
+void facade::setup()
 {
 #ifdef USE_KINECT
 	//Kinect
@@ -83,10 +82,13 @@ facade::facade(void)
 	//integration kinect + physics
 	minZ = 0;
 	maxZ = 0;
+
+	colorSpaceVariation = 1;
 	
 	initCanvas();
 	blackout = 0;
 	canvasFade = 125;
+	canvasY = 0;
 
 	//gestures
 	gestureControl.setup();
@@ -329,7 +331,7 @@ void facade::draw()
 				canvas.draw(0,0);
 			canvasTrace.end();
 		
-			canvasTrace.draw(0,0);
+			canvasTrace.draw(0,canvasY);
 		
 			canvas.begin();
 				ofClear(0);

@@ -49,8 +49,13 @@ public:
 		else if(name == "PARTICLES")
 		{
 			float total =  m.getArgAsFloat(0);
-			for(int i=app->physics.numberOfParticles(); i < total; i++) app->addRandomParticle();
-			for(int i=app->physics.numberOfParticles(); i > total; i--) app->killRandomParticle();
+			
+			if(total==0){
+				app->physics.clear();
+			}else{
+				for(int i=app->physics.numberOfParticles(); i < total; i++) app->addRandomParticle();
+				for(int i=app->physics.numberOfParticles(); i > total; i--) app->killRandomParticle();
+			}
 		}
 		else if(name == "PROBABILITY")
 		{
@@ -84,6 +89,11 @@ public:
 		{
 			cout << m.getArgAsFloat(0) << endl;
 			app->canvasFade =  m.getArgAsFloat(0);
+		}
+		else if(name == "CANVAS Y")
+		{
+			cout << m.getArgAsFloat(0) << endl;
+			app->canvasY =  m.getArgAsFloat(0);
 		}
 		else if(name == "BLACKOUT")
 		{
@@ -369,6 +379,8 @@ private:
 
 	void toggleJoint(bool state, int index)
 	{
+#ifdef USE_KINECT
 		app->boneEnabled[index] = state;
+#endif
 	}
 };

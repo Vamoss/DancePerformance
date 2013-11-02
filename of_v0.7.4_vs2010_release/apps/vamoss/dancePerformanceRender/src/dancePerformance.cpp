@@ -17,6 +17,9 @@ void dancePerformance::setup() {
 	//synthesizer
 	if(config::synthesizerEnabled) server::setup(config::synthesizerIp, config::synthesizerPort);
 	
+	//facade
+	m_facade.setup();
+
 	//panel receiver
 	m_receiver.setup(&m_facade, 11999);
 
