@@ -2,12 +2,11 @@
 
 #include "server.h"
 #include "ofxUI.h"
+#include "UI.h"
 
-class gestureUI {
-    
+class gestureUI : public UI {
+
 public:
-    
-	ofxUICanvas		*gui1;
     
     void setup()
     {
@@ -19,7 +18,7 @@ public:
     
     void setGUI1()
     {   
-		gui1 = new ofxUICanvas((config::columnWidth + config::columnSpace)*3, 0, config::columnWidth, 768);
+		gui1 = new ofxUICanvas((config::columnWidth + config::columnSpace)*3, 0, config::columnWidth, 488);
 		gui1->setWidgetSpacing(config::UISpace);
 		gui1->setWidgetFontSize(OFX_UI_FONT_SMALL);
 		gui1->setName("GestureUI");
@@ -73,7 +72,6 @@ public:
 		gui1->addWidgetRight(new ofxUIToggle( config::UIHeight, config::UIHeight, false, "INV 10"));
         gui1->addWidgetRight(new ofxUIToggle( config::UIHeight, config::UIHeight, true, "FOOT RIGHT Y"));
 
-		gui1->addSpacer(2);
 		gui1->addWidgetDown(new ofxUILabelButton( config::UIWidth, false, "SAVE", OFX_UI_FONT_MEDIUM)); 	
         
         ofAddListener(gui1->newGUIEvent,this,&gestureUI::guiEvent);

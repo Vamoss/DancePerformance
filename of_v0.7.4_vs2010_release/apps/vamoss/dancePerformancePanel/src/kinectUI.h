@@ -2,12 +2,11 @@
 
 #include "server.h"
 #include "ofxUI.h"
+#include "UI.h"
 
-class kinectUI {
+class kinectUI : public UI {
     
 public:
-    
-	ofxUICanvas		*gui1;
     
     void setup()
     {
@@ -53,7 +52,6 @@ public:
 		gui1->addWidgetDown(new ofxUIToggle( config::UIHeight, config::UIHeight, true, "FOOT LEFT"));
 		gui1->addWidgetRight(new ofxUIToggle( config::UIHeight, config::UIHeight, true, "FOOT RIGHT"));
 
-		gui1->addSpacer(2);
 		gui1->addWidgetDown(new ofxUILabelButton( config::UIWidth, false, "SAVE", OFX_UI_FONT_MEDIUM)); 	
         
         ofAddListener(gui1->newGUIEvent,this,&kinectUI::guiEvent);

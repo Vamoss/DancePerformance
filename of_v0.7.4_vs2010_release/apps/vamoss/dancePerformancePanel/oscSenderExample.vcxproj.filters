@@ -64,6 +64,9 @@
     <ClCompile Include="src\config.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxRecorder\src\ofxRecorder.cpp">
+      <Filter>addons\ofxRecorder\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -110,6 +113,12 @@
     </Filter>
     <Filter Include="addons\ofxUI">
       <UniqueIdentifier>{38b8264a-b484-414c-94df-d21f636e609e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxRecorder">
+      <UniqueIdentifier>{f252b6e7-036e-4a6d-9c79-53d1198945aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxRecorder\src">
+      <UniqueIdentifier>{55324dcb-2ca1-45cf-b711-c8c9bc3a3b89}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -321,6 +330,15 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\config.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxRecorder\src\ofxRecorder.h">
+      <Filter>addons\ofxRecorder\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\recorderUI.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UI.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

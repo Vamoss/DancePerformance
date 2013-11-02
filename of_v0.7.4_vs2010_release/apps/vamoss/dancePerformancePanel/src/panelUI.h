@@ -3,6 +3,7 @@
 #include "server.h"
 #include "ofxUI.h"
 #include "config.h"
+#include "UI.h"
 
 #undef OFX_UI_FONT_SMALL_SIZE
 #define OFX_UI_FONT_SMALL_SIZE 4
@@ -16,11 +17,9 @@
 #undef OFX_UI_FONT_RESOLUTION
 #define OFX_UI_FONT_RESOLUTION 40
 
-class panelUI {
+class panelUI : public UI {
     
 public:
-    
-	ofxUICanvas		*gui1;
     
     void setup()
     {
@@ -56,7 +55,6 @@ public:
 		gui1->addWidgetDown(new ofxUILabelButton( config::UIWidth,	false, "SHAKE", OFX_UI_FONT_MEDIUM));
         gui1->addWidgetDown(new ofxUILabelButton( config::UIWidth,	false, "RESTART", OFX_UI_FONT_MEDIUM));
 
-        gui1->addSpacer(2);
 		gui1->addWidgetDown(new ofxUILabelButton( config::UIWidth,	false, "SAVE", OFX_UI_FONT_MEDIUM)); 	
         
         ofAddListener(gui1->newGUIEvent,this,&panelUI::guiEvent);

@@ -2,12 +2,11 @@
 
 #include "server.h"
 #include "ofxUI.h"
+#include "UI.h"
 
-class colorUI {
+class colorUI : public UI {
     
 public:
-    
-	ofxUICanvas		*gui1;
 
     void setup()
     {
@@ -24,7 +23,7 @@ public:
     
     void setGUI1()
     {
-        gui1 = new ofxUICanvas(config::columnWidth + config::columnSpace, 380, config::columnWidth, 387);
+        gui1 = new ofxUICanvas(config::columnWidth + config::columnSpace, 400, config::columnWidth, 367);
 		gui1->setWidgetSpacing(config::UISpace);
 		gui1->setWidgetFontSize(OFX_UI_FONT_SMALL);
 		gui1->setName("ColorUI");
@@ -58,7 +57,6 @@ public:
 
         gui1->addWidgetDown(new ofxUILabelButton( config::UIWidth, false, "RANDOM", OFX_UI_FONT_MEDIUM));
         
-		gui1->addSpacer(2);
 		gui1->addWidgetDown(new ofxUILabelButton( config::UIWidth, false, "SAVE", OFX_UI_FONT_MEDIUM)); 	
         
         ofAddListener(gui1->newGUIEvent,this,&colorUI::guiEvent);

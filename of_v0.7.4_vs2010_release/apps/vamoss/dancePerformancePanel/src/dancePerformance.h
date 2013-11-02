@@ -1,11 +1,13 @@
 #pragma once
 
 #include "ofMain.h"
+#include "UI.h"
 #include "panelUI.h"
 #include "canvasUI.h"
 #include "kinectUI.h"
 #include "colorUI.h"
 #include "gestureUI.h"
+#include "recorderUI.h"
 #include "server.h"
 
 class dancePerformance : public ofBaseApp {
@@ -26,10 +28,14 @@ class dancePerformance : public ofBaseApp {
 
 		void exit();
 	
-		panelUI m_panel;
-		canvasUI m_canvas;
-		kinectUI m_kinect;
-		colorUI m_color;
-		gestureUI m_gesture;
+		vector<UI *> panels;
+		panelUI * m_panel;
+		canvasUI * m_canvas;
+		kinectUI * m_kinect;
+		colorUI * m_color;
+		gestureUI * m_gesture;
+		recorderUI * m_recorder;
+
+
 		
 };

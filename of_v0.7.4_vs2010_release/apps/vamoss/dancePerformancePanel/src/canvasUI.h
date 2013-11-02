@@ -2,15 +2,15 @@
 
 #include "server.h"
 #include "ofxUI.h"
+#include "UI.h"
 
-class canvasUI {
+class canvasUI : public UI {
     
 public:
-    
-	ofxUICanvas		*gui1;
-    
+
     void setup()
     {
+		cout << "canvasOI" << endl;
         setGUI1();
         
 		playRotation = false;
@@ -21,7 +21,7 @@ public:
     
     void setGUI1()
     {
-		gui1 = new ofxUICanvas(config::columnWidth + config::columnSpace, 0, config::columnWidth, 370);
+		gui1 = new ofxUICanvas(config::columnWidth + config::columnSpace, 0, config::columnWidth, 390);
 		gui1->setWidgetSpacing(config::UISpace);
 		gui1->setWidgetFontSize(OFX_UI_FONT_SMALL);
 		gui1->setName("CanvasUI");
@@ -37,8 +37,8 @@ public:
 		gui1->addWidgetDown(new ofxUISlider(config::UIWidth-80,config::UIHeight, 0.0, 255.0, 125, "FADE"));	
         gui1->addWidgetRight(new ofxUIToggle( config::UIHeight, config::UIHeight, false, "PARTICLES")); 
 		gui1->addWidgetDown(new ofxUISlider(config::UIWidth,config::UIHeight, 0.0, 255.0, 125, "BLACKOUT"));
+        gui1->addWidgetDown(new ofxUISlider(config::UIWidth,config::UIHeight, -1000.0, 1000.0, 0.0, "CANVAS Y"));
         
-		gui1->addSpacer(2);
 		gui1->addWidgetDown(new ofxUILabelButton( config::UIWidth, false, "SAVE", OFX_UI_FONT_MEDIUM)); 	
         
         ofAddListener(gui1->newGUIEvent,this,&canvasUI::guiEvent);
@@ -87,6 +87,11 @@ public:
 			ofxUISlider *slider = (ofxUISlider *) e.widget; 
 			server::send(name, slider->getScaledValue());
 			propagatePercent = slider->getValue();
+		}
+		else if(name == "CANVAS Y")
+		{
+			ofxUISlider *slider = (ofxUISlider *) e.widget; 
+			server::send(name, slider->getScaledValue());
 		}else if(name == "PARTICLES")
 		{
 			ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
